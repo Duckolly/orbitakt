@@ -1,12 +1,12 @@
 {
-  "version": "3.8.0+10",
+  "version": "3.8.1+11",
   "package": "com.duckolly.dvizh.preview",
   "build_mode": "release",
   "debuggable": false,
-  "apk_bytes": 17973155,
-  "apk_sha256": "0d277b3023542dd00aa5e63f1dcb2c06bfa032e375d612853338678a15133453",
+  "apk_bytes": 17973331,
+  "apk_sha256": "fe113cc4d1aaeebf29bcb7e0e96b87a806b852721a6c085f1775e32c73045271",
   "signer_sha256": "e68b0a1dce65741b78635a55fc02f17cc253e5094ceb739beddb3449ad9e089f",
-  "preview_371_update_compatible": true,
+  "preview_380_update_compatible": true,
   "main_app_update_compatible": false,
   "permission_allowlist": "EXACT_5_PREVIEW",
   "apk_zip_crc": "PASS",
@@ -41,11 +41,11 @@
       ]
     }
   ],
-  "flutter_tests": 68,
+  "flutter_tests": 72,
   "kotlin_tests": 23,
   "analyze": "PASS",
   "android_lint": "PASS",
-  "compared_source_files": 112,
+  "compared_source_files": 115,
   "physical_battery_measurement": "PENDING",
   "device_update_acceptance": "PENDING",
   "store_release": "NOT_PREPARED"

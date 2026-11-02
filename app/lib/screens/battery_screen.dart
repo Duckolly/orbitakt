@@ -117,7 +117,7 @@ class _BatteryScreenState extends State<BatteryScreen>
     final s = session!;
     final delta = s.chargeDelta;
     return [
-      'Движ 3.8.0 • замер всего телефона',
+      'Движ 3.8.1 • замер всего телефона',
       '${s.start.text('model')} • Android ${s.start.text('android')}',
       'Начало: ${DateTime.fromMillisecondsSinceEpoch(s.start.wall).toLocal()}',
       'Конец: ${DateTime.fromMillisecondsSinceEpoch(s.end!.wall).toLocal()}',

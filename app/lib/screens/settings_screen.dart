@@ -7,6 +7,7 @@ import '../services/daily_tracker.dart';
 import '../services/water_tracker.dart';
 import '../theme/theme_controller.dart';
 import 'consent_screen.dart';
+import 'about_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -255,6 +256,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
               const SizedBox(height: 32),
 
+              Card(
+                child: ListTile(
+                  leading: const Icon(Icons.info_outline),
+                  title: const Text('О приложении и связь'),
+                  subtitle: const Text('Версия, автор и Telegram'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AboutScreen(),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               FilledButton.tonalIcon(
                 onPressed: _deleteAll,
                 icon: const Icon(Icons.delete_forever),

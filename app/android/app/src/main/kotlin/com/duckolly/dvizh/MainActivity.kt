@@ -8,13 +8,14 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.EventChannel
 
 class MainActivity : FlutterActivity() {
+    private var aboutBridge: AboutBridge? = null
     private var batteryBridge: BatteryBridge? = null
     private var skyCompass: SkyCompassBridge? = null
     private val toolSensors = mutableListOf<ToolSensorBridge>()
     private var visible=false
     private val eventToken=Any()
     private val serviceIntent by lazy { Intent(applicationContext,DailyStepService::class.java) }
-    override fun onDestroy() { batteryBridge?.close(); batteryBridge=null; skyCompass?.close(); skyCompass=null; toolSensors.forEach { it.close() }; toolSensors.clear(); DailyRuntime.bind(applicationContext,eventToken,null); super.onDestroy() }
+    override fun onDestroy() { aboutBridge?.close(); aboutBridge=null; batteryBridge?.close(); batteryBridge=null; skyCompass?.close(); skyCompass=null; toolSensors.forEach { it.close() }; toolSensors.clear(); DailyRuntime.bind(applicationContext,eventToken,null); super.onDestroy() }
     override fun onResume() { super.onResume(); visible=true; EnergyRuntime.usage.begin("foreground",this); skyCompass?.setVisible(true); toolSensors.forEach { it.setVisible(true) }; DailyRuntime.worker.post { DailyRuntime.uiVisible=true; DailyRuntime.owner?.setInteractive(true); runCatching { ProgressWidget.refresh(applicationContext,true) } } }
     override fun onPause() { visible=false; EnergyRuntime.usage.end("foreground",this); skyCompass?.setVisible(false); toolSensors.forEach { it.setVisible(false) }; DailyRuntime.worker.post { DailyRuntime.uiVisible=false; DailyRuntime.owner?.setInteractive(DailyRuntime.interactive) }; super.onPause() }
     override fun configureFlutterEngine(engine: FlutterEngine) {
@@ -22,6 +23,7 @@ class MainActivity : FlutterActivity() {
         WaterBridge.install(this,engine) { visible }
         DeviceBridge.install(applicationContext,engine)
         batteryBridge?.close(); batteryBridge=BatteryBridge(this,engine)
+        aboutBridge?.close(); aboutBridge=AboutBridge(this,engine)
         skyCompass?.close(); skyCompass=SkyCompassBridge(this,engine).also { it.setVisible(visible) }
         toolSensors.forEach { it.close() }; toolSensors.clear()
         listOf("tilt", "pressure").forEach { mode -> toolSensors.add(ToolSensorBridge(this,engine,mode).also { it.setVisible(visible) }) }

@@ -1,0 +1,12 @@
+{
+  "changed_existing_app_files": [
+    "TASKS.md",
+    "android/app/build.gradle",
+    "android/app/src/main/AndroidManifest.xml",
+    "android/app/src/main/res/drawable/ic_launcher.xml",
+    "lib/screens/home_screen.dart",
+    "pubspec.yaml"
+  ],
+  "storage_sensor_and_game_code_unchanged": true,
+  "package_and_signer_retained": true
+}

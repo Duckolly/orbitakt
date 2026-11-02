@@ -1,0 +1,52 @@
+{
+  "version": "3.8.0+10",
+  "package": "com.duckolly.dvizh.preview",
+  "build_mode": "release",
+  "debuggable": false,
+  "apk_bytes": 17973155,
+  "apk_sha256": "0d277b3023542dd00aa5e63f1dcb2c06bfa032e375d612853338678a15133453",
+  "signer_sha256": "e68b0a1dce65741b78635a55fc02f17cc253e5094ceb739beddb3449ad9e089f",
+  "preview_371_update_compatible": true,
+  "main_app_update_compatible": false,
+  "permission_allowlist": "EXACT_5_PREVIEW",
+  "apk_zip_crc": "PASS",
+  "zipalign_16k": "PASS",
+  "abis": [
+    "arm64-v8a"
+  ],
+  "native_elf_libraries": [
+    {
+      "name": "lib/arm64-v8a/libapp.so",
+      "load_alignments": [
+        65536,
+        65536,
+        65536
+      ]
+    },
+    {
+      "name": "lib/arm64-v8a/libdatastore_shared_counter.so",
+      "load_alignments": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    {
+      "name": "lib/arm64-v8a/libflutter.so",
+      "load_alignments": [
+        65536,
+        65536,
+        65536,
+        65536
+      ]
+    }
+  ],
+  "flutter_tests": 68,
+  "kotlin_tests": 23,
+  "analyze": "PASS",
+  "android_lint": "PASS",
+  "compared_source_files": 112,
+  "physical_battery_measurement": "PENDING",
+  "device_update_acceptance": "PENDING",
+  "store_release": "NOT_PREPARED"
+}

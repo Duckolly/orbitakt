@@ -1,0 +1,27 @@
+{
+  "flutter": "3.35.7",
+  "flutter_revision": "adc901062556672b4138e18a4dc62a4be8f4b3c2",
+  "dart": "3.9.2",
+  "java": "Azul Zulu 17.0.21",
+  "gradle": "8.11.1",
+  "agp": "8.9.2",
+  "kotlin": "2.1.20",
+  "compile_sdk": 36,
+  "target_sdk": 36,
+  "min_sdk": 24,
+  "build_tools": "35.0.0",
+  "ndk": "27.0.12077973",
+  "build_os": "Linux x86_64",
+  "windows_execution_tested": false,
+  "dependencies": "app/pubspec.lock",
+  "flutter_archive_sha256": "146df531f9ac6a11a918013c1a70faafc053d4811c8cb69a413fd70748d51c3d",
+  "app_version": "3.7.1+9",
+  "androidx_core_ktx": "1.13.1",
+  "native_checks": ":app:testReleaseUnitTest :app:lintRelease",
+  "build_mode": "release preview",
+  "abis": [
+    "arm64-v8a"
+  ],
+  "gradle_execution": "Kotlin in-process, one worker",
+  "verified_app_version": "3.7.1+9"
+}

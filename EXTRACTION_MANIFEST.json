@@ -1,0 +1,710 @@
+{
+  "source_file": "chat-export-1793399444685.json",
+  "index_base": 0,
+  "records": [
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "README.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "e5c1b6d9c512dc5b665d37a52359b579473b46dde72393bb67aee6e3121c492b"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "LICENSE",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "991a8d762e9e33656321c9768f65e3fda792942399cfa5e024d482649dc8df15"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "PRIVACY.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "6822d9dfc6866d554304f519d02c548484d656ac5bfa4f5f1942c73ec9635b27"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "CHANGELOG.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "3a01ef50e6f416e206368de03425a21f3b1baaca9bab272af2e195eb711d136f"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "RELEASE_NOTES_v3.2.0.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "1d5b5b149430716dbb557a6b0367681093587091110cba813e764c7091aa6341"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "TASKS.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "99496455ec87e60cd28224db15843938e474fdd8fae5dd3583e85d58e8a94aff"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "GOOGLE_PLAY_RELEASE_CHECKLIST.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "b822000ddbf78b363938cfb7a568a9dc02d19f553661e497cd3052c455096ca5"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "STORE_LISTING.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "e62bd16387acd8537c3f8544e4822447e2516656ae3a38f97f7dd2dedf932fee"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "COPYRIGHT_FIXATION.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "39e86f4c806de2b46e02330a53d3f5e80ea5dc0b733033951f99fe9de735ba3d"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": ".gitignore",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "aa39675db47487a7d550d198ea27eb295a2644d6fcc3bd76f6606570b393fe56"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "analysis_options.yaml",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "c5cc55b3778045a17c647d12790397c672e5d5f83c2f63c524029362b710231a"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "docs/privacy.html",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "4b6f86966ee0a9063a7344e58c516afa6eb84f542fa081c15d2e864fce3873ca"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/pubspec.yaml",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "1067225f908fe3544ad6ba1181cc179dc01c4add44290eb076398008326f69fd"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/android/app/src/main/AndroidManifest.xml",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "9eb30e4e88d48287afed9106f6b1b16daff2218a997566b05c63331cca966deb"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/android/app/src/main/res/xml/data_extraction_rules.xml",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "4fce3b5323e81580c7fbd6ebb13c613d678af9a582eb0e9b03d4aa395b8107a8"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/android/app/build.gradle.release-patch.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "997f543187a2357ae5b6aad6f8a684e1ae60acf83a20673a655ade99c249861c"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/ios/Runner/Info.plist.patch.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "edca9dd14c5c48f11fa4159c8de88575a0b21153f240cdcaab58643bfc7c3538"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/main.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "48e652f859ce6b8c6e1d1129a04c6de51a2525373874d640d3e182453209b114"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/models/activity.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "915e324c6d0307acfb6b99f8cb34736f32257e4b9c0b2caa345f66a3be3fc223"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/models/workout.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "59a9a93b046574e0228804cf370c025e091b7e1243ca7a34b0964a0d6634dad9"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/services/sensor_service.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "5cd24563bf89bf775677fc987c323a70ab028484b76f0668cad0c8702c376b06"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/services/storage_service.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "5f8cad5039c85e80ddbcbd947ed10fd68ed249a601b8cde89652e0a5ef246815"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/services/notification_service.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "8239819e79cb1818dfa9b9cad796b3a31c07d3491ad85abe311428e46ead154b"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/theme/app_theme.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "7c4c1415c10d984687d46027524bef2913dd077c7b0555b00645f2467cbcd5e9"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/theme/theme_controller.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "5ea1a654b699835e74ac78241ebd2b5a0b7ff3cffa3b786ddef921b8e29e8c1e"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/consent_screen.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "055a79bdca7be5287c3201250df4e6c65a4ac9771cf44b2588d780b18687d3c7"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/home_screen.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "4e2b485bbe8aef94a82f58846a1b3482e0e0904e94b543bc29478f0feddcfe5c"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/activity_screen.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "88c6326926a89ee7300a1471b3c28e31ce83fad5fb8351235a0846b979565786"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/history_screen.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "dcc0d9cd40e8a8328d75c7be450ea4ea352de95b022043a1f8beaafa48948789"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/settings_screen.dart",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "3c686e4381b7bc2393381c6cc2e4179159b29746df1a6e7f69110fb942332f86"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/make_dvizh_release.py",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "17ea7935bad3f2266b857da14e444cdbee9bd53b01daa46cf23cbf46441e75ab"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/main.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "a069d60c90f559d13b70be8f5e36b751b462f57ae6144e9756a137e4b85fdfed"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/services/storage_service.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "46a8b963006ac8c319323840c7beca2956d0d3ba732d7122c259aceacecf756d"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/activity_screen.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "bc03f61d69d5eb0685ffbee7590d3f631bf421402be9bc47f26aae9f251b04e2"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/history_screen.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "58d73854cb47953b27bc0acdca8cf180e1b6d5a0f42a1b0bc70dc3e0ac43c0b3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/settings_screen.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "4e66f943f423e58afb13ce838ca86733eb0b0e9dda5b8c28e9fd5a79110d1333"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/lib/screens/consent_screen.dart",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "77ce5e46f8439db2fc306c8bda12f9b977932f484dd91e0b0a14cf1f085145ea"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/site.webmanifest",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "latest_override",
+      "sha256": "f08bdd9cb56caedcf74e31de549edf41e56d70002d0e1a5ca98df7c190756081"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/apply_pack.py",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "layout_adjustment",
+      "sha256": "ea64779caf2696c19c60240b59f5bd57c672f44dac417fa977d93a764b811f87"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-22.md",
+      "message_index": 22,
+      "message_id": "982b73f3-f474-4f34-bd2c-945051a620cb",
+      "kind": "extracted",
+      "sha256": "a8deca9857ab9708b75602d40897eb2833a392abab5ceb939f85071dc6eaefc6"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-24.md",
+      "message_index": 24,
+      "message_id": "3bdeacc8-dc5f-489a-90c5-2406f44c954e",
+      "kind": "extracted",
+      "sha256": "e58f25522b404088da6054251197749892619f6389f8e7c68ab9a58094156a92"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-26.md",
+      "message_index": 26,
+      "message_id": "0e1f7137-338a-408a-9157-db8f4b31646f",
+      "kind": "extracted",
+      "sha256": "7048f89b7a943c3515726bf1d70f8408d8c5c7c6185e9d656928acd3542709d3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-27.md",
+      "message_index": 27,
+      "message_id": "5cddb8b6-2cc0-4938-a442-f4bbadc08003",
+      "kind": "extracted",
+      "sha256": "c52dca59607a71deb1749f153450fe89383328fffb5e82109fe6934f1666c923"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-29.md",
+      "message_index": 29,
+      "message_id": "a3bc1763-3187-4d94-9207-e6b911b0f7c4",
+      "kind": "extracted",
+      "sha256": "69b5ff55d96327484e0d02f3d6c5b5c25fb77ee63cf9896163be5fa2ee29007b"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-31.md",
+      "message_index": 31,
+      "message_id": "43a843fe-8770-4830-be40-9f4e433ba401",
+      "kind": "extracted",
+      "sha256": "c178818e155e8aada122376f188ee799012b0c2b9053577dfbf0d8adbfb8575c"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-33.md",
+      "message_index": 33,
+      "message_id": "68c0a970-7f44-44e3-b7f9-7495dcb3ec1f",
+      "kind": "extracted",
+      "sha256": "ff40f4069f90678abb0dd7d08618425a5481f79a40bdedab2c0b1b4eaf5f37bf"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-35.md",
+      "message_index": 35,
+      "message_id": "7bac7ce5-9f39-455f-bcd6-57abc2e3ad61",
+      "kind": "extracted",
+      "sha256": "6872fb29a592f9cfead0c71302255083d8f636789ea3677b54e1dc53b2b9337f"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-36.md",
+      "message_index": 36,
+      "message_id": "5cddd513-05b6-4a45-8e43-19f013d4b9b6",
+      "kind": "extracted",
+      "sha256": "b8a256df2fc3303835567858e5557350c16f0870175ed3efafff52cfd7b6c039"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-38.md",
+      "message_index": 38,
+      "message_id": "f58ac9db-3f85-42b7-baff-6660551b8847",
+      "kind": "extracted",
+      "sha256": "02e09644623cfb2272644da186cacfab5aaa89fb9d8b6e5401ac81d7ceb91bd3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-40.md",
+      "message_index": 40,
+      "message_id": "a2dcf6a8-2f24-43cc-833d-f06f919fbedc",
+      "kind": "extracted",
+      "sha256": "5e3e334d3976d644441a0b7923ed0c3d9d81b07929fe9237f23c0e3d67359015"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-42.md",
+      "message_index": 42,
+      "message_id": "25b1d57a-5274-4c42-8c5c-f31ee0e6835f",
+      "kind": "extracted",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-43.md",
+      "message_index": 43,
+      "message_id": "255f9bb3-d362-4fcc-9628-f0415c05d060",
+      "kind": "extracted",
+      "sha256": "c77d1085938747e1819200660308841a0b91bbee8e32f82101a32e626f044bd0"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-45.md",
+      "message_index": 45,
+      "message_id": "8cc20fba-7779-4104-a68b-0807d12909bc",
+      "kind": "extracted",
+      "sha256": "45d27955c9161069b1b0ca0ffded834380ec179cf5d28228e08c85f796f47885"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-47.md",
+      "message_index": 47,
+      "message_id": "6fd76524-403e-43d4-aef6-f5b944d67423",
+      "kind": "extracted",
+      "sha256": "9e12232849e433cf8177701deb3f89996d4b32fde3b2b12c9d730faa35f6b131"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-49.md",
+      "message_index": 49,
+      "message_id": "1d857a6e-4b53-479e-84f9-7e9e7b2f696d",
+      "kind": "extracted",
+      "sha256": "1449d6645328ab1f580ddf1b2a9f40ed103c21cd0cc6727abb678e36cbbecc25"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-51.md",
+      "message_index": 51,
+      "message_id": "c5ac3cf0-8ce1-45a2-8b63-5f8211c39883",
+      "kind": "extracted",
+      "sha256": "7ac76c21f96f630aee3960673f70025fafcd37222d91e3c2a21f561d484bf67d"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-53.md",
+      "message_index": 53,
+      "message_id": "c36bbdfc-b0b5-4e96-8c43-d9dbce4af04b",
+      "kind": "extracted",
+      "sha256": "81557d9a753f3918178084d81ba8ef9374324d1d8000e6b90260fc1f7664f58b"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-55.md",
+      "message_index": 55,
+      "message_id": "4a0cdb54-73e6-41bf-b566-165d87aa4484",
+      "kind": "extracted",
+      "sha256": "1d1ab17bc2cce8bf56108ffd3d411c659d6e8524c2d44235884135cf0b3e1658"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-57.md",
+      "message_index": 57,
+      "message_id": "a11bd162-7351-4243-ab19-b0f67ce3e74c",
+      "kind": "extracted",
+      "sha256": "9326668aed43d659eb8ef02a1f2ab84f431e9027155cc410cec784cd83e8b4f3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-59.md",
+      "message_index": 59,
+      "message_id": "9a3b1537-99b5-494d-b509-3e5727e37486",
+      "kind": "extracted",
+      "sha256": "f1eefdc3d3dce72f0e6124669b7c97832266e643b019260025a0a4ff45a9661d"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-61.md",
+      "message_index": 61,
+      "message_id": "59518491-07db-4191-b2f3-9abe4dfd50a4",
+      "kind": "extracted",
+      "sha256": "77818c9ea0b1f98e9a363ba382a2a07c8f0d40c4e6564332557794fd2f9cb48a"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-63.md",
+      "message_index": 63,
+      "message_id": "90c8417d-1647-46ff-b4ce-62943afb354e",
+      "kind": "extracted",
+      "sha256": "99e52ace7c51102bdfb4145c7929261f9729c1bef8b9218d4ea93e532421c7c6"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-65.md",
+      "message_index": 65,
+      "message_id": "c3d3a252-b210-4b97-be5e-fc2fdb944a19",
+      "kind": "extracted",
+      "sha256": "88a00753e294d44effddfd59d24cdf042988dbacfc0b1df8e8de53ab0b8fdd4e"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-67.md",
+      "message_index": 67,
+      "message_id": "a05cdcca-e82d-4444-bbd0-a4fbdc780491",
+      "kind": "extracted",
+      "sha256": "14aa789661b6b982acd82bee8cfaf2249f1d7f79755440bf582bf452379805c3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-69.md",
+      "message_index": 69,
+      "message_id": "f7d00f26-ef7b-4358-87af-e299af5d6d9b",
+      "kind": "extracted",
+      "sha256": "5be29d9b0fd7a897f1ff15ba94907ad84f2ba0576e5790e1965b441b8d9ce4f2"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-71.md",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "extracted",
+      "sha256": "5444417942ee34bd9983784822a5355ffc69cc705a09c094e7820282e9a5ac60"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-73.md",
+      "message_index": 73,
+      "message_id": "747edc30-1a17-4c45-8da1-5e80c436ce97",
+      "kind": "extracted",
+      "sha256": "5fcd3eece2cc1c1a701021b71d408e0c2d961999d621d1b563d6952ab1cdf032"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "source_history/message-75.md",
+      "message_index": 75,
+      "message_id": "c3d4ae9a-f9e0-4a8b-bd37-3e725419dc43",
+      "kind": "extracted",
+      "sha256": "6cc6ea06b052e7c99133fc1d3d34a12155a640783ae3d21ac73d3be02de75f6d"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/index.html",
+      "message_index": 57,
+      "message_id": "a11bd162-7351-4243-ab19-b0f67ce3e74c",
+      "kind": "extracted",
+      "sha256": "a2b29c40047d600dc4ade9f2e1acbed15726757ac810dbf95fb7a2601a083edf"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/privacy.html",
+      "message_index": 57,
+      "message_id": "a11bd162-7351-4243-ab19-b0f67ce3e74c",
+      "kind": "extracted",
+      "sha256": "b088ca3c69e7cf766fdb56043310d3c8f19dbbd375bc3182d65e2c7bf2763519"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/privacy.html",
+      "message_index": 65,
+      "message_id": "c3d3a252-b210-4b97-be5e-fc2fdb944a19",
+      "kind": "extracted",
+      "sha256": "94e3a52eb54ad93a9c6775c237ccdc2e1a29b872f07e73541a8fd057213430df"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/sitemap.xml",
+      "message_index": 65,
+      "message_id": "c3d3a252-b210-4b97-be5e-fc2fdb944a19",
+      "kind": "extracted",
+      "sha256": "f1df4768c13a9dddbb1b2d1938d8c7b16e16a5845ea28f6ea742b8522c5e301f"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/robots.txt",
+      "message_index": 65,
+      "message_id": "c3d3a252-b210-4b97-be5e-fc2fdb944a19",
+      "kind": "extracted",
+      "sha256": "a0362295f47e717238f30807c68f0af439e5e445c3f927133efe7c4718305e8c"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/site.webmanifest",
+      "message_index": 65,
+      "message_id": "c3d3a252-b210-4b97-be5e-fc2fdb944a19",
+      "kind": "extracted",
+      "sha256": "fe4ff62b8671a57da2bd14807ec7fa48db1831951f06e4537c44bf7a105724ef"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "site/site.webmanifest",
+      "message_index": 71,
+      "message_id": "00547ae8-58f2-483b-a637-b174f86833c1",
+      "kind": "extracted",
+      "sha256": "f08bdd9cb56caedcf74e31de549edf41e56d70002d0e1a5ca98df7c190756081"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/release_gate.sh",
+      "message_index": 75,
+      "message_id": "c3d4ae9a-f9e0-4a8b-bd37-3e725419dc43",
+      "kind": "extracted",
+      "sha256": "a3974e81a4271465c8fdffd3234d47c4070f924bfdbd678cc06073751fc7e2d1"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/forbidden_tokens.txt",
+      "message_index": 75,
+      "message_id": "c3d4ae9a-f9e0-4a8b-bd37-3e725419dc43",
+      "kind": "extracted",
+      "sha256": "5abe40297ec88fddf0f1b09e9e080d9c5be4b4f626594a833d87a09653d97478"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "app/TASKS.md",
+      "message_index": 75,
+      "message_id": "c3d4ae9a-f9e0-4a8b-bd37-3e725419dc43",
+      "kind": "merged_latest_tasks",
+      "sha256": "c679b05d637a7bc9318ff2cc3ec4df12e9b0a6697d2070e18f1b6f44689ea597"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/legacy_concepts/logo-01-wave.svg",
+      "message_index": 59,
+      "message_id": "9a3b1537-99b5-494d-b509-3e5727e37486",
+      "kind": "extracted",
+      "sha256": "dee83b2cb8ac7c5bdb8ae0fd89d157be76b63fd95b74353ae3da1fa845be4c98"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/legacy_concepts/logo-02-privacy-step.svg",
+      "message_index": 59,
+      "message_id": "9a3b1537-99b5-494d-b509-3e5727e37486",
+      "kind": "extracted",
+      "sha256": "4b96900980660560ff54894750bc93b302efa6bb8782ba1c77cd2ad5c2d2cd56"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/legacy_concepts/logo-03-wordmark.svg",
+      "message_index": 59,
+      "message_id": "9a3b1537-99b5-494d-b509-3e5727e37486",
+      "kind": "extracted",
+      "sha256": "a9670d2bacaad3dd24b9fb5cdd2fba82132bc7f616e3c8d22ebb0d619dc52d32"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/BRAND_LICENSE.md",
+      "message_index": 67,
+      "message_id": "a05cdcca-e82d-4444-bbd0-a4fbdc780491",
+      "kind": "merged_license",
+      "sha256": "b4d8e5d3835f104e5f8278b4cb6b6a854177d53bd2967546ef65c4d62c2f87e3"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/export_branding.py",
+      "message_index": 61,
+      "message_id": "59518491-07db-4191-b2f3-9abe4dfd50a4",
+      "kind": "extracted",
+      "sha256": "e9535b7877affc08b62714a729dbd19e1f8eb8ab151fb470929cf651c2190143"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "branding/install_android_icons.py",
+      "message_index": 63,
+      "message_id": "90c8417d-1647-46ff-b4ce-62943afb354e",
+      "kind": "extracted",
+      "sha256": "100dbfa88a2e1a7c644ab9a097c257c9f78f1ddaa05f71e154919da5cb6eeeff"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "docs/archive_initial/01_Concept_and_MVP.md",
+      "message_index": 26,
+      "message_id": "0e1f7137-338a-408a-9157-db8f4b31646f",
+      "kind": "extracted",
+      "sha256": "5a563e521c42d487a4f69f9feaca1cc300ad9960042fe0d6ddf4a6f63b5c42a1"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "docs/archive_initial/02_Business_Plan.md",
+      "message_index": 26,
+      "message_id": "0e1f7137-338a-408a-9157-db8f4b31646f",
+      "kind": "extracted",
+      "sha256": "f4639805f94cd9bb6d1b6678c855186d449d642a9fa6f74e7c9f482c7bf94cbd"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "docs/archive_initial/03_Marketing_Strategy.md",
+      "message_index": 26,
+      "message_id": "0e1f7137-338a-408a-9157-db8f4b31646f",
+      "kind": "extracted",
+      "sha256": "cf6a34022b2edbca72974e038986d54d41236b7118698801ccaaf64605f7be08"
+    },
+    {
+      "project": "02_dvizh_offline_tracker",
+      "path": "docs/archive_initial/04_Technical_Architecture.md",
+      "message_index": 26,
+      "message_id": "0e1f7137-338a-408a-9157-db8f4b31646f",
+      "kind": "extracted",
+      "sha256": "64db98fa9d0591b55c18905db0f3648174ce277fe85503726e50871b27445a69"
+    }
+  ]
+}

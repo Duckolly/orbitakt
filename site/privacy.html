@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Движ</title>
+  <meta name="description" content="Политика конфиденциальности приложения Движ: офлайн-режим, локальное хранение данных, отсутствие сбора персональных данных, удаление данных.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://duckolly.github.io/dvizh/privacy.html"> <!-- ЗАМЕНИ -->
+  <meta name="theme-color" content="#0B1A3C">
+  <style>
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.6;max-width:860px;margin:40px auto;padding:0 20px;color:#0B1A3C;background:#F4F6FA}
+    @media (prefers-color-scheme:dark){body{color:#F4F6FA;background:#0B1A3C}}
+    a{color:#0A3BFF}
+    @media (prefers-color-scheme:dark){a{color:#00E5FF}}
+    h1,h2,h3{line-height:1.2}
+    ul{padding-left:22px} li{margin:8px 0}
+    .box{border-left:4px solid #B7FF00;padding:14px 16px;background:rgba(11,26,60,.04);border-radius:10px}
+    @media (prefers-color-scheme:dark){.box{background:rgba(244,246,250,.05)}}
+  </style>
+</head>
+<body><main><h1>ДВИЖ 3.4.0 — приватность</h1><p>Версия политики: 31.10.2026. Данные тренировок, дневные итоги, контрольные показания датчика и настройки хранятся локально. Аккаунтов, рекламы, аналитики, экспорта и передачи на сервер нет.</p><p>Дневной шагомер включается пользователем. Он использует системный счётчик и health foreground service с тихим служебным уведомлением. При погашенном экране подсчёт продолжается в рамках возможностей Android. Разрешения: распознавание активности, уведомления и foreground service.</p><p>Выключение дневного режима останавливает новый учёт; после перезагрузки требуется возобновление. Историю можно очистить отдельно, все данные — удалить в настройках. Резервное копирование отключено конфигурацией приложения.</p><p>ОС может прерывать службу; точность и расход батареи на конкретном телефоне требуют проверки. Приложение не предназначено для медицинской диагностики. Полная политика включена в PRIVACY.md исходного комплекта.</p><p>Разработчик: Sergey Shvetsov / Duckolly. Контактный профиль: <a href="https://github.com/Duckolly">GitHub</a>. Контакт поддержки и публичный адрес политики необходимо подтвердить перед магазинным выпуском.</p><a href="index.html">На главную</a></main><section><h2>Water and home-screen widget / Вода и виджет (3.4.0)</h2>
+<p>Water is a manual daily log of 200 ml glasses, stored in a separate private SQLite database. The app stores workouts, daily steps, water and settings locally. Manual water logging works when activity recording is disabled. Water history can be cleared separately or with Delete all data.</p>
+<p>Вода — ручной журнал стаканов по 200 мл с местной датой телефона. При смене суток открывается новый дневной итог без удаления истории. Все данные удаляются через настройки приложения.</p>
+<p>A widget added by the user exposes local step and water totals to the system home-screen launcher. Anyone viewing the screen can see them. +200/−200 updates today's water without enabling the pedometer. The snapshot timestamp is shown; updates may be delayed by Android. No network, Health Connect or new permissions are used.</p>
+<p>Добавленный пользователем виджет показывает локальные шаги и воду на рабочем столе. Данные видны наблюдателю экрана. Виджет не включает шагомер; для этого откройте приложение. Это описание исходников; публичная политика и данные владельца должны быть проверены перед публикацией.</p></section>
+</body></html>

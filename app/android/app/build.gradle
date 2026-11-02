@@ -1,0 +1,77 @@
+import java.util.Properties
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+def previewBuild = providers.gradleProperty("dvizhPreview").map { it.toBoolean() }.getOrElse(false)
+def unsignedRelease = providers.gradleProperty("dvizhUnsigned").map { it.toBoolean() }.getOrElse(false)
+def platformAbis = ["android-arm": "armeabi-v7a", "android-arm64": "arm64-v8a", "android-x64": "x86_64"]
+def requestedAbis = (project.findProperty("target-platform") ?: "android-arm,android-arm64,android-x64").toString().split(",").collect { platform ->
+    def abi = platformAbis[platform.trim()]
+    if (abi == null) { throw new GradleException("Unsupported target platform: " + platform) }
+    abi
+}
+def keyFile = rootProject.file("key.properties")
+def keys = new Properties()
+if (keyFile.exists()) { keyFile.withInputStream { keys.load(it) } }
+android {
+    namespace = "com.duckolly.dvizh"
+    compileSdk = 36
+    ndkVersion = flutter.ndkVersion
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+    kotlinOptions { jvmTarget = "17" }
+    defaultConfig {
+        applicationId = "com.duckolly.dvizh"
+        if (previewBuild) { applicationIdSuffix = ".preview" }
+        manifestPlaceholders = [appLabel: "Движ", widgetLabel: "Движ: шаги и вода"]
+        minSdk = 24
+        targetSdk = 36
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+    signingConfigs {
+        debug {
+            if (previewBuild && providers.gradleProperty("dvizhPreviewKeystore").isPresent()) {
+                storeFile = file(providers.gradleProperty("dvizhPreviewKeystore").get())
+                keyAlias = "androiddebugkey"
+                storePassword = "android"
+                keyPassword = "android"
+            }
+        }
+        release {
+            if (keyFile.exists()) {
+                keyAlias = keys["keyAlias"]
+                keyPassword = keys["keyPassword"]
+                storeFile = file(keys["storeFile"])
+                storePassword = keys["storePassword"]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig = previewBuild ? signingConfigs.debug : (unsignedRelease ? null : signingConfigs.release)
+            // Match dependency JNI libraries to the Flutter engines actually built.
+            // Do not combine filters with Flutter's split-per-ABI configuration.
+            if (project.findProperty("split-per-abi")?.toString() != "true") {
+                ndk.abiFilters.clear()
+                ndk.abiFilters.addAll(requestedAbis)
+            }
+        }
+    }
+}
+flutter { source = "../.." }
+dependencies {
+ coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
+ testImplementation "junit:junit:4.13.2"
+ implementation "androidx.core:core-ktx:1.13.1"
+}
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { it.name.toLowerCase().contains("release") } && !keyFile.exists() && !unsignedRelease && !previewBuild) {
+        throw new GradleException("Release signing requires android/key.properties; or explicit -PdvizhUnsigned=true for a non-installable unsigned artifact; see docs/PACKAGING_STATUS.md")
+    }
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "library": "lib/arm64-v8a/libapp.so",
+    "bytes": 5243824,
+    "16k": "PASS",
+    "alignments": [
+      65536,
+      65536,
+      65536
+    ]
+  },
+  {
+    "library": "lib/arm64-v8a/libdatastore_shared_counter.so",
+    "bytes": 7112,
+    "16k": "PASS",
+    "alignments": [
+      16384,
+      16384,
+      16384
+    ]
+  },
+  {
+    "library": "lib/arm64-v8a/libflutter.so",
+    "bytes": 11037032,
+    "16k": "PASS",
+    "alignments": [
+      65536,
+      65536,
+      65536,
+      65536
+    ]
+  }
+]

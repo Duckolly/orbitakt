@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 256" width="900" height="256" role="img" aria-label="Dvizh offline activity tracker logo">
+  <style>
+    .name {
+      fill: #111111;
+      font-family: Inter, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+      font-size: 112px;
+      font-weight: 800;
+      letter-spacing: -3px;
+    }
+
+    .tag {
+      fill: #6B6B6B;
+      font-family: Inter, "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .name {
+        fill: #F5F5F5;
+      }
+
+      .tag {
+        fill: #B0B0B0;
+      }
+    }
+  </style>
+
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="#111111"/>
+
+  <path
+    d="M56 154 C92 100 128 190 164 132 C184 98 204 92 220 88"
+    fill="none"
+    stroke="#FF7A00"
+    stroke-width="22"
+    stroke-linecap="round"
+  />
+
+  <circle cx="220" cy="88" r="18" fill="#FFFFFF"/>
+
+  <text class="name" x="276" y="164">Движ</text>
+  <text class="tag" x="280" y="210">offline activity tracker</text>
+</svg>

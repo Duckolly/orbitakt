@@ -1,0 +1,12 @@
+{
+  "name": "Движ — офлайн счётчик активности",
+  "short_name": "Движ",
+  "description": "Локальный трекер ходьбы, бега и зарядки. Без аккаунта, интернета, рекламы и аналитики.",
+  "start_url": "/dvizh/",
+  "scope": "/dvizh/",
+  "display": "standalone",
+  "background_color": "#0B1A3C",
+  "theme_color": "#0B1A3C",
+  "lang": "ru",
+  "icons": []
+}

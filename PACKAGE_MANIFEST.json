@@ -1,0 +1,1281 @@
+{
+  "version": "3.7.1+9",
+  "packaging_checked": "2026-11-02",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 300,
+      "sha256": "c59622b66509240e5788592afc6bb8f8c98be2b25060d95754508e7f52194fbf"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "bytes": 2113,
+      "sha256": "6458b6711cf0664a362c8c964ec67e68c69dcd24d1f500a3c9be95a0b3ca76fa"
+    },
+    {
+      "path": "COPYRIGHT_FIXATION.md",
+      "bytes": 2326,
+      "sha256": "7860ad2403c8c55bf364f6cedc61d90ce7cb12137e6422dfb57a293038876bd9"
+    },
+    {
+      "path": "EXTRACTION_MANIFEST.json",
+      "bytes": 26642,
+      "sha256": "c6107fbd59b2a1e76701b17188615338b686cbac9fa74bcf09aa93c17d9a022d"
+    },
+    {
+      "path": "GOOGLE_PLAY_RELEASE_CHECKLIST.md",
+      "bytes": 8330,
+      "sha256": "6ef43ad6bbe2edd13accf5ac4ec49557fdc8f0738e8e552e303897878ebdae83"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1337,
+      "sha256": "8bec55f049ca876bccc9e25084580a8a6c14ce96a6d6858c0fe304674da01ceb"
+    },
+    {
+      "path": "PRIVACY.md",
+      "bytes": 8396,
+      "sha256": "c05881c55415f8554a2322ed7b9909c52662951c0ce4d7dbca49eb06fbf00044"
+    },
+    {
+      "path": "PROJECT_BOUNDARIES.md",
+      "bytes": 1144,
+      "sha256": "5626633d50b5657f9d4d47d52371a218dca3f9d808c352502c564e6a8d9e1a04"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3015,
+      "sha256": "f597b028d2c832aaecb9cac5e45de6833008d6aa8b36f99f03f7c62750485a71"
+    },
+    {
+      "path": "RELEASE_NOTES_v3.2.0.md",
+      "bytes": 1851,
+      "sha256": "9a9fac92b52884359e5ff3b699a125fdf32565234ea22fdf4d444d582a99912b"
+    },
+    {
+      "path": "RELEASE_NOTES_v3.3.0.md",
+      "bytes": 1205,
+      "sha256": "3ee7f266a41f08ca331c9511faed00017f81e80e48a02c7467cabf4aae77af1a"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 2533,
+      "sha256": "3a102f5286ccc706884d8e783d12fc88a8cfa96e59520b9b8877bad7f306d083"
+    },
+    {
+      "path": "STORE_LISTING.md",
+      "bytes": 2514,
+      "sha256": "a993b5c384dafde91048835787de8a0b15f4afcbc7e73c99b7a82d8a8aae0244"
+    },
+    {
+      "path": "TASKS.md",
+      "bytes": 11550,
+      "sha256": "f9f3e38ce3d607314f5de032d5bbcc483cd0670763278f8b9d67875209e5a896"
+    },
+    {
+      "path": "analysis_options.yaml",
+      "bytes": 150,
+      "sha256": "c5cc55b3778045a17c647d12790397c672e5d5f83c2f63c524029362b710231a"
+    },
+    {
+      "path": "app/.fvmrc",
+      "bytes": 21,
+      "sha256": "9331998888138221ce60dce32d616d3bfa6ff6a52370c02e17d9e62ce3c4575c"
+    },
+    {
+      "path": "app/TASKS.md",
+      "bytes": 11550,
+      "sha256": "f9f3e38ce3d607314f5de032d5bbcc483cd0670763278f8b9d67875209e5a896"
+    },
+    {
+      "path": "app/analysis_options.yaml",
+      "bytes": 44,
+      "sha256": "c1e9534c05acb3643e72a82ad3d92d56d2ba9b0df2add014c18f7e1d462f24e4"
+    },
+    {
+      "path": "app/android/app/build.gradle",
+      "bytes": 3333,
+      "sha256": "9be1b4c2419abd1f0644772315384196b4311a43bd374aa2b31d4751c313e96e"
+    },
+    {
+      "path": "app/android/app/src/main/AndroidManifest.xml",
+      "bytes": 5121,
+      "sha256": "83967e31924f73a9fbfa6a87fbc4bf86d1760ab3c5dc9efb32b83e23f15d49b8"
+    },
+    {
+      "path": "app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java",
+      "bytes": 1864,
+      "sha256": "f0a6e0b7129031cf946ce3fc1b2eeb7fe981f50122ca1814936990dcf3f5d75f"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/CounterMath.kt",
+      "bytes": 712,
+      "sha256": "984b0bb27c005ac74f1c1878b7a47748df500e27ea8fc5fe54c69e4ec9635ce1"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/DailyRuntime.kt",
+      "bytes": 3395,
+      "sha256": "bc27cb202051c4a7246f1cc05c8a715ca28c87848a202f3ff3655e176d855b36"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/DailyStepService.kt",
+      "bytes": 7222,
+      "sha256": "e32a4ad9e796e0320502decacbecb5f1d65cc4d482f7b1f528a2cf75d6fcdaf3"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/DailyStore.kt",
+      "bytes": 4002,
+      "sha256": "cef16131ce3a80332c2849eac098046b3cc76640aba13cc399680e43a372eb11"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/DeviceBridge.kt",
+      "bytes": 3041,
+      "sha256": "6d8ca13aa9e75705166322573a882ea2d4d9129861a6c3f88070bf9a38bc284d"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/MainActivity.kt",
+      "bytes": 5388,
+      "sha256": "9401a1a583eb9568e7627c4e4f2332c351f6a17c032241a2f162e71591b87fbd"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/ProgressWidget.kt",
+      "bytes": 3816,
+      "sha256": "c37c5cacb5ec07c4adea7c10c43b1280d269e250fec7f8b84dbb1cb63f02f437"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/SkyCompassBridge.kt",
+      "bytes": 6764,
+      "sha256": "195fa79b9e86f035dc15687d0fba89f96a9ce9f165d7e0317fea94ab00710407"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/SkyCompassMath.kt",
+      "bytes": 892,
+      "sha256": "ea1975b039aebff0748cef9302a5a27ac4df4fa424360a499c3c4fbca4c40b53"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/ToolSensorBridge.kt",
+      "bytes": 4365,
+      "sha256": "493b00882aac2c0e026342424aa4bdcf782ec6ebb1d6d918f1f8f0786d592dd3"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/ToolSensorMath.kt",
+      "bytes": 341,
+      "sha256": "18a2a203e1ed279bc688a586d810010d32ebb5cafa5681a6e1a4a3303b2e4093"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/WaterBridge.kt",
+      "bytes": 2163,
+      "sha256": "8c49cf2bb64df5aecbf343bd74c0ed3c9392efd24fbaad1e4e7afe58d537ec61"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/WaterMath.kt",
+      "bytes": 415,
+      "sha256": "d244650d91fea613af69f760d022e8d848a0cc112531eb75aab32dac4ab90838"
+    },
+    {
+      "path": "app/android/app/src/main/kotlin/com/duckolly/dvizh/WaterStore.kt",
+      "bytes": 1773,
+      "sha256": "02ece5001f461e4014c1724c05f03b331668762f0ea6673e1b2cf05f4d70a75e"
+    },
+    {
+      "path": "app/android/app/src/main/res/drawable/dvizh_icon_background.xml",
+      "bytes": 595,
+      "sha256": "924b87f2f9dafc67377fd1bb33617341e47544890458866da523bd2d051c245b"
+    },
+    {
+      "path": "app/android/app/src/main/res/drawable/dvizh_icon_foreground.xml",
+      "bytes": 1074,
+      "sha256": "f5912f647e62185d7bf87146be3d0869b749867476d0efb521855f93cb54fc00"
+    },
+    {
+      "path": "app/android/app/src/main/res/drawable/dvizh_icon_monochrome.xml",
+      "bytes": 688,
+      "sha256": "ef65deede65b3d3ff1f3235b996c712e893ec839b4fbbdcba292b855d12966c2"
+    },
+    {
+      "path": "app/android/app/src/main/res/drawable/ic_stat_activity.xml",
+      "bytes": 335,
+      "sha256": "309a17001695b1d0ed9fda98c2dfa65f959c616b60abd4c5c2f8859a895dc916"
+    },
+    {
+      "path": "app/android/app/src/main/res/drawable/widget_background.xml",
+      "bytes": 303,
+      "sha256": "75bf7e47f75c7074025b27a093bc24ff9562d448014e1f3aa4c2737b0430b6b9"
+    },
+    {
+      "path": "app/android/app/src/main/res/layout/progress_widget.xml",
+      "bytes": 2830,
+      "sha256": "7dff3ce436877dbd9a38d79063296a5b598370d01276201b1d3ec56ab41db597"
+    },
+    {
+      "path": "app/android/app/src/main/res/layout-v26/progress_widget.xml",
+      "bytes": 3116,
+      "sha256": "302810d500e1b78d95d79fa281237ab82ab821a347411d60507c8736b9e523ab"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+      "bytes": 1078,
+      "sha256": "46b4ffeedd707540147ecfc13167c74725bf35084311030523dce24f42f7e47c"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "bytes": 283,
+      "sha256": "ea94fe4c47990fe24d6d4897586e3a298e6cd1ecd0c4ddc0fe368c3683b87760"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "bytes": 283,
+      "sha256": "ea94fe4c47990fe24d6d4897586e3a298e6cd1ecd0c4ddc0fe368c3683b87760"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "bytes": 118,
+      "sha256": "b9425752bac5b41c24800a0461535277f685801f1b7a8900443c050b84ee61e6"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "bytes": 106,
+      "sha256": "06c8e1a21f5ab3320921ca8dff2bf903369ff9c8d471be57a5cadc6712178345"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "bytes": 134,
+      "sha256": "877f390eb4ab236433e031100659fb20eef934405ae1c246ae7e6eb3b3f9b248"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "bytes": 178,
+      "sha256": "ad5a31eb8a6d06fb062884012e580d7c678dbfb6fc8a4e33a53a8154c6f2dde8"
+    },
+    {
+      "path": "app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "bytes": 241,
+      "sha256": "45ae1231c625834e890e0f30084fa945db322fad56f4b4f44e424f33989dc0de"
+    },
+    {
+      "path": "app/android/app/src/main/res/values/styles.xml",
+      "bytes": 310,
+      "sha256": "2f1254f0564d598995b64334da28978acaff2e27dad90e385591e2f4a8ade7cf"
+    },
+    {
+      "path": "app/android/app/src/main/res/values/widget_colors.xml",
+      "bytes": 316,
+      "sha256": "e18a5e77d534d8c399b1bd79848d1593a1141c19836a53c49a423787889f9768"
+    },
+    {
+      "path": "app/android/app/src/main/res/values/widget_strings.xml",
+      "bytes": 455,
+      "sha256": "185ea6264f05521f43f4126fd8eb924dc638b88c65b01b2ce5e4b87cd2536492"
+    },
+    {
+      "path": "app/android/app/src/main/res/values-night/styles.xml",
+      "bytes": 310,
+      "sha256": "d5ebe4e774db65d6087c7a37cddea9bb337cb46af694d803c8d93cffcc0a54c5"
+    },
+    {
+      "path": "app/android/app/src/main/res/values-night/widget_colors.xml",
+      "bytes": 316,
+      "sha256": "5546a896158f3751ab0d90923d94b78a007a5aeaecbdf4723bc0238e759ff40a"
+    },
+    {
+      "path": "app/android/app/src/main/res/xml/data_extraction_rules.xml",
+      "bytes": 544,
+      "sha256": "0043b24c655abefbf50d6a9c58035f055fdad6ff82567f7506e84a6cd722808c"
+    },
+    {
+      "path": "app/android/app/src/main/res/xml/progress_widget_info.xml",
+      "bytes": 408,
+      "sha256": "fbdd741b98f1af586d582a7cceb43faa1506da7e87f2abe2b281a6e3719d2611"
+    },
+    {
+      "path": "app/android/app/src/main/res/xml-v31/progress_widget_info.xml",
+      "bytes": 566,
+      "sha256": "054c4f850d23205d980651a01a32b6cb470fb9f683933c0a09cd5ab09b65d8ea"
+    },
+    {
+      "path": "app/android/app/src/test/kotlin/com/duckolly/dvizh/CounterMathTest.kt",
+      "bytes": 1674,
+      "sha256": "f64e71fc59bf4de1fe1d0de9430f6cfc60d65baa6d402de2043c7357ecdd75bc"
+    },
+    {
+      "path": "app/android/app/src/test/kotlin/com/duckolly/dvizh/SkyCompassMathTest.kt",
+      "bytes": 1297,
+      "sha256": "f1e82a5cfccaf411b03f482b0acf84c305153ba13e0102ab9473156d9542c661"
+    },
+    {
+      "path": "app/android/app/src/test/kotlin/com/duckolly/dvizh/ToolSensorMathTest.kt",
+      "bytes": 480,
+      "sha256": "7f7bab1b8a03181ecfa08dedf14562066bb3eff9656abfbbb3f0548fc940fb47"
+    },
+    {
+      "path": "app/android/app/src/test/kotlin/com/duckolly/dvizh/WaterMathTest.kt",
+      "bytes": 541,
+      "sha256": "cb2777e1152b46c9f650fd7ad1df634448cadcbfcefcbaa880cf45f1b2448657"
+    },
+    {
+      "path": "app/android/build.gradle",
+      "bytes": 285,
+      "sha256": "452a2b8bb6df3f406969e92d2b458972dcff9ac47f399f6fdeee42bbf345bd58"
+    },
+    {
+      "path": "app/android/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 43583,
+      "sha256": "2db75c40782f5e8ba1fc278a5574bab070adccb2d21ca5a6e5ed840888448046"
+    },
+    {
+      "path": "app/android/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 340,
+      "sha256": "d69131ca636c4f6fb0d5ae3d02a535f70990effeca7368a2a15c42b9aa7e0cd3"
+    },
+    {
+      "path": "app/android/gradle.properties",
+      "bytes": 228,
+      "sha256": "de653b02c25d4eb406cad629601de5d00c3ab80325edfa73646450ce633bb46e"
+    },
+    {
+      "path": "app/android/gradlew",
+      "bytes": 8784,
+      "sha256": "9cbbb4d68ff7fb5211c4d58f598ac9d8664c05fdcd1e5f59b7f2c3ac1ee00af0"
+    },
+    {
+      "path": "app/android/gradlew.bat",
+      "bytes": 2894,
+      "sha256": "0f3ed8f03b50934cb8c48b15a470d5c20a30a5385825e48b55bcc8ea3d8f8e18"
+    },
+    {
+      "path": "app/android/key.properties.example",
+      "bytes": 127,
+      "sha256": "1f12d2e5894fbcb4ad8ce8c6b28291fb642f111faf0eff4a6c0d6b619e938b9c"
+    },
+    {
+      "path": "app/android/settings.gradle",
+      "bytes": 686,
+      "sha256": "20228b068d6e55bc2cadcc85babb7fb72b24c0bb1d4892f26f51c644a0b8a2c8"
+    },
+    {
+      "path": "app/assets/sky/LICENSE_CC-BY-4.0.txt",
+      "bytes": 17023,
+      "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744"
+    },
+    {
+      "path": "app/assets/sky/LICENSE_CC-BY-SA-4.0.txt",
+      "bytes": 18375,
+      "sha256": "cde7883b9050a1104f4ac19a1572aafd6e5d7323b68351aaf51fbf4beba54966"
+    },
+    {
+      "path": "app/assets/sky/NOTICE.txt",
+      "bytes": 1142,
+      "sha256": "7ea796539c08d9dff4e8086c2d1847d98e5ae36b72dda061aa011d987f38b656"
+    },
+    {
+      "path": "app/assets/sky/cities.json",
+      "bytes": 3799,
+      "sha256": "e0d24a6f063e02528fa47762dbed96f9bc545e2595dae5bbedc27929ffa148a0"
+    },
+    {
+      "path": "app/assets/sky/figures.json",
+      "bytes": 1391,
+      "sha256": "14be8f779f6d5d69b88aa260dbdf66e5499627ba6183409f5276e93de1f51dea"
+    },
+    {
+      "path": "app/assets/sky/stars.json",
+      "bytes": 60571,
+      "sha256": "b17298c8240b98d0e82f0d9df21595731644d7fb33963523e100b7358f57249e"
+    },
+    {
+      "path": "app/lib/games/snake_game.dart",
+      "bytes": 2705,
+      "sha256": "73050a85c38747565aee2bdef2bdd1d6a99654b859a4e8a91c3d9bc3532a2145"
+    },
+    {
+      "path": "app/lib/games/tilt_control.dart",
+      "bytes": 1556,
+      "sha256": "bca377beb605a7b6c6ad2a1d919e3329bb030caf88c8ed286cc5b21fa9a720de"
+    },
+    {
+      "path": "app/lib/main.dart",
+      "bytes": 2388,
+      "sha256": "a8ddb10d4d080b4c4844a55864cd0d590ed2d6f02514404d612fcad93cbf8546"
+    },
+    {
+      "path": "app/lib/models/activity.dart",
+      "bytes": 299,
+      "sha256": "915e324c6d0307acfb6b99f8cb34736f32257e4b9c0b2caa345f66a3be3fc223"
+    },
+    {
+      "path": "app/lib/models/breathing.dart",
+      "bytes": 1553,
+      "sha256": "bd5740f1f35565b86276b8b110e4c7f4c9954b507091b482182481a402b8bf76"
+    },
+    {
+      "path": "app/lib/models/relative_altitude.dart",
+      "bytes": 874,
+      "sha256": "270579bc06adc6e6d6c6699a4273ebb0dbd732e12c7874288e43c8fd13377b52"
+    },
+    {
+      "path": "app/lib/models/workout.dart",
+      "bytes": 919,
+      "sha256": "59a9a93b046574e0228804cf370c025e091b7e1243ca7a34b0964a0d6634dad9"
+    },
+    {
+      "path": "app/lib/screens/activity_screen.dart",
+      "bytes": 10660,
+      "sha256": "175c934819f24e45f545b2dd50c95e2ccb394b80375ff8efa65deb2d24023164"
+    },
+    {
+      "path": "app/lib/screens/altitude_screen.dart",
+      "bytes": 6953,
+      "sha256": "b3e03991e9a5fa9b4314d1eb91da24cf5d04899405c69a999bae618ea135d5c0"
+    },
+    {
+      "path": "app/lib/screens/breathing_screen.dart",
+      "bytes": 6563,
+      "sha256": "237f3a1000758496a6219d7c6af387cccdbea05070f3d7d9d443d0a0e650ac28"
+    },
+    {
+      "path": "app/lib/screens/consent_screen.dart",
+      "bytes": 8246,
+      "sha256": "3aa9c96d6bb550f709aa22655712f8bba16133218529aaa493e5a8e5cf4fd19c"
+    },
+    {
+      "path": "app/lib/screens/daily_screen.dart",
+      "bytes": 8816,
+      "sha256": "c83d7de8f693a1cd032080f1ab0a6f147a23f7a695086aef449ab91efc8f6fab"
+    },
+    {
+      "path": "app/lib/screens/history_screen.dart",
+      "bytes": 4213,
+      "sha256": "54ed037a42cb8b31fd34a27ff6dfd749eb23cfd42db42628999c170da6369b74"
+    },
+    {
+      "path": "app/lib/screens/home_screen.dart",
+      "bytes": 5998,
+      "sha256": "ce54921ed3dac9f72ed3156a4869215d40e930f97873de23e00985fabad9c375"
+    },
+    {
+      "path": "app/lib/screens/sensors_screen.dart",
+      "bytes": 5663,
+      "sha256": "ab91bc42c898a437793a6b82431865c624cd4a6c3d7b5412f795a8701b6f56bb"
+    },
+    {
+      "path": "app/lib/screens/settings_screen.dart",
+      "bytes": 8991,
+      "sha256": "ebaf02e04aa5d7a9ecc8e463178c91d845b05eda398bf520c9d7ce32da7ffb19"
+    },
+    {
+      "path": "app/lib/screens/sky_screen.dart",
+      "bytes": 14777,
+      "sha256": "1d95497a29c88edd4e7ed5309cfc86d3aefc4850ec95689f3f509912e593e5f0"
+    },
+    {
+      "path": "app/lib/screens/snake_screen.dart",
+      "bytes": 14011,
+      "sha256": "8aae3a0b1a07e8cbd9f39908eceae7f3fad5fd268dc870827ccbec0930638dfb"
+    },
+    {
+      "path": "app/lib/screens/water_screen.dart",
+      "bytes": 6707,
+      "sha256": "1f848c3cbd565798595eac822661bdfda623f99a2586aa5bba1fc40bbf3ba701"
+    },
+    {
+      "path": "app/lib/services/daily_tracker.dart",
+      "bytes": 3412,
+      "sha256": "ede3ce78efca5ee08f15ff9f237ccf271815617a416e214e4e1dc8ce1f379b81"
+    },
+    {
+      "path": "app/lib/services/device_sensors.dart",
+      "bytes": 835,
+      "sha256": "7b0f5f3bdb4ce43258b601019e023353e389671a1f7805823862442cf1cabf00"
+    },
+    {
+      "path": "app/lib/services/hardware_workout_sensor.dart",
+      "bytes": 1573,
+      "sha256": "9c654143c70181c30b6860509ca2758e192717ab3125a2923ebe2b64291c9680"
+    },
+    {
+      "path": "app/lib/services/notification_service.dart",
+      "bytes": 2188,
+      "sha256": "95aafd72395b119c3b68b3aea412d4ab9529f2dba1b2a09f1d6f0bd3ac136f90"
+    },
+    {
+      "path": "app/lib/services/sensor_service.dart",
+      "bytes": 2115,
+      "sha256": "d60c15c111a914d40d0c05e8401137240cacb5f844b919bda24a66b40a38efdd"
+    },
+    {
+      "path": "app/lib/services/storage_service.dart",
+      "bytes": 2364,
+      "sha256": "47bd0fa5f09de2288f9419a7f8e5241912a27b448ee15dc9549531da80a430d4"
+    },
+    {
+      "path": "app/lib/services/tool_routes.dart",
+      "bytes": 104,
+      "sha256": "2aa826d80815b2ff2e72b4ea661738264dfe661aa512aa3ca3c9833452432e17"
+    },
+    {
+      "path": "app/lib/services/tool_sensors.dart",
+      "bytes": 1864,
+      "sha256": "dce55f8909f2c23dd2a9f2b6cb3054d6ff64299c4d06013bb226f8831e5215c0"
+    },
+    {
+      "path": "app/lib/services/water_tracker.dart",
+      "bytes": 1275,
+      "sha256": "12573d01328f8f495102439e4d3b92ab0529979adc53ac65c48006a7840ed6c0"
+    },
+    {
+      "path": "app/lib/sky/city_picker.dart",
+      "bytes": 5107,
+      "sha256": "7c546346346c4e2079e14fa41d46ff0521cecd6e9bcb60d3d0dd1a6ec17d6a1f"
+    },
+    {
+      "path": "app/lib/sky/sky_catalog.dart",
+      "bytes": 3482,
+      "sha256": "9ccc4996125a0d3df5f3e54ce5bdc0ff92d76fa161964e6ae952f4b8a5e9b36c"
+    },
+    {
+      "path": "app/lib/sky/sky_chart.dart",
+      "bytes": 6007,
+      "sha256": "4beebd8713c0b10a2db069bcbcc5b6101a73210ba0373ae696f31841cbf518cc"
+    },
+    {
+      "path": "app/lib/sky/sky_compass_control.dart",
+      "bytes": 8514,
+      "sha256": "fd4fe642d7926b8797026a67cbfb9b143c4700fcd05ec671e1c2e2d903f850d8"
+    },
+    {
+      "path": "app/lib/sky/sky_math.dart",
+      "bytes": 3149,
+      "sha256": "baf082b7ffc69412c53e77e727e3faaf89011a9cb1077d6271ab2d400549ed2d"
+    },
+    {
+      "path": "app/lib/sky/sky_snapshot.dart",
+      "bytes": 565,
+      "sha256": "a659a2421cf01b15d01c0f6b8d7812a25fc633b3b3deb6f3c8d3bb4cc307a8e9"
+    },
+    {
+      "path": "app/lib/theme/app_theme.dart",
+      "bytes": 632,
+      "sha256": "85d82c6ede18b45d50fe39301369ec9909919bf4e35de550706c00c413254fbe"
+    },
+    {
+      "path": "app/lib/theme/theme_controller.dart",
+      "bytes": 861,
+      "sha256": "84892257dbe197b642a544a6d6371e7156a76dec6db4404e498b8532a95ebf71"
+    },
+    {
+      "path": "app/lib/widgets/daily_summary.dart",
+      "bytes": 1920,
+      "sha256": "a4b4529372fd2cc153025a1da984c5243c14e7a3461a6078861787bd2db976cc"
+    },
+    {
+      "path": "app/lib/widgets/water_summary.dart",
+      "bytes": 2048,
+      "sha256": "ee7075d437c79420d9ff59dfdd5e13c5676881c0af8ec02b73183d4a91765bf1"
+    },
+    {
+      "path": "app/pubspec.lock",
+      "bytes": 17511,
+      "sha256": "04c1d134c1ed5b2a8b6e48e276dc39ecc4d88f20ed9ca0f07ddebd1b7aed6753"
+    },
+    {
+      "path": "app/pubspec.yaml",
+      "bytes": 567,
+      "sha256": "37968df6ae8c0767b587ad7f8b5417f249d1ca94dbd20b9e0cd6e2cb31a48806"
+    },
+    {
+      "path": "app/regress_tokens.txt",
+      "bytes": 1250,
+      "sha256": "5abe40297ec88fddf0f1b09e9e080d9c5be4b4f626594a833d87a09653d97478"
+    },
+    {
+      "path": "app/release_gate.sh",
+      "bytes": 2705,
+      "sha256": "d94c42b1279a15444fd94f761bdca556dde4bc377558fbccd412dd73ad10e40a"
+    },
+    {
+      "path": "app/scripts/build_debug.ps1",
+      "bytes": 1490,
+      "sha256": "9ad6304e7ed73ed9b0fbc6cae6d0fa5ff008542b5650d9ea69861712fbf561ec"
+    },
+    {
+      "path": "app/scripts/build_debug.sh",
+      "bytes": 797,
+      "sha256": "1c9543998e7aa808401e5daf6bd8cf152b0521bef2599e262277f2938cc0c14c"
+    },
+    {
+      "path": "app/test/altitude_test.dart",
+      "bytes": 4043,
+      "sha256": "5ac49b78a65a743603536f05770b188bb1b1e4ff591ff280270589dd803f6bd2"
+    },
+    {
+      "path": "app/test/breathing_test.dart",
+      "bytes": 3213,
+      "sha256": "807e69a985da04789914d0dfedd65c77a3e0be4ec79d90e03dc4ebe06ff92382"
+    },
+    {
+      "path": "app/test/daily_tracker_test.dart",
+      "bytes": 4070,
+      "sha256": "ebc814d9bb8a04d8cbc2c84f05c9d49347a6d6d61e02e8dff80843324d7d10c3"
+    },
+    {
+      "path": "app/test/fixtures/sky_reference.json",
+      "bytes": 11908,
+      "sha256": "debd7e91decccf40df05c91c8de05de2b5721da954ff8e5c7699302b5d39e722"
+    },
+    {
+      "path": "app/test/hardware_workout_test.dart",
+      "bytes": 1855,
+      "sha256": "626b68b07036cdc388fd7a3aed468b830b54e7aa653240b4716d2b13c94fbfc7"
+    },
+    {
+      "path": "app/test/navigation_test.dart",
+      "bytes": 7489,
+      "sha256": "8f92ee40fbbcc5b1e98f52ea5e28efb1b1a70e16a01cee65ee1b6ed1ea38a93c"
+    },
+    {
+      "path": "app/test/offline_tools_test.dart",
+      "bytes": 4541,
+      "sha256": "25d5d62e2cc07cff5b4003443d5fbf815557f35578edbd0f549efa96ffc6914b"
+    },
+    {
+      "path": "app/test/sensor_service_test.dart",
+      "bytes": 1458,
+      "sha256": "ed38d7416f3db9e79a2e5c690a38a6085ebd892d217de390ff351dfebbc0b067"
+    },
+    {
+      "path": "app/test/sky_compass_test.dart",
+      "bytes": 5929,
+      "sha256": "1357e50ecd48801e234c1a30c7aef6a7e1c20d490eee54efea09f2560d0db408"
+    },
+    {
+      "path": "app/test/sky_math_test.dart",
+      "bytes": 3663,
+      "sha256": "5725f172f796a9761997748833bb63af490a3b113b2ad42dc49dff50c1cc1bbd"
+    },
+    {
+      "path": "app/test/sky_screen_test.dart",
+      "bytes": 5775,
+      "sha256": "40a859c579f06d8bbe0204162fdc10a9fed460073a5b44ed665afba3c8eeae53"
+    },
+    {
+      "path": "app/test/snake_game_test.dart",
+      "bytes": 3630,
+      "sha256": "0456d9fc46d5d7a95e6e339422700bc93d59dbb3cf7fd9645a814c628c4703e1"
+    },
+    {
+      "path": "app/test/storage_test.dart",
+      "bytes": 1611,
+      "sha256": "49414e5cf216511dd1f44f8bac74a789528762f044d43f83be70ca2de0280d6b"
+    },
+    {
+      "path": "app/test/tilt_control_test.dart",
+      "bytes": 1370,
+      "sha256": "ba8b27075f152c1e60858a8dc480e37715e0b3141e78c95c750d65c58b43373c"
+    },
+    {
+      "path": "app/test/tilt_screen_test.dart",
+      "bytes": 3153,
+      "sha256": "02c145876813d87867de1ff6f388d1e280fb38b4c1dededd039e381101fcf126"
+    },
+    {
+      "path": "app/test/water_tracker_test.dart",
+      "bytes": 5778,
+      "sha256": "c0820b9734558b8d55906890405247bffdb00f76eebdd0e8b48a33cee0b42730"
+    },
+    {
+      "path": "app/test/workout_test.dart",
+      "bytes": 713,
+      "sha256": "33fecf37b36ef491193254d8f964c959fc0371d707b888d05123e88ba6660758"
+    },
+    {
+      "path": "branding/BRAND_LICENSE.md",
+      "bytes": 3296,
+      "sha256": "b4d8e5d3835f104e5f8278b4cb6b6a854177d53bd2967546ef65c4d62c2f87e3"
+    },
+    {
+      "path": "branding/DVIZH_Adaptive_Icon.svg",
+      "bytes": 988,
+      "sha256": "21324c3b05dfff0bd82fa231077983e260b7acbd1ccd9990181847e0b54406f9"
+    },
+    {
+      "path": "branding/DVIZH_Approved_Icon.png",
+      "bytes": 1287121,
+      "sha256": "0393a777fa07bbdf42162919c9a2248c6dc1c75ac19c8f0801c6e65ac4ed4e02"
+    },
+    {
+      "path": "branding/DVIZH_Launcher_Masks_Preview.png",
+      "bytes": 28788,
+      "sha256": "957f12db61ba0aa8def9ca7e33900171f9d9b3d1f74039ef58eb4cbbecb8f636"
+    },
+    {
+      "path": "branding/DVIZH_Legacy_Icon.svg",
+      "bytes": 322,
+      "sha256": "6fdaa80d85272ba3e5dbf8ac90ec6d257b0f628b81829d3b9a19569be105ba81"
+    },
+    {
+      "path": "branding/DVIZH_Store_Icon_512.png",
+      "bytes": 212257,
+      "sha256": "dcc6a57426a5fed246c557c80d8b3b344f063118c9574155b4b636e127d61168"
+    },
+    {
+      "path": "branding/IMAGE_PROMPTS.md",
+      "bytes": 1941,
+      "sha256": "cdb2697669799c262fce89c5106e9462f1db7b433f4fd6ea9c5aeee582e7a9df"
+    },
+    {
+      "path": "branding/README.md",
+      "bytes": 1043,
+      "sha256": "7c7c008348bcc9a8705fcce1f12f837e6c79f1d944fb7a71b88050e7a85bbb7e"
+    },
+    {
+      "path": "branding/export_branding.py",
+      "bytes": 5808,
+      "sha256": "e9535b7877affc08b62714a729dbd19e1f8eb8ab151fb470929cf651c2190143"
+    },
+    {
+      "path": "branding/install_android_icons.py",
+      "bytes": 2461,
+      "sha256": "100dbfa88a2e1a7c644ab9a097c257c9f78f1ddaa05f71e154919da5cb6eeeff"
+    },
+    {
+      "path": "branding/legacy_concepts/logo-01-wave.svg",
+      "bytes": 676,
+      "sha256": "dee83b2cb8ac7c5bdb8ae0fd89d157be76b63fd95b74353ae3da1fa845be4c98"
+    },
+    {
+      "path": "branding/legacy_concepts/logo-02-privacy-step.svg",
+      "bytes": 610,
+      "sha256": "4b96900980660560ff54894750bc93b302efa6bb8782ba1c77cd2ad5c2d2cd56"
+    },
+    {
+      "path": "branding/legacy_concepts/logo-03-wordmark.svg",
+      "bytes": 1104,
+      "sha256": "a9670d2bacaad3dd24b9fb5cdd2fba82132bc7f616e3c8d22ebb0d619dc52d32"
+    },
+    {
+      "path": "dist/SHA256SUMS",
+      "bytes": 96,
+      "sha256": "283fa9ff1922a2198ef8018dd23f821f2b0789a603784e3dd6d553a291684298"
+    },
+    {
+      "path": "dist/dvizh-3.7.1-arm64.apk",
+      "bytes": 17906067,
+      "sha256": "ef25053e86e3708b50febb0639a03e874de8406cbc8581f21ed9306be47ffaf1"
+    },
+    {
+      "path": "docs/ACCEPTANCE_360.md",
+      "bytes": 4479,
+      "sha256": "71e32e1ca585cc96ffabf8244994dad3b35269e94b6eb6b3a685eab402eaf191"
+    },
+    {
+      "path": "docs/ACCEPTANCE_370.md",
+      "bytes": 2912,
+      "sha256": "f68b115566b4540959cf1cc6f66e783932ae56f7c2dc96aaf348a47083944dfd"
+    },
+    {
+      "path": "docs/ACCEPTANCE_371.md",
+      "bytes": 1491,
+      "sha256": "440178bfb218e1f1d6876d30781068b3ff6b3cb220892e806a343763c17a18a6"
+    },
+    {
+      "path": "docs/ANDROID_16_17_FEATURES.md",
+      "bytes": 7006,
+      "sha256": "8ace7c6f705c226f73f84396ef490a9cdb1a25accdbdc48569c798ab697d5b2e"
+    },
+    {
+      "path": "docs/BRANDING_371.json",
+      "bytes": 625,
+      "sha256": "ca8f09eda49057af20b4c50fd32cc480a17323b7f186d3b18e09043f8ca3d3a8"
+    },
+    {
+      "path": "docs/BRANDING_ONLY_DIFF.json",
+      "bytes": 339,
+      "sha256": "e300b2b6a283eaff5eaec173471d40298e844f8adebefa4b60492cefc5de77cd"
+    },
+    {
+      "path": "docs/BUILD_ENVIRONMENT.json",
+      "bytes": 801,
+      "sha256": "329bbc2339a98bdb8bfaab0ccc68e0c9d3322e865719e9259ec45caeddfae1bf"
+    },
+    {
+      "path": "docs/BUILD_MODES.md",
+      "bytes": 3579,
+      "sha256": "adc5b9585f4f914a54efa52e0d32d4c8db5c2dd0a492ea9411427b4c224f3827"
+    },
+    {
+      "path": "docs/BUILD_VERIFICATION.json",
+      "bytes": 1567,
+      "sha256": "806fa37d971f4b12a1d76f72ed8e441c5db8c0661fd1186de29f94b3256bdc18"
+    },
+    {
+      "path": "docs/CONTINUOUS_STEPS.md",
+      "bytes": 9595,
+      "sha256": "f58dca5715f93c54b4ab8fcfe0967e6910450eb57e36c2b35871e409c863831a"
+    },
+    {
+      "path": "docs/NATIVE_TEST_RESULTS.json",
+      "bytes": 388,
+      "sha256": "e399e8abed3f81987ec0d72135af2e0e3aceace91f579d1f67c73c397f8bfd86"
+    },
+    {
+      "path": "docs/NIGHT_SKY.md",
+      "bytes": 8359,
+      "sha256": "a1fd89d7fe24d70e1797cf0c0f888b4725232c52af9d603bc685efdab8dcd484"
+    },
+    {
+      "path": "docs/OFFLINE_360.md",
+      "bytes": 6426,
+      "sha256": "24eaefe11ca8507fffc2a4e161e25f3d5284d3ca4d37d7f632c4f7cc64891739"
+    },
+    {
+      "path": "docs/OFFLINE_EXTRAS.md",
+      "bytes": 465,
+      "sha256": "812caf6eb76f9853176f5af4f36273c7fa3e8a98985a177f4712884eb762d45b"
+    },
+    {
+      "path": "docs/PACKAGING_STATUS.md",
+      "bytes": 724,
+      "sha256": "0ede504f0cd9c52ff670e012c419b0e4618c4c86df10ce54e98cae9d7c7cf2f4"
+    },
+    {
+      "path": "docs/PHONE_ACCEPTANCE.md",
+      "bytes": 7162,
+      "sha256": "57d9ff2f9a4c4599f5aea00e6157c75d35ed5cd727223d9ff465da565be4ca81"
+    },
+    {
+      "path": "docs/PROJECT_SCOPE.md",
+      "bytes": 1806,
+      "sha256": "083a6233830ac76bf6d68a6910350c708fa5ea33b78ee077b7cae292597a731a"
+    },
+    {
+      "path": "docs/RELEASE_STATUS.md",
+      "bytes": 3042,
+      "sha256": "7e5865e9de727ef93bd3be68f871f719c83fc017f1b0745f1cbf79f2a6d9abb6"
+    },
+    {
+      "path": "docs/SKY_DATA_SOURCES.json",
+      "bytes": 1592,
+      "sha256": "06e0c34cd832a8ef614b9c498be985ef1a447932741059e8008397f52f61ab19"
+    },
+    {
+      "path": "docs/TASKS.md",
+      "bytes": 11550,
+      "sha256": "f9f3e38ce3d607314f5de032d5bbcc483cd0670763278f8b9d67875209e5a896"
+    },
+    {
+      "path": "docs/VERIFICATION.md",
+      "bytes": 1615,
+      "sha256": "98a94eb2d102e086403522f90c395b641326f993b9dee439a256c89e8175336b"
+    },
+    {
+      "path": "docs/WATER_AND_WIDGET.md",
+      "bytes": 3573,
+      "sha256": "4d15f845bdee2ffe9b05d9502b188cdde1083691974d0404d152b3801e598ea8"
+    },
+    {
+      "path": "docs/archive_initial/01_Concept_and_MVP.md",
+      "bytes": 2930,
+      "sha256": "5a563e521c42d487a4f69f9feaca1cc300ad9960042fe0d6ddf4a6f63b5c42a1"
+    },
+    {
+      "path": "docs/archive_initial/02_Business_Plan.md",
+      "bytes": 2977,
+      "sha256": "f4639805f94cd9bb6d1b6678c855186d449d642a9fa6f74e7c9f482c7bf94cbd"
+    },
+    {
+      "path": "docs/archive_initial/03_Marketing_Strategy.md",
+      "bytes": 3164,
+      "sha256": "cf6a34022b2edbca72974e038986d54d41236b7118698801ccaaf64605f7be08"
+    },
+    {
+      "path": "docs/archive_initial/04_Technical_Architecture.md",
+      "bytes": 3198,
+      "sha256": "64db98fa9d0591b55c18905db0f3648174ce277fe85503726e50871b27445a69"
+    },
+    {
+      "path": "docs/build_logs/analyze_360.log",
+      "bytes": 96,
+      "sha256": "0ca78c05804bd9276f72fd7fa044ed10711d078a5efa42f11e7b93d83a9be3bf"
+    },
+    {
+      "path": "docs/build_logs/analyze_370.log",
+      "bytes": 96,
+      "sha256": "542e02ae2ac2128dbf9bd2ecad838797efa1d04cbe13d6cea1732b4506eedb64"
+    },
+    {
+      "path": "docs/build_logs/analyze_371.log",
+      "bytes": 96,
+      "sha256": "a806ab3103ec791bf2c5370241e84b7b5ba8e5801d43e936212e3a8eb94da7dd"
+    },
+    {
+      "path": "docs/build_logs/android-lint.txt",
+      "bytes": 17,
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334"
+    },
+    {
+      "path": "docs/build_logs/apk-badging.txt",
+      "bytes": 5915,
+      "sha256": "cd88218e9dfba48720dbab9d219c8f8f96f9da2b2972602a3473ec9d8725b6aa"
+    },
+    {
+      "path": "docs/build_logs/apk-manifest.txt",
+      "bytes": 7766,
+      "sha256": "3cbd6c38fa68af7b2613f51ead6c169c4b5033834c2debdd422a3141c18d70be"
+    },
+    {
+      "path": "docs/build_logs/apk-native-elf.json",
+      "bytes": 506,
+      "sha256": "b1e2b328142fe2e4904edb758aa1e24b084964a874ef9ba40c9a15f1d9a7dc4a"
+    },
+    {
+      "path": "docs/build_logs/apk-permissions.txt",
+      "bytes": 465,
+      "sha256": "db614b750569fb92404a728a47aa0567392241ea6d097893b5989859c9a50153"
+    },
+    {
+      "path": "docs/build_logs/apk-signature.txt",
+      "bytes": 955,
+      "sha256": "99d364997c663764180060271fd7e21c66a4b3f55c91f145c2705496012215a1"
+    },
+    {
+      "path": "docs/build_logs/apk-zipalign.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/build_logs/apk_checks_360.log",
+      "bytes": 1171,
+      "sha256": "fb26da2ec1195e947d0f419cb118bf2c8ddf1f29ea9c40b8cbbbd56b52eaeee4"
+    },
+    {
+      "path": "docs/build_logs/apk_checks_370.log",
+      "bytes": 1171,
+      "sha256": "bad167fc77e59109b18bbabc21bb046a17c1bb1c549214b9a01d529466f60565"
+    },
+    {
+      "path": "docs/build_logs/apk_checks_371.log",
+      "bytes": 1171,
+      "sha256": "becd36749496742d10b29ed150bda5fe6e9d39530e72b24f7c1e98d3e52d8bb1"
+    },
+    {
+      "path": "docs/build_logs/build_360.log",
+      "bytes": 542,
+      "sha256": "b4671e880fee7aa1bd684bbfdacff880e99dfa1e7a4df8fc3fb19340fe640cae"
+    },
+    {
+      "path": "docs/build_logs/build_370.log",
+      "bytes": 498,
+      "sha256": "7f3bccfecaf7ba406611563c616231b920a9252e6df9eb5739a147ee08c4c789"
+    },
+    {
+      "path": "docs/build_logs/build_371.log",
+      "bytes": 498,
+      "sha256": "470ae861b22d5ca522c7d77e8fcd393837ac6f19d0af953dbad6e72fff5c9282"
+    },
+    {
+      "path": "docs/build_logs/flutter-analyze.txt",
+      "bytes": 96,
+      "sha256": "cf853c105f44e5f4f6241b8a0ec2383ae22e41208cba9bbab2c3c0df0ba11b00"
+    },
+    {
+      "path": "docs/build_logs/flutter-build-apk.txt",
+      "bytes": 498,
+      "sha256": "31d375b4110c4d8821aad2e1f026576cda21a9315c15340a4422dfff250dca8b"
+    },
+    {
+      "path": "docs/build_logs/flutter-tests.txt",
+      "bytes": 6655,
+      "sha256": "bf0ac0bc1b661df27b8fc1e631b8dfa33636b95b34856715d09343ba42000e54"
+    },
+    {
+      "path": "docs/build_logs/flutter_tests_360.log",
+      "bytes": 6444,
+      "sha256": "b1ef4255f95858df084a4795bda396fe09c8a93b1c8e4853b6b499222bb8434a"
+    },
+    {
+      "path": "docs/build_logs/flutter_tests_370.log",
+      "bytes": 7380,
+      "sha256": "f34996cdf711783593b66aa3b3e1bc67818c9d89361614d8814d3125f5ddf957"
+    },
+    {
+      "path": "docs/build_logs/flutter_tests_371.log",
+      "bytes": 7657,
+      "sha256": "b5cfff0f8be6e9c9124e34063950077147553e27794bf5f667639fa4fcf1bd7e"
+    },
+    {
+      "path": "docs/build_logs/kotlin-tests-and-android-lint.txt",
+      "bytes": 23744,
+      "sha256": "4765546fe49aa302c1987bc2de8d59a61421156009676591d144182e75488f64"
+    },
+    {
+      "path": "docs/build_logs/lint_360.txt",
+      "bytes": 17,
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334"
+    },
+    {
+      "path": "docs/build_logs/lint_370.txt",
+      "bytes": 17,
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334"
+    },
+    {
+      "path": "docs/build_logs/lint_371.txt",
+      "bytes": 17,
+      "sha256": "a69ecb171bea9d40de22744c85220b4a4ea12f5a25ce7976d67f2c88c9195334"
+    },
+    {
+      "path": "docs/build_logs/native_checks_360.log",
+      "bytes": 16084,
+      "sha256": "e8cc63d5a2b0fc2862ba00d84b9ca4d7e04e6de58fcbc8b3529a60b711cbbcc4"
+    },
+    {
+      "path": "docs/build_logs/native_checks_370.log",
+      "bytes": 16084,
+      "sha256": "8d3cbc5c86e9b7e54e0bc4922380cdcfd1bc1b0f3e2b2bd846d430299b330a7d"
+    },
+    {
+      "path": "docs/build_logs/native_checks_371.log",
+      "bytes": 16257,
+      "sha256": "d38e691fa8b8171703f3033e785487f20a94b0e95501b4e73c050b80868588fe"
+    },
+    {
+      "path": "docs/data_licenses/GEONAMES_README.txt",
+      "bytes": 8843,
+      "sha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5"
+    },
+    {
+      "path": "docs/data_licenses/HYG_LICENSE.md",
+      "bytes": 422,
+      "sha256": "f404190403d31e0ce7223f4cb7af954485ad88077358330754dc5c892a856627"
+    },
+    {
+      "path": "docs/privacy.html",
+      "bytes": 4520,
+      "sha256": "e22534e407490d66b5e3f3d7dffcb077248333109776263c14e8c0ef560ede3b"
+    },
+    {
+      "path": "previews/DVIZH_Begalka_Preview.png",
+      "bytes": 73483,
+      "sha256": "d58a18fae46c6426b44f8c86f15cc92fcd923494cabe6e3f7eb1ba47d32886cb"
+    },
+    {
+      "path": "previews/DVIZH_Compact_Widget_Preview.png",
+      "bytes": 41298,
+      "sha256": "56d4ecd4b1575f7844301422300ab4fdf55298d22cf67f4f5f537e28bbb621a4"
+    },
+    {
+      "path": "previews/DVIZH_Night_Sky_Preview.png",
+      "bytes": 156146,
+      "sha256": "267352e4819f89c7b9342c6114ed122db602ca5228ec50b432a98696b089105b"
+    },
+    {
+      "path": "previews/NIGHT_SKY_PREVIEW.md",
+      "bytes": 456,
+      "sha256": "6ac9464dbc2981bd9562c98de3c343975707bd044cd1c3ac86d7c41abdef405e"
+    },
+    {
+      "path": "site/index.html",
+      "bytes": 31935,
+      "sha256": "a6d8fc5ab5cea3f7c3d0f021866c2ccc74271cf5dddbc0c4206d06f748cb821b"
+    },
+    {
+      "path": "site/privacy.html",
+      "bytes": 4971,
+      "sha256": "f7cea94df396919ee48eb21e672a090adcb21981b42466602f2d54155357877e"
+    },
+    {
+      "path": "site/robots.txt",
+      "bytes": 211,
+      "sha256": "a0362295f47e717238f30807c68f0af439e5e445c3f927133efe7c4718305e8c"
+    },
+    {
+      "path": "site/site.webmanifest",
+      "bytes": 449,
+      "sha256": "f41135d70d6cd2c7d368d4f85f1d76fcabeda4ee6a558904947f1a500194be05"
+    },
+    {
+      "path": "site/sitemap.xml",
+      "bytes": 497,
+      "sha256": "f1df4768c13a9dddbb1b2d1938d8c7b16e16a5845ea28f6ea742b8522c5e301f"
+    },
+    {
+      "path": "source_history/build.gradle.release-patch.original.md",
+      "bytes": 2586,
+      "sha256": "997f543187a2357ae5b6aad6f8a684e1ae60acf83a20673a655ade99c249861c"
+    },
+    {
+      "path": "source_history/make_dvizh_release.py",
+      "bytes": 82838,
+      "sha256": "17ea7935bad3f2266b857da14e444cdbee9bd53b01daa46cf23cbf46441e75ab"
+    },
+    {
+      "path": "source_history/message-22.md",
+      "bytes": 8659,
+      "sha256": "a8deca9857ab9708b75602d40897eb2833a392abab5ceb939f85071dc6eaefc6"
+    },
+    {
+      "path": "source_history/message-24.md",
+      "bytes": 5836,
+      "sha256": "e58f25522b404088da6054251197749892619f6389f8e7c68ab9a58094156a92"
+    },
+    {
+      "path": "source_history/message-26.md",
+      "bytes": 15026,
+      "sha256": "7048f89b7a943c3515726bf1d70f8408d8c5c7c6185e9d656928acd3542709d3"
+    },
+    {
+      "path": "source_history/message-27.md",
+      "bytes": 15484,
+      "sha256": "c52dca59607a71deb1749f153450fe89383328fffb5e82109fe6934f1666c923"
+    },
+    {
+      "path": "source_history/message-29.md",
+      "bytes": 34102,
+      "sha256": "69b5ff55d96327484e0d02f3d6c5b5c25fb77ee63cf9896163be5fa2ee29007b"
+    },
+    {
+      "path": "source_history/message-31.md",
+      "bytes": 35200,
+      "sha256": "c178818e155e8aada122376f188ee799012b0c2b9053577dfbf0d8adbfb8575c"
+    },
+    {
+      "path": "source_history/message-33.md",
+      "bytes": 9316,
+      "sha256": "ff40f4069f90678abb0dd7d08618425a5481f79a40bdedab2c0b1b4eaf5f37bf"
+    },
+    {
+      "path": "source_history/message-35.md",
+      "bytes": 46436,
+      "sha256": "6872fb29a592f9cfead0c71302255083d8f636789ea3677b54e1dc53b2b9337f"
+    },
+    {
+      "path": "source_history/message-36.md",
+      "bytes": 8275,
+      "sha256": "b8a256df2fc3303835567858e5557350c16f0870175ed3efafff52cfd7b6c039"
+    },
+    {
+      "path": "source_history/message-38.md",
+      "bytes": 2759,
+      "sha256": "02e09644623cfb2272644da186cacfab5aaa89fb9d8b6e5401ac81d7ceb91bd3"
+    },
+    {
+      "path": "source_history/message-40.md",
+      "bytes": 14177,
+      "sha256": "5e3e334d3976d644441a0b7923ed0c3d9d81b07929fe9237f23c0e3d67359015"
+    },
+    {
+      "path": "source_history/message-42.md",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "source_history/message-43.md",
+      "bytes": 58427,
+      "sha256": "c77d1085938747e1819200660308841a0b91bbee8e32f82101a32e626f044bd0"
+    },
+    {
+      "path": "source_history/message-45.md",
+      "bytes": 33027,
+      "sha256": "45d27955c9161069b1b0ca0ffded834380ec179cf5d28228e08c85f796f47885"
+    },
+    {
+      "path": "source_history/message-47.md",
+      "bytes": 52653,
+      "sha256": "9e12232849e433cf8177701deb3f89996d4b32fde3b2b12c9d730faa35f6b131"
+    },
+    {
+      "path": "source_history/message-49.md",
+      "bytes": 14748,
+      "sha256": "1449d6645328ab1f580ddf1b2a9f40ed103c21cd0cc6727abb678e36cbbecc25"
+    },
+    {
+      "path": "source_history/message-51.md",
+      "bytes": 72812,
+      "sha256": "7ac76c21f96f630aee3960673f70025fafcd37222d91e3c2a21f561d484bf67d"
+    },
+    {
+      "path": "source_history/message-53.md",
+      "bytes": 35582,
+      "sha256": "81557d9a753f3918178084d81ba8ef9374324d1d8000e6b90260fc1f7664f58b"
+    },
+    {
+      "path": "source_history/message-55.md",
+      "bytes": 89659,
+      "sha256": "1d1ab17bc2cce8bf56108ffd3d411c659d6e8524c2d44235884135cf0b3e1658"
+    },
+    {
+      "path": "source_history/message-57.md",
+      "bytes": 46043,
+      "sha256": "9326668aed43d659eb8ef02a1f2ab84f431e9027155cc410cec784cd83e8b4f3"
+    },
+    {
+      "path": "source_history/message-59.md",
+      "bytes": 11989,
+      "sha256": "f1eefdc3d3dce72f0e6124669b7c97832266e643b019260025a0a4ff45a9661d"
+    },
+    {
+      "path": "source_history/message-61.md",
+      "bytes": 21636,
+      "sha256": "77818c9ea0b1f98e9a363ba382a2a07c8f0d40c4e6564332557794fd2f9cb48a"
+    },
+    {
+      "path": "source_history/message-63.md",
+      "bytes": 18904,
+      "sha256": "99e52ace7c51102bdfb4145c7929261f9729c1bef8b9218d4ea93e532421c7c6"
+    },
+    {
+      "path": "source_history/message-65.md",
+      "bytes": 41745,
+      "sha256": "88a00753e294d44effddfd59d24cdf042988dbacfc0b1df8e8de53ab0b8fdd4e"
+    },
+    {
+      "path": "source_history/message-67.md",
+      "bytes": 19619,
+      "sha256": "14aa789661b6b982acd82bee8cfaf2249f1d7f79755440bf582bf452379805c3"
+    },
+    {
+      "path": "source_history/message-69.md",
+      "bytes": 28239,
+      "sha256": "5be29d9b0fd7a897f1ff15ba94907ad84f2ba0576e5790e1965b441b8d9ce4f2"
+    },
+    {
+      "path": "source_history/message-71.md",
+      "bytes": 58318,
+      "sha256": "5444417942ee34bd9983784822a5355ffc69cc705a09c094e7820282e9a5ac60"
+    },
+    {
+      "path": "source_history/message-73.md",
+      "bytes": 13175,
+      "sha256": "5fcd3eece2cc1c1a701021b71d408e0c2d961999d621d1b563d6952ab1cdf032"
+    },
+    {
+      "path": "source_history/message-75.md",
+      "bytes": 26303,
+      "sha256": "6cc6ea06b052e7c99133fc1d3d34a12155a640783ae3d21ac73d3be02de75f6d"
+    },
+    {
+      "path": "source_history/release_gate.original.sh",
+      "bytes": 14600,
+      "sha256": "a3974e81a4271465c8fdffd3234d47c4070f924bfdbd678cc06073751fc7e2d1"
+    },
+    {
+      "path": "tools/archive/apply_pack.py",
+      "bytes": 43707,
+      "sha256": "ea64779caf2696c19c60240b59f5bd57c672f44dac417fa977d93a764b811f87"
+    },
+    {
+      "path": "tools/check_permissions.py",
+      "bytes": 877,
+      "sha256": "6d4bae76e95f6f2b96a768a158617177d5356ed4d17bd2bc9fa2ab08556247c3"
+    },
+    {
+      "path": "tools/prepare_sky_catalog.py",
+      "bytes": 7255,
+      "sha256": "9ff9e7a0e2afbc81083fcff187c57b7edca4b31beea539a21f12336d4c47d91a"
+    },
+    {
+      "path": "tools/static_check.py",
+      "bytes": 4494,
+      "sha256": "f4bc10d4c8aa6bc0278e0291a78c90da43e8525bd22d6b335b4635d72c49fee9"
+    }
+  ]
+}

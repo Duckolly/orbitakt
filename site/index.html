@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===== SEO core ===== -->
+  <!-- title: до ~60 символов, бренд + первичный ключ + УТП -->
+  <title>Движ — офлайн счётчик активности без аккаунта и рекламы</title>
+
+  <!-- description: 150–160 символов, первичный ключ + приватность + CTA-намёк -->
+  <meta name="description" content="Движ — локальный трекер ходьбы, бега и зарядки на Android. Без сервера, без аккаунта, без рекламы и аналитики. Шаги считаются на устройстве, история не отправляется наружу. Открытый код.">
+
+  <!-- optional: только для Яндекс/RuStore-каталогов, Google игнорирует. Не переспамь. -->
+  <meta name="keywords" content="офлайн счётчик активности, трекер шагов без интернета, трекер без аккаунта, локальный учёт тренировок, приватный фитнес трекер, Движ, Dvizh">
+
+  <meta name="author" content="Sergey Shvetsov">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <!-- max-image-preview:large и max-snippet:-1 — разрешаем Google показывать крупные превью и полные сниппеты. Без них сниппет урезают. -->
+
+  <link rel="canonical" href="https://duckolly.github.io/dvizh/"> <!-- ЗАМЕНИ при переименовании репо -->
+
+  <!-- theme-color: брендовый тёмно-синий из палитры (#0B1A3C). Красит строку адреса/UI. -->
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F6FA">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#0B1A3C">
+  <!-- Фолбэк для браузеров без media: -->
+  <meta name="theme-color" content="#0B1A3C">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Движ">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Движ — офлайн счётчик активности">
+  <meta property="og:description" content="Локальный учёт шагов и тренировок. Без интернета, рекламы и сбора персональных данных. Больше движения в твоей жизни.">
+  <meta property="og:url" content="https://duckolly.github.io/dvizh/"> <!-- ЗАМЕНИ -->
+   <!-- ЗАМЕНИ -->
+  
+  
+  
+
+  <!-- ===== Twitter / X ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Движ — офлайн счётчик активности">
+  <meta name="twitter:description" content="Локальный учёт шагов и тренировок. Без интернета, рекламы и сбора персональных данных.">
+   <!-- ЗАМЕНИ -->
+  
+
+  <!-- ===== Favicon / touch (пути к файлам из export_branding.py) ===== -->
+  
+  
+  
+  <link rel="manifest" href="site.webmanifest"> <!-- см. §6, файл ниже -->
+
+  <!-- ===== JSON-LD: SoftwareApplication ===== -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Движ",
+  "alternateName": "Dvizh",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Android 6.0+",
+  "softwareVersion": "3.4.0",
+  "datePublished": "2026-10-31",
+  "inLanguage": "ru",
+  "url": "https://duckolly.github.io/dvizh/",
+  "sameAs": [
+    "https://github.com/Duckolly/dvizh",
+    "https://duckolly.github.io/dvizh/privacy.html"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Sergey Shvetsov",
+    "url": "https://github.com/Duckolly"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Sergey Shvetsov",
+    "url": "https://github.com/Duckolly"
+  },
+  "slogan": "Больше движения в твоей жизни",
+  "description": "Движ — офлайн-приложение для локального учёта физической активности. Считает шаги через датчик движения устройства, хранит историю только на телефоне и не отправляет данные на сервер. Без аккаунта, рекламы и аналитики.",
+  "featureList": [
+    "Офлайн-режим без сервера",
+    "Локальное хранение данных на устройстве",
+    "Подсчёт шагов через датчик движения",
+    "Выбор типа активности: ходьба, бег, зарядка",
+    "История тренировок на устройстве",
+    "Очистка истории",
+    "Удаление всех данных",
+    "Переключатель записи активности",
+    "Переключатель уведомлений",
+    "Светлая, тёмная и системная тема",
+    "Без рекламы, аналитики и crash reporting",
+    "Без геолокации, камеры, микрофона и контактов"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "RUB"
+  }
+}
+</script>
+<!--
+  offers/priceCurrency RUB корректны для RU-сайта.
+  НЕ переноси блок offers в store listing Google Play / RuStore:
+  там цена бесплатного приложения задаётся не через schema,
+  а через настройки консоли, и фиксированная валюта создаст рассогласование.
+-->
+
+
+  <!-- ===== JSON-LD: FAQPage (rich results НЕ гарантированы, см. §5) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Приложение работает без интернета?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Да. Движ спроектирован как офлайн-инструмент: не требует постоянного подключения и не отправляет данные на сервер." }
+      },
+      {
+        "@type": "Question",
+        "name": "Собирает ли приложение персональные данные?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Нет. Приложение не собирает ФИО, email, телефон, адрес, геолокацию, вес или медицинские данные. История тренировок хранится локально." }
+      },
+      {
+        "@type": "Question",
+        "name": "Зачем нужен доступ к датчику движения?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Только для подсчёта шагов во время активной тренировки, которую запустил пользователь. Данные обрабатываются локально и не отправляются на сервер." }
+      },
+      {
+        "@type": "Question",
+        "name": "Можно ли удалить данные?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Да. В приложении есть очистка истории и удаление всех данных. Удаление приложения также убирает локальные данные согласно политике ОС." }
+      },
+      {
+        "@type": "Question",
+        "name": "Это медицинское приложение?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Нет. Приложение не является медицинским изделием, не ставит диагнозы, не лечит и не заменяет консультацию врача." }
+      },
+      {
+        "@type": "Question",
+        "name": "Почему шаги могут считаться неточно?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Точность зависит от устройства, датчиков и способа ношения телефона. Движ использует датчик движения смартфона, а не специализированный фитнес-трекер." }
+      }
+    ]
+  }
+  </script>
+<style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #111111;
+      --muted: #555555;
+      --card: #f6f6f7;
+      --accent: #0A3BFF;
+      --border: #dddddd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111111;
+        --fg: #f2f2f2;
+        --muted: #aaaaaa;
+        --card: #1b1b1d;
+        --border: #333333;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .container {
+      width: min(980px, 92vw);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .links a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      padding: 32px 0 64px;
+    }
+
+    .hero {
+      padding: 48px 0 28px;
+    }
+
+    h1 {
+      font-size: clamp(34px, 7vw, 64px);
+      line-height: 1.05;
+      margin: 0 0 16px;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin: 0 0 18px;
+      letter-spacing: -0.02em;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .lead {
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 0 24px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .badge {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      color: inherit;
+      background: var(--card);
+    }
+
+    .section {
+      padding: 42px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 900;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .list li {
+      margin: 8px 0;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: var(--card);
+      margin-bottom: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .privacy-box {
+      border-left: 4px solid var(--accent);
+      padding: 16px;
+      background: var(--card);
+      border-radius: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 40px;
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: 14px;
+    }
+
+    .code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 14px;
+      background: var(--card);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --fg: #0B1A3C;
+  --muted: #5A6478;
+  --card: #F4F6FA;
+  --accent: #0A3BFF;     /* электрический синий */
+  --accent-2: #B7FF00;   /* лайм */
+  --accent-3: #00E5FF;   /* циан */
+  --border: #E1E6EF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0B1A3C;
+    --fg: #F4F6FA;
+    --muted: #AEB8CC;
+    --card: #11224A;
+    --accent: #3D6BFF;
+    --accent-2: #B7FF00;
+    --accent-3: #00E5FF;
+    --border: #1E3366;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-3) 100%);
+  color: #ffffff;
+}
+.btn-primary:hover { filter: brightness(1.08); }
+
+.badge {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+}
+.badge.hot {
+  border-color: var(--accent-2);
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent-2) 14%, var(--card));
+}
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a class="brand" href="#top">Движ</a>
+        <div class="links">
+          <a href="#features">Возможности</a>
+          <a href="#privacy">Приватность</a>
+          <a href="#faq">FAQ</a>
+          <a href="#download">Скачать</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <h1>Движ — офлайн счётчик активности</h1>
+      <p class="lead">
+        Простое локальное приложение для учёта ходьбы, бега и зарядки.
+        Без сервера, без аккаунта, без рекламы, без аналитики и без отправки данных.
+      </p>
+
+      <div class="badges">
+        <span class="badge">Офлайн</span>
+        <span class="badge">Без рекламы</span>
+        <span class="badge">Без аналитики</span>
+        <span class="badge">Открытый код</span>
+        <span class="badge">Данные на устройстве</span>
+      </div>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/Duckolly/dvizh">
+          GitHub / исходный код
+        </a>
+        <a class="btn btn-secondary" href="#privacy">
+          Privacy Policy
+        </a>
+      </div>
+
+      <p class="small" style="margin-top: 16px; color: var(--muted);">
+        Google Play-ссылка будет добавлена после публикации приложения.
+      </p>
+    </section>
+
+    <section id="features" class="section container">
+      <h2>Что умеет приложение</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Локальный учёт</h3>
+          <p>
+            История тренировок хранится только на устройстве пользователя.
+            Приложение не отправляет данные на сервер.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Выбор активности</h3>
+          <p>
+            Можно выбрать тип тренировки: ходьба, бег или зарядка.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Подсчёт шагов</h3>
+          <p>
+            Шаги считаются через датчик движения смартфона во время активной записи.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Длительность тренировки</h3>
+          <p>
+            Приложение показывает время записи и сохраняет результат в локальную историю.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Управление данными</h3>
+          <p>
+            Пользователь может очистить историю или удалить все данные приложения.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Переключатели</h3>
+          <p>
+            Дневной шагомер можно остановить в приложении или уведомлении. Настройка уведомлений тренировки не отключает служебное уведомление шагомера.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Тёмная тема</h3>
+          <p>
+            Поддерживаются светлая, тёмная и системная темы оформления.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Без лишних разрешений</h3>
+          <p>
+            Не используются геолокация, камера, микрофон, контакты и SMS.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section container">
+      <h2>Как это работает</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>Открой приложение</h3>
+            <p>
+              При первом запуске показывается экран согласия с политикой конфиденциальности
+              и подтверждением возраста.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>Выбери активность</h3>
+            <p>
+              Выбери тип тренировки: ходьба, бег или зарядка.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>Нажми «Начать»</h3>
+            <p>
+              Приложение запросит доступ к датчику движения, если это необходимо,
+              и начнёт локальную запись активности.
+            </p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <h3>Останови и сохрани</h3>
+            <p>
+              После нажатия «Стоп» тренировка сохраняется только на устройстве.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" class="section container">
+      <h2>Privacy Policy / Политика конфиденциальности</h2>
+
+      <div class="privacy-box">
+        <p><strong>Последнее обновление:</strong> 2026-10-31</p>
+        <p><strong>Разработчик / maintainer:</strong> Sergey Shvetsov</p>
+        <p><strong>Репозиторий:</strong> <a href="https://github.com/Duckolly/dvizh">https://github.com/Duckolly/dvizh</a></p>
+      </div>
+
+      <h3>1. Общий принцип</h3>
+      <p>
+        Приложение «Движ» разработано как офлайн-инструмент для локального учёта физической активности.
+      </p>
+
+      <ul class="list">
+        <li>Приложение не имеет сервера.</li>
+        <li>Приложение не требует регистрации.</li>
+        <li>Приложение не собирает ФИО, email, номер телефона, адрес, геолокацию, вес или медицинские данные.</li>
+        <li>Приложение не использует рекламу.</li>
+        <li>Приложение не использует аналитику.</li>
+        <li>Приложение не использует crash reporting.</li>
+        <li>Приложение не отправляет данные разработчику.</li>
+        <li>Приложение не отправляет данные третьим лицам автоматически.</li>
+      </ul>
+
+      <h3>2. Какие данные обрабатываются локально</h3>
+      <p>
+        Приложение может локально хранить на устройстве пользователя:
+      </p>
+
+      <ul class="list">
+        <li>тип активности;</li>
+        <li>дату и время начала тренировки;</li>
+        <li>длительность тренировки;</li>
+        <li>количество шагов, рассчитанное на основе датчика движения устройства.</li>
+      </ul>
+
+      <p>
+        Эти данные не покидают устройство.
+      </p>
+
+      <h3>3. Разрешения</h3>
+
+      <h4>Доступ к датчику движения</h4>
+      <p>
+        Приложение может запрашивать разрешение на доступ к датчикам движения,
+        чтобы считать шаги во время активной тренировки, запущенной пользователем.
+        Данные обрабатываются локально и не отправляются на сервер.
+      </p>
+
+      <h4>Уведомления</h4>
+      <p>
+        Если пользователь включил уведомления, приложение может показывать локальное
+        уведомление о том, что идёт запись активности. Уведомления не используются
+        для рекламы и не отправляют данные наружу.
+      </p>
+
+      <h3>4. Хранение и удаление данных</h3>
+      <p>
+        Все данные хранятся только на устройстве пользователя.
+      </p>
+
+      <p>Пользователь может:</p>
+
+      <ul class="list">
+        <li>очистить историю тренировок;</li>
+        <li>удалить все данные приложения внутри приложения;</li>
+        <li>удалить приложение, после чего операционная система удалит локальные данные приложения в соответствии со своей политикой.</li>
+      </ul>
+
+      <h3>5. Дети</h3>
+      <p>
+        Приложение не предназначено для детей младше 14 лет без участия родителя
+        или законного представителя.
+      </p>
+
+      <h3>6. Медицинская информация</h3>
+      <p>
+        Приложение не является медицинским изделием. Оно не ставит диагнозы,
+        не лечит, не заменяет консультацию врача и не гарантирует точность измерений.
+      </p>
+
+      <p>
+        Данные о шагах и длительности активности носят информационный характер
+        и могут быть неточными в зависимости от устройства, датчиков и того,
+        как пользователь носит телефон.
+      </p>
+
+      <h3>7. Открытый код</h3>
+      <p>
+        Исходный код приложения доступен публично. Это позволяет независимым
+        исследователям проверить отсутствие сетевых запросов, аналитики, рекламы
+        и скрытой передачи данных.
+      </p>
+
+      <h3>8. Контакты</h3>
+      <p>
+        По вопросам приватности можно открыть issue в публичном репозитории
+        или связаться с maintainer через контакты, указанные в репозитории.
+      </p>
+    </section>
+
+    <section id="google-info" class="section container">
+      <h2>Информация для Google Play и проверяющих</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Тип приложения</h3>
+          <p>
+            Офлайн-трекер физической активности для локального использования.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Сбор данных</h3>
+          <p>
+            Данные обрабатываются только на устройстве. Разработчик не получает
+            пользовательские данные.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Передача данных</h3>
+          <p>
+            Автоматическая передача данных третьим лицам отсутствует.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Реклама</h3>
+          <p>
+            Реклама не используется.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Аналитика</h3>
+          <p>
+            Аналитика и telemetry не используются.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Crash reporting</h3>
+          <p>
+            Внешние сервисы отчётов о сбоях не используются.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Разрешения</h3>
+          <p>
+            Используются только разрешения на доступ к датчику движения
+            и, опционально, на локальные уведомления.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Удаление данных</h3>
+          <p>
+            Пользователь может очистить историю и удалить все данные внутри приложения.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section container">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>Приложение работает без интернета?</summary>
+        <p>
+          Да. Приложение спроектировано как офлайн-инструмент. Оно не требует
+          постоянного подключения к интернету и не отправляет данные на сервер.
+        </p>
+      </details>
+
+      <details>
+        <summary>Собирает ли приложение персональные данные?</summary>
+        <p>
+          Нет. Приложение не собирает ФИО, email, телефон, адрес, геолокацию,
+          вес или медицинские данные. История тренировок хранится локально.
+        </p>
+      </details>
+
+      <details>
+        <summary>Зачем нужен доступ к датчику движения?</summary>
+        <p>
+          Доступ к датчику движения используется только для подсчёта шагов
+          во время активной тренировки, которую запустил пользователь.
+        </p>
+      </details>
+
+      <details>
+        <summary>Можно ли удалить данные?</summary>
+        <p>
+          Да. В приложении есть очистка истории и удаление всех данных.
+          Также удаление приложения удаляет локальные данные в соответствии
+          с политикой операционной системы.
+        </p>
+      </details>
+
+      <details>
+        <summary>Это медицинское приложение?</summary>
+        <p>
+          Нет. Приложение не является медицинским изделием, не ставит диагнозы,
+          не лечит и не заменяет консультацию врача.
+        </p>
+      </details>
+
+      <details>
+        <summary>Почему шаги могут считаться неточно?</summary>
+        <p>
+          Точность зависит от устройства, датчиков, способа ношения телефона
+          и условий использования. Приложение использует датчик движения смартфона,
+          а не специализированный фитнес-трекер.
+        </p>
+      </details>
+    </section>
+
+    <section id="download" class="section container">
+      <h2>Скачать и исходный код</h2>
+
+      <p>
+        Проект распространяется как open source. Исходный код доступен на GitHub.
+      </p>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="https://github.com/Duckolly/dvizh">
+          Открыть репозиторий
+        </a>
+        <a class="btn btn-secondary" href="https://github.com/Duckolly/dvizh/issues">
+          Сообщить о проблеме
+        </a>
+      </div>
+
+      <p class="small" style="margin-top: 16px; color: var(--muted);">
+        После публикации в Google Play здесь появится ссылка на страницу приложения.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        <strong>Движ</strong> — офлайн счётчик активности.
+      </p>
+      <p class="small">
+        Автор: Sergey Shvetsov.<br>
+        Репозиторий: <a href="https://github.com/Duckolly/dvizh">github.com/Duckolly/dvizh</a><br>
+        Лицензия: MIT.<br>
+        Приложение не является медицинским изделием.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

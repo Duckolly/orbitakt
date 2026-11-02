@@ -1,0 +1,8 @@
+<resources>
+    <string name="widget_label">Движ: шаги и вода</string>
+    <string name="widget_description">Компактные итоги: шаги слева, стаканы воды справа</string>
+    <string name="widget_steps_label">Шаги</string>
+    <string name="widget_water_label">Вода</string>
+    <string name="widget_steps_preview">0</string>
+    <string name="widget_water_preview">0 ст.</string>
+</resources>

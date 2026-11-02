@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets_raw/   # исходники бренда не индексируем, если коммитишь
+
+Sitemap: https://duckolly.github.io/dvizh/sitemap.xml   # ЗАМЕНИ

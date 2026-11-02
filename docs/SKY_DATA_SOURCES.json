@@ -1,0 +1,10 @@
+{
+  "hyg_url": "https://raw.githubusercontent.com/astronexus/HYG-Database/main/hyg/CURRENT/hygdata_v41.csv",
+  "hyg_sha256": "d9f69fd86bbf90a4e4d52b4c5c53eacfa6dfc0bfdef85bfd94f095e0bebe4ebd",
+  "geonames_url": "https://download.geonames.org/export/dump/cities15000.zip",
+  "geonames_sha256": "c7b7482b115463874798824f76381f84103233c0a9db9d43efe8501719200dc9",
+  "stars": 920,
+  "figures": 14,
+  "cities": 44,
+  "derived_data_notice": "Данные звёзд: HYG v4.1, David Nash / Astronexus, https://github.com/astronexus/HYG-Database\nЛицензия CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/\nИзменения ДВИЖ: выбор ярких звёзд (mag ≤ 4.5) и опорных звёзд фигур; поля HIP, RA, Dec, magnitude; округление; русские подписи. assets/sky/stars.json распространяется под CC BY-SA 4.0.\n\nКоординаты городов: GeoNames, https://www.geonames.org/\nЛицензия CC BY 4.0: https://creativecommons.org/licenses/by/4.0/\nИзменения ДВИЖ: выбор городов, координат центров и русских подписей; assets/sky/cities.json.\n\nЛинии фигур — собственные упрощённые схемы ДВИЖ. Это ориентиры, не официальные границы всех созвездий.\nЛицензии данных относятся к соответствующим наборам. Исходный код приложения имеет свою лицензию (LICENSE).\n"
+}

@@ -1,0 +1,22 @@
+{
+  "total": 21,
+  "failed": 0,
+  "suites": [
+    {
+      "suite": "com.duckolly.dvizh.CounterMathTest",
+      "tests": 12
+    },
+    {
+      "suite": "com.duckolly.dvizh.SkyCompassMathTest",
+      "tests": 4
+    },
+    {
+      "suite": "com.duckolly.dvizh.ToolSensorMathTest",
+      "tests": 1
+    },
+    {
+      "suite": "com.duckolly.dvizh.WaterMathTest",
+      "tests": 4
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# regress_tokens.txt — нормативный регресс-список для release_gate.sh.
+# Формат: scope:токен. scope: lib|pubspec|index|privacy|manifest|all.
+# Любое вхождение токена в соответствующей области = FAIL гейта.
+# Синхронизирован с N1..N6 (консистентность бренда/контента) и REMOVE-001..005.
+
+# --- палитра / категория (N-1, N-2) ---
+lib:Colors.orange
+lib:#ff7a00
+index:#ff7a00
+index:orange
+index:HealthApplication
+privacy:HealthApplication
+
+# --- удалённые поля продукта v3.2.0 (REMOVE-001..003) ---
+lib:nickname
+lib:groupCode
+lib:calories
+lib:weight
+lib:mets
+
+# --- запрещённые зависимости / фичи (REMOVE-004..005) ---
+pubspec:flutter_foreground_task
+pubspec:share_plus
+pubspec:pdf:
+pubspec:path_provider
+pubspec:csv
+lib:flutter_foreground_task
+lib:share_plus
+
+# --- brandbook публично запрещён (N-3) ---
+index:brandbook
+privacy:brandbook
+manifest:brandbook
+
+# --- сетевые/трекерные токены в коде (офлайн-дух) ---
+lib:http
+lib:https
+lib:dio
+lib:socket
+lib:firebase
+lib:analytics
+lib:admob
+lib:crashlytics

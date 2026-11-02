@@ -1,0 +1,38 @@
+00:00 +0: loading /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart
+00:00 +0: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart: 200ml glass, undo and native validation boundary
+00:00 +1: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart: add and remove update visible daily water totals
+00:00 +2: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart: add and remove update visible daily water totals
+00:00 +3: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart: add and remove update visible daily water totals
+00:00 +4: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +5: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +6: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +7: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +8: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +9: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +10: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: small screen and large text: consent is scrollable and Continue requires all confirmations
+00:01 +11: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/water_tracker_test.dart: clear confirmation can cancel and then removes water history
+00:01 +12: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: home opens workout screen without plugin access
+00:01 +13: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/navigation_test.dart: home opens workout screen without plugin access
+00:01 +14: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:01 +15: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:02 +16: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:02 +17: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:02 +18: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:02 +19: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/offline_tools_test.dart: game pauses on leaving foreground and requires explicit resume
+00:02 +20: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +21: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +22: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +23: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +24: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +25: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +26: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +27: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +28: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +29: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +30: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:02 +31: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: daily toggle starts and stops without changing accumulated steps
+00:03 +32: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: unsupported phone offers training mode without toggle
+00:03 +33: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: clearing daily history requires confirmation and stops counting
+00:03 +34: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: global recording off prevents starting native service
+00:03 +35: /workspace/scratch/0a1f1e70fcfd/widget_update/02_dvizh_offline_tracker/app/test/daily_tracker_test.dart: no hardware prevents starting native service
+00:03 +36: All tests passed!

@@ -1,0 +1,22 @@
+{
+  "version": "3.7.1+9",
+  "approved_master_sha256": "0393a777fa07bbdf42162919c9a2248c6dc1c75ac19c8f0801c6e65ac4ed4e02",
+  "app_label": "Движ",
+  "widget_label": "Движ: шаги и вода",
+  "adaptive_layers": [
+    "background",
+    "foreground",
+    "monochrome"
+  ],
+  "legacy_sizes": [
+    48,
+    72,
+    96,
+    144,
+    192
+  ],
+  "source": "Approved generated bitmap; Android-native vector adaptation for adaptive/themed masks",
+  "retained_package": "com.duckolly.dvizh.preview",
+  "functional_device_acceptance": "USER_INSTALLED_AND_REVIEWED_370_LIKED",
+  "sensor_accuracy_and_energy": "NOT_MEASURED"
+}

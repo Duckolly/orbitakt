@@ -2,6 +2,9 @@ package com.duckolly.dvizh
 
 import android.app.*
 import android.content.Intent
+import android.content.IntentFilter
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.pm.ServiceInfo
 import android.hardware.*
 import android.os.*
@@ -13,7 +16,34 @@ class DailyStepService : Service(), SensorEventListener {
     private var baselineReady = false
     private var lastEventNanos = 0L
     private val persist = Runnable { runCatching { flushPending() }.onFailure { fail() } }
-    override fun onCreate() { super.onCreate(); sensors=getSystemService(SensorManager::class.java) }
+    private var appliedLatency: Int? = null
+    private var screenReceiverRegistered = false
+    private val screenReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            DailyRuntime.worker.post {
+                if (DailyRuntime.owner !== this@DailyStepService || !DailyRuntime.running) return@post
+                setInteractive(DailyRuntime.uiVisible || DailyRuntime.interactive)
+                if (intent.action != Intent.ACTION_SCREEN_OFF) {
+                    runCatching { flushPending(); sensors.flush(this@DailyStepService) }
+                    runCatching { ProgressWidget.refresh(applicationContext, true) }
+                }
+            }
+        }
+    }
+    private fun deliveryLatency(uiOrWorkout: Boolean): Int = StepDeliveryPolicy.maxLatencyUs(
+        uiOrWorkout, getSystemService(PowerManager::class.java).isInteractive)
+    override fun onCreate() {
+        super.onCreate(); sensors=getSystemService(SensorManager::class.java)
+        val filter = IntentFilter().apply {
+            addAction(Intent.ACTION_SCREEN_ON); addAction(Intent.ACTION_SCREEN_OFF)
+            addAction(Intent.ACTION_USER_PRESENT); addAction(Intent.ACTION_DATE_CHANGED)
+            addAction(Intent.ACTION_TIME_CHANGED); addAction(Intent.ACTION_TIMEZONE_CHANGED)
+        }
+        // Registered only for the lifetime of the existing step service; never starts it.
+        if (Build.VERSION.SDK_INT >= 33) registerReceiver(screenReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+        else registerReceiver(screenReceiver, filter)
+        screenReceiverRegistered = true
+    }
     override fun onBind(intent: Intent?): IBinder? = null
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if(intent?.action=="STOP") {
@@ -57,7 +87,9 @@ class DailyStepService : Service(), SensorEventListener {
                 DailyRuntime.owner=this
                 baselineReady=DailyRuntime.store(this).state().raw>=0
                 val sensor=sensors.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-                val ok=sensor!=null && sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,if(DailyRuntime.uiVisible || DailyRuntime.interactive)0 else 60_000_000,DailyRuntime.worker)
+                val latency = deliveryLatency(DailyRuntime.uiVisible || DailyRuntime.interactive)
+                val ok=sensor!=null && sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,latency,DailyRuntime.worker)
+                appliedLatency = if (ok) latency else null
                 DailyRuntime.running=ok; if(ok) EnergyRuntime.usage.begin("step",this) else EnergyRuntime.usage.end("step",this); DailyRuntime.issue=if(ok)"" else "registration_failed"
                 if(!ok) { DailyRuntime.store(this).disable(); DailyRuntime.main.post { stopSelf() } }
                 DailyRuntime.emit(this, true)
@@ -98,7 +130,12 @@ class DailyStepService : Service(), SensorEventListener {
     fun setInteractive(interactive: Boolean) {
         if(DailyRuntime.owner!==this || !DailyRuntime.running) return
         val sensor=sensors.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) ?: return
-        runCatching { sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,if(interactive)0 else 60_000_000,DailyRuntime.worker) }.onFailure { fail() }
+        val latency = deliveryLatency(interactive)
+        if (appliedLatency == latency) return
+        runCatching {
+            check(sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,latency,DailyRuntime.worker))
+            appliedLatency = latency
+        }.onFailure { fail() }
     }
     private fun fail() {
         haltSensor(); DailyRuntime.suppressed=true; DailyRuntime.running=false; DailyRuntime.issue="storage_error"
@@ -107,6 +144,7 @@ class DailyStepService : Service(), SensorEventListener {
     }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int)=Unit
     override fun onDestroy() {
+        if (screenReceiverRegistered) { unregisterReceiver(screenReceiver); screenReceiverRegistered = false }
         DailyRuntime.worker.post {
             sensors.unregisterListener(this); EnergyRuntime.usage.end("step",this)
             if(DailyRuntime.owner===this) runCatching { flushPending() }

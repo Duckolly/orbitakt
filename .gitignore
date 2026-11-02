@@ -1,43 +1,93 @@
-# Flutter/Dart
-.dart_tool/
-.packages
-build/
-.flutter-plugins
-.flutter-plugins-dependencies
+# Движ / Flutter + Android. Place this file at the repository root.
+# Keep app/ sources, pubspec.lock, Gradle wrapper, assets and licenses in Git.
 
-# IDE
-.idea/
-.vscode/
-*.iml
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Secrets / signing
-android/key.properties
-*.jks
-*.keystore
-google-services.json
-GoogleService-Info.plist
-
-# Local notes
-LOCAL_NOTES.md
-DRAFTS/
-PRIVATE/
-
-# All nested Android local state and credentials
-**/key.properties
-**/local.properties
-.gradle/
-.cxx/
-.externalNativeBuild/
-/dist/
+# Installers and release binaries (upload separately to GitHub Releases)
 *.apk
 *.aab
 *.apks
+*.xapk
 *.idsig
+/dist/
+/releases/
 
+# Archives, including source bundles and PRIVATE signing-key backups
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+
+# Signing keys, passwords and machine-local Android settings (at any depth)
+key.properties
+local.properties
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.key
+*.pem
+/PRIVATE/
+/PRIVATE_*/
+*Signing_Key_PRIVATE*
+
+# Environment variables and service credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+google-services.json
+GoogleService-Info.plist
+
+# Flutter / Dart generated state. Do NOT ignore pubspec.lock.
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+coverage/
+**/doc/api/
+**/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+.fvm/flutter_sdk/
+.fvm/versions/
+
+# Gradle / Android native build state. Keep gradlew(.bat) and wrapper files.
+.gradle/
+.kotlin/
+.cxx/
+.externalNativeBuild/
+captures/
+*.hprof
+
+# Locally installed SDKs / toolchains (never ignore the android/ sources)
+sdk/
+android-sdk/
+android-sdk-linux/
+android-sdk-windows/
+/flutter/
+/tools/flutter/
+/tools/android-sdk/
+
+# IDE / OS / temporary files
+.idea/
+.vscode/
+*.iml
 *.log
-/app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+*.tmp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+.rsync-tmp/
+
+# Private working notes
+/LOCAL_NOTES.md
+/DRAFTS/
+
+# Accidental local console artifact
 /e Dvizh 3.8.0*

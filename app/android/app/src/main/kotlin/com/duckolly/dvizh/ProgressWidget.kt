@@ -1,12 +1,14 @@
 package com.duckolly.dvizh
 
 import android.app.PendingIntent
+import android.app.Application
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
+import android.os.PowerManager
 import android.widget.RemoteViews
 import java.text.NumberFormat
 import java.time.LocalDateTime
@@ -32,7 +34,14 @@ class ProgressWidget : AppWidgetProvider() {
     }
 
     companion object {
-        private var lastUpdate = 0L // worker thread only
+        private var widgetContext: Application? = null // application context, worker thread only
+        private val updates = WidgetUpdateQueue(
+            now = { SystemClock.elapsedRealtime() },
+            schedule = { task, delay -> DailyRuntime.worker.postDelayed(task, delay); Unit },
+            cancel = { task -> DailyRuntime.worker.removeCallbacks(task) },
+            publish = { widgetContext?.let { publish(it) } },
+            onError = { widgetContext?.let { context -> runCatching { showError(context) } }; Unit }
+        )
         private fun ids(context: Context) = AppWidgetManager.getInstance(context)
             .getAppWidgetIds(ComponentName(context, ProgressWidget::class.java))
 
@@ -45,9 +54,13 @@ class ProgressWidget : AppWidgetProvider() {
         }
 
         fun refresh(context: Context, force: Boolean) {
-            val now = SystemClock.elapsedRealtime()
-            if (!force && lastUpdate != 0L && now - lastUpdate < 60_000L) return
-            lastUpdate = now
+            widgetContext = context.applicationContext as? Application ?: return
+            if (ids(context).isEmpty()) { updates.clear(); return }
+            val interactive = runCatching { context.getSystemService(PowerManager::class.java).isInteractive }.getOrDefault(true)
+            updates.request(force, if (interactive) 5_000L else 60_000L)
+        }
+
+        private fun publish(context: Context) {
             val targets = ids(context)
             if (targets.isEmpty()) return
             val daily = DailyRuntime.snapshot(context)

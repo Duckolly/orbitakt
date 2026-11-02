@@ -1,7 +1,7 @@
 name: dvizh
 description: Offline local activity tracker without personal data collection
 publish_to: 'none'
-version: 3.8.1+11
+version: 3.8.2+12
 
 environment:
   sdk: '>=3.9.0 <4.0.0'

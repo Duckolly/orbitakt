@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.pm.ServiceInfo
 import android.hardware.*
+import android.database.sqlite.SQLiteException
 import android.os.*
 
 class DailyStepService : Service(), SensorEventListener {
@@ -15,8 +16,8 @@ class DailyStepService : Service(), SensorEventListener {
     private var persistScheduled = false
     private var baselineReady = false
     private var lastEventNanos = 0L
-    private val persist = Runnable { runCatching { flushPending() }.onFailure { fail() } }
-    private var appliedLatency: Int? = null
+    private val persist = Runnable { runCatching { flushPending() }.onFailure { fail(reasonFor(it)) } }
+    private lateinit var subscription: StepSensorSubscription
     private var screenReceiverRegistered = false
     private val screenReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -34,6 +35,14 @@ class DailyStepService : Service(), SensorEventListener {
         uiOrWorkout, getSystemService(PowerManager::class.java).isInteractive)
     override fun onCreate() {
         super.onCreate(); sensors=getSystemService(SensorManager::class.java)
+        subscription = StepSensorSubscription(
+            register = { latency ->
+                val sensor = sensors.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+                sensor != null && sensors.registerListener(this, sensor,
+                    SensorManager.SENSOR_DELAY_NORMAL, latency, DailyRuntime.worker)
+            },
+            unregister = { sensors.unregisterListener(this) }
+        )
         val filter = IntentFilter().apply {
             addAction(Intent.ACTION_SCREEN_ON); addAction(Intent.ACTION_SCREEN_OFF)
             addAction(Intent.ACTION_USER_PRESENT); addAction(Intent.ACTION_DATE_CHANGED)
@@ -50,7 +59,7 @@ class DailyStepService : Service(), SensorEventListener {
             DailyRuntime.worker.post {
                 DailyRuntime.stopNow()
                 runCatching { DailyRuntime.store(this).disable() }
-                if(DailyRuntime.owner===this) { sensors.unregisterListener(this); EnergyRuntime.usage.end("step",this); DailyRuntime.running=false }
+                if(DailyRuntime.owner===this) { haltSensor(); DailyRuntime.running=false }
                 DailyRuntime.issue=""; runCatching { DailyRuntime.emit(this, true) }
                 DailyRuntime.main.post { stopSelf() }
             }
@@ -75,25 +84,29 @@ class DailyStepService : Service(), SensorEventListener {
         try {
             if(Build.VERSION.SDK_INT>=34) startForeground(2001,notification,ServiceInfo.FOREGROUND_SERVICE_TYPE_HEALTH)
             else startForeground(2001,notification)
-        } catch(_:RuntimeException) {
-            DailyRuntime.worker.post { DailyRuntime.stopNow(); DailyRuntime.issue="permission"; runCatching { DailyRuntime.store(this).disable(); DailyRuntime.emit(this, true) } }
+        } catch (error: RuntimeException) {
+            val reason = if (error is SecurityException) "permission" else "start_failed"
+            DailyRuntime.worker.post { DailyRuntime.stopNow(); DailyRuntime.issue=reason; runCatching { DailyRuntime.store(this).disable(); DailyRuntime.emit(this, true) } }
             stopSelf(); return START_NOT_STICKY
         }
         DailyRuntime.worker.post {
+            var phase = "internal_error"
             try {
                 if(DailyRuntime.suppressed || !DailyRuntime.store(this).state().enabled) { DailyRuntime.main.post { stopSelf() }; return@post }
                 if(DailyRuntime.owner===this && DailyRuntime.running) return@post
                 DailyRuntime.store(this).interrupted()
                 DailyRuntime.owner=this
                 baselineReady=DailyRuntime.store(this).state().raw>=0
-                val sensor=sensors.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
                 val latency = deliveryLatency(DailyRuntime.uiVisible || DailyRuntime.interactive)
-                val ok=sensor!=null && sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,latency,DailyRuntime.worker)
-                appliedLatency = if (ok) latency else null
+                phase = "registration_failed"
+                val ok = subscription.start(latency)
                 DailyRuntime.running=ok; if(ok) EnergyRuntime.usage.begin("step",this) else EnergyRuntime.usage.end("step",this); DailyRuntime.issue=if(ok)"" else "registration_failed"
                 if(!ok) { DailyRuntime.store(this).disable(); DailyRuntime.main.post { stopSelf() } }
+                phase = "internal_error"
                 DailyRuntime.emit(this, true)
-            } catch(_:RuntimeException) { fail() }
+            } catch (_: SecurityException) { fail("permission") }
+              catch (_: SQLiteException) { fail("storage_error") }
+              catch (_: RuntimeException) { fail(phase) }
         }
         // System may recreate an interrupted service; user STOP disables the stored intent.
         return START_STICKY
@@ -113,7 +126,7 @@ class DailyStepService : Service(), SensorEventListener {
                 persistScheduled=true
                 DailyRuntime.worker.postDelayed(persist,500)
             }
-        } catch(_:RuntimeException) { fail() }
+        } catch (error: RuntimeException) { fail(reasonFor(error)) }
     }
     fun flushPending() {
         DailyRuntime.worker.removeCallbacks(persist)
@@ -126,28 +139,48 @@ class DailyStepService : Service(), SensorEventListener {
         DailyRuntime.workoutSyncPending=false
         DailyRuntime.emit(this)
     }
-    fun haltSensor() { sensors.unregisterListener(this); EnergyRuntime.usage.end("step",this); DailyRuntime.worker.removeCallbacks(persist); persistScheduled=false; pending=null }
+    fun haltSensor() {
+        try { subscription.stop() } finally {
+            EnergyRuntime.usage.end("step",this)
+            DailyRuntime.worker.removeCallbacks(persist)
+            persistScheduled=false
+            pending=null
+        }
+    }
     fun setInteractive(interactive: Boolean) {
         if(DailyRuntime.owner!==this || !DailyRuntime.running) return
-        val sensor=sensors.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) ?: return
         val latency = deliveryLatency(interactive)
-        if (appliedLatency == latency) return
-        runCatching {
-            check(sensors.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL,latency,DailyRuntime.worker))
-            appliedLatency = latency
-        }.onFailure { fail() }
+        if (subscription.latencyUs == latency) return
+        // Commit the last received cumulative sample before changing queues.
+        // Do not call enable()/disable(): they would reset the raw baseline.
+        try { flushPending() } catch (error: RuntimeException) { fail(reasonFor(error)); return }
+        try {
+            if (!DailyRuntime.permission(this)) { fail("permission"); return }
+            val result = subscription.change(latency)
+            if (result == StepSensorSubscription.Change.FAILED ||
+                result == StepSensorSubscription.Change.NOT_RUNNING) fail("registration_failed")
+        } catch (_: SecurityException) { fail("permission") }
+          catch (_: RuntimeException) { fail("registration_failed") }
     }
-    private fun fail() {
-        haltSensor(); DailyRuntime.suppressed=true; DailyRuntime.running=false; DailyRuntime.issue="storage_error"
-        runCatching { DailyRuntime.store(this).disable(); DailyRuntime.emit(this, true) }
+    private fun reasonFor(error: Throwable): String = when (error) {
+        is SecurityException -> "permission"
+        is SQLiteException -> "storage_error"
+        else -> "internal_error"
+    }
+    private fun fail(reason: String) {
+        // Cleanup failures must not prevent the stopped status reaching the UI.
+        runCatching { haltSensor() }
+        DailyRuntime.suppressed=true; DailyRuntime.running=false; DailyRuntime.issue=reason
+        runCatching { DailyRuntime.store(this).disable() }
+        runCatching { DailyRuntime.emit(this, true) }
         DailyRuntime.main.post { stopSelf() }
     }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int)=Unit
     override fun onDestroy() {
         if (screenReceiverRegistered) { unregisterReceiver(screenReceiver); screenReceiverRegistered = false }
         DailyRuntime.worker.post {
-            sensors.unregisterListener(this); EnergyRuntime.usage.end("step",this)
             if(DailyRuntime.owner===this) runCatching { flushPending() }
+            runCatching { subscription.stop() }; EnergyRuntime.usage.end("step",this)
             DailyRuntime.worker.removeCallbacks(persist); persistScheduled=false; pending=null
             if(DailyRuntime.owner===this) { DailyRuntime.running=false; DailyRuntime.owner=null; runCatching { DailyRuntime.emit(this, true) } }
         }

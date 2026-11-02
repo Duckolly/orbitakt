@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../services/daily_tracker.dart';
+import '../services/daily_issue.dart';
 import '../services/activity_preferences.dart';
 
 class DailyScreen extends StatefulWidget {
@@ -187,9 +188,7 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
                   'Уведомления запрещены. Подсчёт можно остановить в приложении; на Android 13+ также в системном списке активных приложений.',
                 ),
               if (s.issue.isNotEmpty)
-                const Text(
-                  'Подсчёт остановлен из-за ошибки датчика, доступа или хранения. Проверьте разрешения и повторите запуск.',
-                ),
+                Text(describeDailyIssue(s.issue), key: const Key('dailyIssue')),
             ],
             if (_error != null)
               Padding(

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../screens/daily_screen.dart';
 import '../services/daily_tracker.dart';
+import '../services/daily_issue.dart';
 import '../services/activity_preferences.dart';
 import '../theme/app_theme.dart';
 import 'orbit/orbit_art.dart';
@@ -135,6 +136,8 @@ class _DailySummaryState extends State<DailySummary>
                 _error ??
                     (_status == null
                         ? 'Читаем данные…'
+                        : _status!.issue.isNotEmpty
+                        ? describeDailyIssue(_status!.issue)
                         : _status!.active
                         ? 'Дневной шагомер работает'
                         : 'Настроить фоновый подсчёт'),

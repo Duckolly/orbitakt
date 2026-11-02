@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import '../models/workout.dart';
 import '../services/storage_service.dart';
+import 'daily_screen.dart';
+import 'water_screen.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -123,28 +125,63 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ],
       ),
       body: SafeArea(
-        child: _error
-            ? const Center(
-                child: Text('История временно недоступна. Попробуй позже.'),
-              )
-            : _workouts.isEmpty
-            ? const Center(child: Text('Пока нет сохранённых тренировок'))
-            : ListView.builder(
-                itemCount: _workouts.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final Workout workout = _workouts[index];
-
-                  return ListTile(
-                    leading: Icon(workout.type.icon, color: primary),
-                    title: Text(workout.type.title),
-                    subtitle: Text(
-                      '${DateFormat('dd.MM.yyyy HH:mm').format(workout.startedAt)}'
-                      ' • ${_formatDuration(workout.durationSeconds)}'
-                      ' • ${workout.steps} шагов',
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Wrap(
+                spacing: 12,
+                runSpacing: 8,
+                children: [
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.directions_walk),
+                    label: const Text('Шаги и километры'),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const DailyScreen(),
+                      ),
                     ),
-                  );
-                },
+                  ),
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.water_drop_outlined),
+                    label: const Text('История воды'),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const WaterScreen(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+            ),
+            Expanded(
+              child: _error
+                  ? const Center(
+                      child: Text(
+                        'История временно недоступна. Попробуй позже.',
+                      ),
+                    )
+                  : _workouts.isEmpty
+                  ? const Center(child: Text('Пока нет сохранённых тренировок'))
+                  : ListView.builder(
+                      itemCount: _workouts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final Workout workout = _workouts[index];
+
+                        return ListTile(
+                          leading: Icon(workout.type.icon, color: primary),
+                          title: Text(workout.type.title),
+                          subtitle: Text(
+                            '${DateFormat('dd.MM.yyyy HH:mm').format(workout.startedAt)}'
+                            ' • ${_formatDuration(workout.durationSeconds)}'
+                            ' • ${workout.steps} шагов',
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

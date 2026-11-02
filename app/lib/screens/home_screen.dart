@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/activity.dart';
+import '../theme/app_theme.dart';
+import '../widgets/daily_summary.dart';
+import '../widgets/water_summary.dart';
 import 'activity_screen.dart';
 import 'history_screen.dart';
 import 'settings_screen.dart';
@@ -9,165 +12,186 @@ import 'breathing_screen.dart';
 import 'altitude_screen.dart';
 import 'sky_screen.dart';
 import 'battery_screen.dart';
-import '../widgets/daily_summary.dart';
-import '../widgets/water_summary.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
-  Widget build(BuildContext context) {
-    final primary = Theme.of(context).colorScheme.primary;
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Движ'),
-        actions: [
-          IconButton(
-            tooltip: 'История',
-            icon: const Icon(Icons.history),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const HistoryScreen()),
-            ),
-          ),
-          IconButton(
-            tooltip: 'Настройки',
-            icon: const Icon(Icons.settings),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
-            ),
-          ),
-        ],
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selected = 0;
+  void _open(Widget screen) => Navigator.of(
+    context,
+  ).push(MaterialPageRoute<void>(builder: (_) => screen));
+  Widget _entry(
+    String title,
+    String subtitle,
+    IconData icon,
+    Widget screen, {
+    Color? color,
+  }) => Card(
+    color: color,
+    child: ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      leading: Icon(icon),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.w700)),
+      subtitle: Text(subtitle),
+      trailing: const Icon(Icons.chevron_right),
+      onTap: () => _open(screen),
+    ),
+  );
+  Widget _rest() => ListView(
+    padding: const EdgeInsets.all(20),
+    children: [
+      Text(
+        'Пауза для себя',
+        style: Theme.of(
+          context,
+        ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w800),
       ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(Icons.lock_outline, color: primary, size: 32),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        'Локальный режим. Данные остаются на устройстве.',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.battery_saver_outlined),
-                title: const Text('Батарея и нагрузка'),
-                subtitle: const Text('Ручной замер и управление шагомером'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const BatteryScreen(),
-                  ),
-                ),
-              ),
-            ),
-            const DailySummary(),
-            const WaterSummary(),
-            const SizedBox(height: 24),
-            const Text(
-              'Выбери активность',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            ...ActivityType.values.map(
-              (activity) => Card(
-                child: ListTile(
-                  leading: Icon(activity.icon, color: primary, size: 32),
-                  title: Text(
-                    activity.title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => ActivityScreen(activityType: activity),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Отдых и инструменты',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.sports_esports_outlined),
-                title: const Text('Бегалка'),
-                subtitle: const Text('Игра без интернета'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const SnakeScreen()),
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.air),
-                title: const Text('Дыхание'),
-                subtitle: const Text('Для сна, утра и после занятий'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const BreathingScreen(),
-                  ),
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.terrain_outlined),
-                title: const Text('Перепад высоты'),
-                subtitle: const Text('Относительная оценка по барометру'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const AltitudeScreen(),
-                  ),
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.nights_stay_outlined),
-                title: const Text('Ночное небо'),
-                subtitle: const Text('Звёзды по городу и времени · офлайн'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(builder: (_) => const SkyScreen()),
-                ),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.sensors),
-                title: const Text('Датчики телефона'),
-                subtitle: const Text('Что реально доступно на устройстве'),
-                trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const SensorsScreen(),
-                  ),
-                ),
-              ),
-            ),
-          ],
+      const SizedBox(height: 8),
+      const Text('Без спешки. В своём темпе.'),
+      const SizedBox(height: 20),
+      _entry(
+        'Подышать',
+        'Для сна, утра и после занятий',
+        Icons.air,
+        const BreathingScreen(),
+        color: OrbitColors.peach(context),
+      ),
+      _entry(
+        'Ночное небо',
+        'Звёзды по городу и времени · офлайн',
+        Icons.nights_stay_outlined,
+        const SkyScreen(),
+        color: OrbitColors.lavender(context),
+      ),
+      _entry(
+        'Бегалка',
+        'Небольшая игра без интернета',
+        Icons.sports_esports_outlined,
+        const SnakeScreen(),
+      ),
+    ],
+  );
+  Widget _today() => ListView(
+    padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+    children: [
+      Text(
+        'Сегодня',
+        style: Theme.of(
+          context,
+        ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w800),
+      ),
+      const SizedBox(height: 4),
+      const Text('Шаги, вода и немного времени для себя'),
+      const SizedBox(height: 16),
+      const DailySummary(),
+      const WaterSummary(),
+      const SizedBox(height: 12),
+      _entry(
+        'Подышать',
+        'Пауза для себя',
+        Icons.air,
+        const BreathingScreen(),
+        color: OrbitColors.peach(context),
+      ),
+      _entry(
+        'Ночное небо',
+        'Посмотреть на звёзды',
+        Icons.nights_stay_outlined,
+        const SkyScreen(),
+        color: OrbitColors.lavender(context),
+      ),
+      const SizedBox(height: 20),
+      Text('Тренировки', style: Theme.of(context).textTheme.titleLarge),
+      const SizedBox(height: 8),
+      ...ActivityType.values.map(
+        (a) => _entry(
+          a.title,
+          'Записать тренировку',
+          a.icon,
+          ActivityScreen(activityType: a),
         ),
       ),
-    );
-  }
+      const SizedBox(height: 20),
+      Text('Инструменты', style: Theme.of(context).textTheme.titleLarge),
+      _entry(
+        'Батарея и нагрузка',
+        'Ручной замер и управление шагомером',
+        Icons.battery_saver_outlined,
+        const BatteryScreen(),
+      ),
+      _entry(
+        'Перепад высоты',
+        'Относительная оценка по барометру',
+        Icons.terrain_outlined,
+        const AltitudeScreen(),
+      ),
+      _entry(
+        'Датчики телефона',
+        'Доступные датчики устройства',
+        Icons.sensors,
+        const SensorsScreen(),
+      ),
+      _entry(
+        'Бегалка',
+        'Игра без интернета',
+        Icons.sports_esports_outlined,
+        const SnakeScreen(),
+      ),
+    ],
+  );
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: _selected == 0 || _selected == 2
+        ? AppBar(
+            title: const Text('Движ'),
+            actions: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.lock_outline, size: 16),
+                      SizedBox(width: 6),
+                      Text('Офлайн'),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )
+        : null,
+    body: SafeArea(
+      child: switch (_selected) {
+        1 => const HistoryScreen(),
+        2 => _rest(),
+        3 => const SettingsScreen(),
+        _ => _today(),
+      },
+    ),
+    bottomNavigationBar: NavigationBar(
+      selectedIndex: _selected,
+      onDestinationSelected: (index) => setState(() => _selected = index),
+      destinations: const [
+        NavigationDestination(
+          icon: Icon(Icons.home_outlined),
+          selectedIcon: Icon(Icons.home),
+          label: 'Сегодня',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.bar_chart_outlined),
+          label: 'История',
+        ),
+        NavigationDestination(icon: Icon(Icons.spa_outlined), label: 'Отдых'),
+        NavigationDestination(
+          icon: Icon(Icons.settings_outlined),
+          label: 'Настройки',
+        ),
+      ],
+    ),
+  );
 }

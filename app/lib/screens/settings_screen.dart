@@ -8,6 +8,7 @@ import '../services/water_tracker.dart';
 import '../theme/theme_controller.dart';
 import 'consent_screen.dart';
 import 'about_screen.dart';
+import '../widgets/activity_preferences_card.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -223,6 +224,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
               const SizedBox(height: 24),
 
+              const ActivityPreferencesCard(),
+              const SizedBox(height: 24),
               const Text(
                 'Тема',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),

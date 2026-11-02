@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,6 +20,7 @@ void main() {
         .toList(),
   };
   setUp(() {
+    SharedPreferences.setMockInitialValues({});
     count = 0;
     date = '2026-10-31';
     fail = false;
@@ -54,6 +56,7 @@ void main() {
   ) async {
     await tester.pumpWidget(const MaterialApp(home: WaterScreen()));
     await tester.pumpAndSettle();
+    await tester.scrollUntilVisible(find.text('+1 стакан · 200 мл'), 150);
     await tester.tap(find.text('+1 стакан · 200 мл'));
     await tester.pumpAndSettle();
     expect(find.byKey(const Key('waterVolume')), findsOneWidget);
@@ -61,6 +64,7 @@ void main() {
       tester.widget<Text>(find.byKey(const Key('waterVolume'))).data,
       '200 мл',
     );
+    await tester.scrollUntilVisible(find.text('Убрать стакан за сегодня'), 150);
     await tester.tap(find.text('Убрать стакан за сегодня'));
     await tester.pumpAndSettle();
     expect(
@@ -84,6 +88,7 @@ void main() {
       tester.widget<Text>(find.byKey(const Key('waterVolume'))).data,
       '0 мл',
     );
+    await tester.scrollUntilVisible(find.text('2026-10-31'), 150);
     expect(find.text('2026-10-31'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
   });
@@ -93,11 +98,16 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: WaterScreen()));
     await tester.pumpAndSettle();
     fail = true;
+    await tester.scrollUntilVisible(find.text('+1 стакан · 200 мл'), 150);
     await tester.tap(find.text('+1 стакан · 200 мл'));
     await tester.pumpAndSettle();
     expect(
       tester.widget<Text>(find.byKey(const Key('waterVolume'))).data,
       '0 мл',
+    );
+    await tester.scrollUntilVisible(
+      find.textContaining('Не удалось прочитать'),
+      150,
     );
     expect(find.textContaining('Не удалось прочитать'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
@@ -129,7 +139,7 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: WaterScreen()));
     await tester.pumpAndSettle();
     final clear = find.text('Удалить историю воды');
-    await tester.ensureVisible(clear);
+    await tester.scrollUntilVisible(clear, 150);
     await tester.tap(clear);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Отмена'));
@@ -149,7 +159,7 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: WaterScreen()));
     await tester.pumpAndSettle();
     final button = find.text('Виджет: шаги и вода');
-    await tester.ensureVisible(button);
+    await tester.scrollUntilVisible(button, 150);
     await tester.tap(button);
     await tester.pumpAndSettle();
     expect(find.textContaining('Зажмите свободное место'), findsOneWidget);

@@ -1,14 +1,24 @@
 {
-  "version": "3.8.2+12",
+  "version": "3.9.0+13",
   "package": "com.duckolly.dvizh.preview",
   "build_mode": "release",
   "debuggable": false,
-  "apk_bytes": 17973327,
-  "apk_sha256": "24e5e48ba11fb069353661b29f59fa23d3f75f571dc64da7d85dab865945c4d9",
+  "flutter_tests": 82,
+  "kotlin_tests": 32,
+  "flutter_analyze": "PASS",
+  "android_lint_release": "PASS",
+  "apk_bytes": 18039411,
+  "apk_sha256": "32093a9bea76e9db4cb61a8f6f71d5542c85a5748bcce0435d1f7395da40da7f",
   "signer_sha256": "e68b0a1dce65741b78635a55fc02f17cc253e5094ceb739beddb3449ad9e089f",
-  "preview_381_update_compatible": true,
+  "preview_382_update_compatible": true,
   "main_app_update_compatible": false,
-  "permission_allowlist": "EXACT_5_PREVIEW",
+  "permissions": [
+    "android.permission.ACTIVITY_RECOGNITION",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_HEALTH",
+    "android.permission.POST_NOTIFICATIONS",
+    "com.duckolly.dvizh.preview.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
   "apk_zip_crc": "PASS",
   "zipalign_16k": "PASS",
   "abis": [
@@ -41,12 +51,6 @@
       ]
     }
   ],
-  "flutter_tests": 72,
-  "kotlin_tests": 32,
-  "analyze": "PASS",
-  "android_lint": "PASS",
-  "compared_source_files": 118,
-  "physical_battery_measurement": "PENDING",
-  "device_update_acceptance": "PENDING",
-  "store_release": "NOT_PREPARED"
+  "device_tests": "NOT_RUN",
+  "screenshots": "Flutter test rendering with fixture data, not physical device screenshots"
 }

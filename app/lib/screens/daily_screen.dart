@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../services/daily_tracker.dart';
+import '../services/activity_preferences.dart';
 
 class DailyScreen extends StatefulWidget {
   const DailyScreen({super.key});
@@ -10,6 +11,7 @@ class DailyScreen extends StatefulWidget {
 
 class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
   DailyStatus? _status;
+  ActivityPreferences _prefs = const ActivityPreferences();
   String? _error;
   bool _busy = false;
   Timer? _timer;
@@ -40,7 +42,14 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
     if (_busy) return;
     try {
       final status = await DailyTracker.status();
-      if (mounted) setState(() => _status = status);
+      final prefs = await ActivityPreferences.load();
+      if (mounted) {
+        setState(() {
+          _status = status;
+          _prefs = prefs;
+          _error = null;
+        });
+      }
     } catch (_) {
       if (mounted) {
         setState(() => _error = 'Не удалось прочитать историю шагов.');
@@ -138,6 +147,14 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
               ),
             ),
             const Text('шагов сегодня'),
+            Text(
+              _prefs.distanceLabel(s?.todaySteps ?? 0),
+              key: const Key('dailyDistance'),
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const Text(
+              'Приблизительное расстояние без GPS. Длину шага можно изменить в настройках.',
+            ),
             const SizedBox(height: 16),
             if (s == null)
               const LinearProgressIndicator()
@@ -209,10 +226,10 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: Text(day.day),
-                trailing: Text('${day.steps}'),
-                subtitle: day.estimated
-                    ? const Text('Распределение по дате приблизительное')
-                    : null,
+                trailing: Text('${day.steps} шагов'),
+                subtitle: Text(
+                  '${_prefs.distanceLabel(day.steps)}${day.estimated ? ' · дата приблизительная' : ''}',
+                ),
               ),
             TextButton(
               onPressed: _busy ? null : _clear,

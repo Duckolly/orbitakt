@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../services/water_tracker.dart';
+import '../services/activity_preferences.dart';
+import '../theme/app_theme.dart';
+import '../widgets/orbit/orbit_art.dart';
 
 class WaterScreen extends StatefulWidget {
   const WaterScreen({super.key});
@@ -10,6 +13,7 @@ class WaterScreen extends StatefulWidget {
 
 class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
   WaterStatus? _status;
+  ActivityPreferences _prefs = const ActivityPreferences();
   bool _busy = false;
   String? _error;
   Timer? _timer;
@@ -58,7 +62,13 @@ class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
     });
     try {
       final value = await action();
-      if (mounted) setState(() => _status = value);
+      final prefs = await ActivityPreferences.load();
+      if (mounted) {
+        setState(() {
+          _status = value;
+          _prefs = prefs;
+        });
+      }
     } catch (_) {
       if (mounted) {
         setState(
@@ -136,18 +146,48 @@ class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
           const Text('Один стакан = 200 мл. Отмечайте выпитую воду вручную.'),
           const SizedBox(height: 16),
           if (_status != null) ...[
-            Text(_status!.today),
-            Text(
-              '${_status!.glasses} стаканов',
-              key: const Key('waterGlasses'),
-              style: Theme.of(context).textTheme.headlineMedium,
+            Card(
+              color: OrbitColors.aqua(context),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const Text('Небольшими порциями в течение дня'),
+                    OrbitArt(
+                      water: true,
+                      progress: _status!.millilitres / _prefs.waterGoalMl,
+                    ),
+                    Text(
+                      '${_status!.millilitres} мл',
+                      key: const Key('waterVolume'),
+                      style: const TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text('из ${_prefs.waterGoalMl} мл'),
+                    Text(
+                      '${_status!.glasses} стаканов',
+                      key: const Key('waterGlasses'),
+                    ),
+                    Text(_status!.today),
+                    const SizedBox(height: 12),
+                    LinearProgressIndicator(
+                      value: (_status!.millilitres / _prefs.waterGoalMl).clamp(
+                        0,
+                        1,
+                      ),
+                      minHeight: 10,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text('Личная цель · изменить в настройках'),
+                  ],
+                ),
+              ),
             ),
-            Text(
-              '${_status!.millilitres} мл',
-              key: const Key('waterVolume'),
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             FilledButton.icon(
               onPressed: _busy
                   ? null

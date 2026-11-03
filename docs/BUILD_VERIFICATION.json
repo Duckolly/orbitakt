@@ -1,9 +1,9 @@
 {
-  "version": "3.9.4+17",
+  "version": "3.9.5+18",
   "package": "com.duckolly.dvizh.preview",
   "build_mode": "release",
   "debuggable": false,
-  "flutter_tests": 95,
+  "flutter_tests": 112,
   "kotlin_tests": 41,
   "compact_layout_tests": 7,
   "flutter_analyze": "PASS",
@@ -13,7 +13,7 @@
   "native_elf_16k": "PASS",
   "signer_sha256": "e68b0a1dce65741b78635a55fc02f17cc253e5094ceb739beddb3449ad9e089f",
   "preview_update_signature_matches_390": true,
-  "apk_sha256": "eb2fa0b19acda142a482fedbd9dbd1af835e2a46416400c83132ffd672363ca5",
+  "apk_sha256": "9bb15b83f57256e46f31ec1319f067c65f3a03913faf33d50d4025c22433fe8a",
   "permissions": [
     "android.permission.ACTIVITY_RECOGNITION",
     "android.permission.FOREGROUND_SERVICE",
@@ -46,9 +46,41 @@
   "legacy_age_confirmation_accepted": false,
   "website_url": "https://duckolly.github.io/testofsilence/",
   "website_changed": false,
+  "sleep_breathing": {
+    "stages_seconds": [
+      [
+        4,
+        4
+      ],
+      [
+        4.5,
+        4.5
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "comfortable_completed_sessions_before_offer": 3,
+    "increase_requires_confirmation": true,
+    "active_clock": "monotonic, excludes pause/background",
+    "session_minutes": [
+      5,
+      10,
+      15
+    ],
+    "alternatives": [
+      "3/3",
+      "4.5/5.5",
+      "free"
+    ],
+    "persistence_key": "sleepBreathingV1",
+    "medical_efficacy": "NOT_TESTED",
+    "phone_test": "NOT_RUN"
+  },
   "source_sha256": {
     "app/lib/main.dart": "f2a5a7f094b9885b7980b5200903fb380c20ba6948ec93e14cd681ec72b47696",
-    "app/lib/screens/breathing_screen.dart": "237f3a1000758496a6219d7c6af387cccdbea05070f3d7d9d443d0a0e650ac28",
+    "app/lib/screens/breathing_screen.dart": "489943138f36af80244730dd1840d131101de02a83bbd0e3bf0b281f6b728179",
     "app/lib/screens/history_screen.dart": "09a27ca70bc1180cc4c5f028bff64ddbb0b6a41b2fca801a106082cc023c55bb",
     "app/lib/screens/home_screen.dart": "53a6c7a34adab81e6eb36a950f122d5bc118aa3edc6508d6dc44a64d899fb686",
     "app/lib/screens/activity_screen.dart": "2eb9ed93afc6867a671a9345c38f6f704fd4da20fc5c31f96692a464dd4ca613",
@@ -59,6 +91,7 @@
     "app/lib/screens/sensors_screen.dart": "34f6bf135c6e8c26724ae7fc230b989ab0b26fc6af66d0bd8ffe8bf848aea5b2",
     "app/lib/screens/altitude_screen.dart": "b3e03991e9a5fa9b4314d1eb91da24cf5d04899405c69a999bae618ea135d5c0",
     "app/lib/screens/battery_screen.dart": "01d24bdfe6d350c0fab496e4155d61b2ff3aee1fcf6635c5c275514f0d070dc1",
+    "app/lib/screens/breathing_help_screen.dart": "05f56fdeb265d0154306ba292dc2e9afc9599faa727290959f7cf221353d1727",
     "app/lib/screens/snake_screen.dart": "8aae3a0b1a07e8cbd9f39908eceae7f3fad5fd268dc870827ccbec0930638dfb",
     "app/lib/screens/about_screen.dart": "c8927d93e1f12c3826f61fcadbc908ff03fde66170b655243b260492347027b6",
     "app/lib/screens/water_screen.dart": "321b4cb4fa42a0bb214329f59f38c746ff25adce09e37093c2673492a678d1c7",
@@ -69,8 +102,9 @@
     "app/lib/sky/sky_snapshot.dart": "a659a2421cf01b15d01c0f6b8d7812a25fc633b3b3deb6f3c8d3bb4cc307a8e9",
     "app/lib/sky/sky_catalog.dart": "9ccc4996125a0d3df5f3e54ce5bdc0ff92d76fa161964e6ae952f4b8a5e9b36c",
     "app/lib/models/workout.dart": "59a9a93b046574e0228804cf370c025e091b7e1243ca7a34b0964a0d6634dad9",
+    "app/lib/models/sleep_breathing.dart": "e70b547012e3c5e37a2293542d67e5d6015050793a93de7e5094ff0c0a121781",
     "app/lib/models/battery_session.dart": "f808124b054024a1a0ec30f43bddd6c3731db5e34f4843194776bc864880db7d",
-    "app/lib/models/breathing.dart": "bd5740f1f35565b86276b8b110e4c7f4c9954b507091b482182481a402b8bf76",
+    "app/lib/models/breathing.dart": "5b08e46ee29912a769b6df14a96eb4b82856fce3380a2ebbf53fc52acb627051",
     "app/lib/models/relative_altitude.dart": "270579bc06adc6e6d6c6699a4273ebb0dbd732e12c7874288e43c8fd13377b52",
     "app/lib/models/activity.dart": "915e324c6d0307acfb6b99f8cb34736f32257e4b9c0b2caa345f66a3be3fc223",
     "app/lib/games/tilt_control.dart": "bca377beb605a7b6c6ad2a1d919e3329bb030caf88c8ed286cc5b21fa9a720de",
@@ -78,12 +112,14 @@
     "app/lib/widgets/water_summary.dart": "8468a44247e36a21704dd613b8f8008ca73432d0633538619fe8e802f1da8f9f",
     "app/lib/widgets/activity_preferences_card.dart": "ee1938d80333cfccd9b13c45dc114eff8cd44df2173e6236ac0a9d4376617771",
     "app/lib/widgets/daily_summary.dart": "4923c8359e2d1029878eadd22e343dda8085f834d4584868cefcb072db21b901",
+    "app/lib/widgets/sleep_breathing_settings.dart": "160dc10ccd29ecfecdd07343d55a42a5bc476fff45748ff93ca6fb4c7c855de7",
     "app/lib/services/water_tracker.dart": "12573d01328f8f495102439e4d3b92ab0529979adc53ac65c48006a7840ed6c0",
     "app/lib/services/tool_routes.dart": "2aa826d80815b2ff2e72b4ea661738264dfe661aa512aa3ca3c9833452432e17",
     "app/lib/services/storage_service.dart": "47bd0fa5f09de2288f9419a7f8e5241912a27b448ee15dc9549531da80a430d4",
     "app/lib/services/sensor_service.dart": "d60c15c111a914d40d0c05e8401137240cacb5f844b919bda24a66b40a38efdd",
     "app/lib/services/daily_issue.dart": "af684b43960fce4818c779fbdcc515f2c686bda8e0815a9faa6fd2d8d2ffa63d",
     "app/lib/services/daily_tracker.dart": "ede3ce78efca5ee08f15ff9f237ccf271815617a416e214e4e1dc8ce1f379b81",
+    "app/lib/services/sleep_breathing_store.dart": "e963aa2db726f3e957b3cf9d700695e3bbe06483ffb59bae7b2316eb86129609",
     "app/lib/services/device_sensors.dart": "7b0f5f3bdb4ce43258b601019e023353e389671a1f7805823862442cf1cabf00",
     "app/lib/services/notification_service.dart": "95aafd72395b119c3b68b3aea412d4ab9529f2dba1b2a09f1d6f0bd3ac136f90",
     "app/lib/services/battery_service.dart": "37bf24d8c679d55f6bf3557e1667daa796e96406b219b58237841eadd6730cf5",
@@ -148,12 +184,13 @@
     "app/android/app/src/test/kotlin/com/duckolly/dvizh/CounterMathTest.kt": "f64e71fc59bf4de1fe1d0de9430f6cfc60d65baa6d402de2043c7357ecdd75bc",
     "app/test/orbit_ui_test.dart": "8c10ac45731569c6fa7ddbadf129ca02d0ee945fe626b7943b52ef3d1f24ba4d",
     "app/test/activity_preferences_test.dart": "fe8ba8147733775d9934698ab034059baf4b229fe34c3198bcd22e3bb6c7c15c",
-    "app/test/breathing_test.dart": "807e69a985da04789914d0dfedd65c77a3e0be4ec79d90e03dc4ebe06ff92382",
+    "app/test/breathing_test.dart": "c0d80684b89cb5afbc5c3055d6337e2ac5fcca52c1859f9c02b78346c23d8293",
     "app/test/sensor_service_test.dart": "ed38d7416f3db9e79a2e5c690a38a6085ebd892d217de390ff351dfebbc0b067",
     "app/test/tilt_screen_test.dart": "02c145876813d87867de1ff6f388d1e280fb38b4c1dededd039e381101fcf126",
     "app/test/navigation_test.dart": "8f92ee40fbbcc5b1e98f52ea5e28efb1b1a70e16a01cee65ee1b6ed1ea38a93c",
     "app/test/sky_math_test.dart": "5725f172f796a9761997748833bb63af490a3b113b2ad42dc49dff50c1cc1bbd",
     "app/test/consent_age_test.dart": "26a3b30eccab4eb33f1efca2ac81da3414dd8efae6c6913d7af161a1d489c8f0",
+    "app/test/sleep_breathing_test.dart": "9f7e4135a8d825e832589bedec03a235f3c70c43ede2b02e52334e8f54aabdab",
     "app/test/about_test.dart": "44f35cabe13d4a2a7c7537aa3dcc122e96da5a8e3106b3ea9ed751611d42db76",
     "app/test/storage_test.dart": "49414e5cf216511dd1f44f8bac74a789528762f044d43f83be70ca2de0280d6b",
     "app/test/water_tracker_test.dart": "0c1c070b51c238059bf4c83f6f23cb0c41ca5efb053262f5841c7afe12bde886",

@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dvizh/models/breathing.dart';
 import 'package:dvizh/screens/breathing_screen.dart';
 import 'package:dvizh/services/tool_routes.dart';
 
 void main() {
+  setUp(() => SharedPreferences.setMockInitialValues({}));
   test('all presets have no breath hold and finish at their duration', () {
     for (final p in BreathingPreset.values) {
       expect(BreathingFrame(p, Duration.zero).inhaling, isTrue);
-      expect(BreathingFrame(p, Duration(seconds: p.inhale)).inhaling, isFalse);
       expect(
-        BreathingFrame(p, Duration(seconds: p.inhale + p.exhale)).inhaling,
+        BreathingFrame(
+          p,
+          Duration(milliseconds: (p.inhale * 1000).round()),
+        ).inhaling,
+        isFalse,
+      );
+      expect(
+        BreathingFrame(
+          p,
+          Duration(milliseconds: ((p.inhale + p.exhale) * 1000).round()),
+        ).inhaling,
         isTrue,
       );
       final end = BreathingFrame(p, Duration(minutes: p.minutes));

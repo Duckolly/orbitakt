@@ -76,17 +76,23 @@ class _HomeScreenState extends State<HomeScreen> {
     ],
   );
   Widget _today() => ListView(
-    padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
     children: [
-      Text(
-        'Сегодня',
-        style: Theme.of(
-          context,
-        ).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w800),
+      Wrap(
+        alignment: WrapAlignment.spaceBetween,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 16,
+        children: [
+          Text(
+            'Сегодня',
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          Text('Шаги и вода', style: Theme.of(context).textTheme.bodySmall),
+        ],
       ),
-      const SizedBox(height: 4),
-      const Text('Шаги, вода и немного времени для себя'),
-      const SizedBox(height: 16),
+      const SizedBox(height: 8),
       const DailySummary(),
       const WaterSummary(),
       const SizedBox(height: 12),

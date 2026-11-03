@@ -78,81 +78,130 @@ class _WaterSummaryState extends State<WaterSummary>
   }
 
   @override
-  Widget build(BuildContext context) => Card(
-    color: OrbitColors.aqua(context),
-    child: Padding(
-      padding: const EdgeInsets.all(22),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.water_drop_outlined),
-              const SizedBox(width: 8),
-              const Expanded(
-                child: Text(
-                  'Вода',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-                ),
+  Widget build(BuildContext context) {
+    final largeText = MediaQuery.textScalerOf(context).scale(1) > 1.3;
+    final volume = Text(
+      _status == null
+          ? '—'
+          : '${_status!.millilitres} / ${_prefs.waterGoalMl} мл',
+      key: const Key('homeWaterVolume'),
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+    );
+    Future<void> openHistory() async {
+      await Navigator.of(
+        context,
+      ).push(MaterialPageRoute<void>(builder: (_) => const WaterScreen()));
+      if (mounted) _load();
+    }
+
+    return Card(
+      color: OrbitColors.aqua(context),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            InkWell(
+              onTap: openHistory,
+              borderRadius: BorderRadius.circular(12),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 48),
+                child: largeText
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Row(
+                            children: [
+                              Icon(Icons.water_drop_outlined, size: 20),
+                              SizedBox(width: 8),
+                              Expanded(
+                                child: Text(
+                                  'Вода',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              Icon(Icons.chevron_right, size: 20),
+                            ],
+                          ),
+                          volume,
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          const Icon(Icons.water_drop_outlined, size: 20),
+                          const SizedBox(width: 8),
+                          const Text(
+                            'Вода',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerRight,
+                              child: volume,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          const Icon(Icons.chevron_right, size: 20),
+                        ],
+                      ),
               ),
-              IconButton(
-                tooltip: 'История воды',
-                icon: const Icon(Icons.chevron_right),
-                onPressed: () async {
-                  await Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const WaterScreen(),
-                    ),
-                  );
-                  if (mounted) _load();
-                },
+            ),
+            LinearProgressIndicator(
+              value: ((_status?.millilitres ?? 0) / _prefs.waterGoalMl).clamp(
+                0,
+                1,
+              ),
+              minHeight: 6,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    key: const Key('quickWaterAdd'),
+                    onPressed: _busy || _status == null
+                        ? null
+                        : () => _run(() => WaterTracker.change(1)),
+                    icon: const Icon(Icons.add),
+                    label: const Text('200 мл'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                IconButton(
+                  key: const Key('quickWaterUndo'),
+                  tooltip: 'Убрать 200 мл за сегодня',
+                  onPressed: _busy || _status == null || _status!.glasses == 0
+                      ? null
+                      : () => _run(() => WaterTracker.change(-1)),
+                  icon: const Icon(Icons.undo),
+                  constraints: const BoxConstraints(
+                    minWidth: 48,
+                    minHeight: 48,
+                  ),
+                ),
+              ],
+            ),
+            if (_error != null) ...[
+              Text(
+                _error!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+              TextButton(
+                onPressed: _busy ? null : _load,
+                child: const Text('Повторить'),
               ),
             ],
-          ),
-          Text(
-            _status == null
-                ? '—'
-                : '${_status!.millilitres} / ${_prefs.waterGoalMl} мл',
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800),
-          ),
-          const SizedBox(height: 12),
-          LinearProgressIndicator(
-            value: ((_status?.millilitres ?? 0) / _prefs.waterGoalMl).clamp(
-              0,
-              1,
-            ),
-            minHeight: 10,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          const SizedBox(height: 18),
-          FilledButton.icon(
-            key: const Key('quickWaterAdd'),
-            onPressed: _busy || _status == null
-                ? null
-                : () => _run(() => WaterTracker.change(1)),
-            icon: const Icon(Icons.add),
-            label: const Text('200 мл'),
-          ),
-          if (_status != null && _status!.glasses > 0)
-            TextButton.icon(
-              onPressed: _busy
-                  ? null
-                  : () => _run(() => WaterTracker.change(-1)),
-              icon: const Icon(Icons.undo),
-              label: const Text('Убрать 200 мл за сегодня'),
-            ),
-          if (_error != null) ...[
-            Text(
-              _error!,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-            TextButton(
-              onPressed: _busy ? null : _load,
-              child: const Text('Повторить'),
-            ),
           ],
-        ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

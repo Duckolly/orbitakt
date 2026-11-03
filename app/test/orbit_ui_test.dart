@@ -63,55 +63,53 @@ void main() {
     bool dark = false,
     double scale = 1,
     double width = 390,
+    double height = 844,
+    bool systemInsets = false,
   }) async {
-    t.view.physicalSize = Size(width, 844);
+    t.view.physicalSize = Size(width, height);
     t.view.devicePixelRatio = 1;
+    if (systemInsets) {
+      t.view.padding = const FakeViewPadding(top: 24, bottom: 24);
+      addTearDown(t.view.resetPadding);
+    }
     addTearDown(t.view.resetPhysicalSize);
     addTearDown(t.view.resetDevicePixelRatio);
+    // Use a real SDK font for layout assertions; Ahem has square glyphs and
+    // cannot model Android text widths. The SDK layout is pinned by Flutter.
     final fontDir = Platform.environment['DVIZH_FONT_DIR'];
-    if (fontDir != null) {
-      await t.runAsync(() async {
-        final loader = FontLoader('OrbitPreview')
-          ..addFont(
-            Future.value(
-              ByteData.sublistView(
-                await File('$fontDir/DejaVuSans.ttf').readAsBytes(),
-              ),
-            ),
-          );
+    final sdkAssets = File(Platform.resolvedExecutable).parent.parent.parent;
+    final fontFile = fontDir == null
+        ? File('${sdkAssets.path}/material_fonts/Roboto-Regular.ttf')
+        : File('$fontDir/DejaVuSans.ttf');
+    await t.runAsync(() async {
+      final bytes = ByteData.sublistView(await fontFile.readAsBytes());
+      for (final family in ['OrbitPreview', 'Roboto']) {
+        final loader = FontLoader(family)..addFont(Future.value(bytes));
         await loader.load();
-        for (final family in ['Roboto', 'Ahem']) {
-          final fallback = FontLoader(family)
-            ..addFont(
-              Future.value(
-                ByteData.sublistView(
-                  await File('$fontDir/DejaVuSans.ttf').readAsBytes(),
-                ),
-              ),
-            );
-          await fallback.load();
-        }
-        final iconPath = Platform.environment['DVIZH_MATERIAL_ICONS'];
-        if (iconPath != null) {
-          final icons = FontLoader('MaterialIcons')
-            ..addFont(
-              Future.value(
-                ByteData.sublistView(await File(iconPath).readAsBytes()),
-              ),
-            );
-          await icons.load();
-        }
-      });
-    }
-    var theme = dark ? AppTheme.dark : AppTheme.light;
-    if (fontDir != null) {
-      const buttonText = TextStyle(fontFamily: 'OrbitPreview', fontSize: 17, fontWeight: FontWeight.w700);
-      theme = theme.copyWith(
-        textTheme: theme.textTheme.apply(fontFamily: 'OrbitPreview'),
-        filledButtonTheme: FilledButtonThemeData(style: theme.filledButtonTheme.style?.copyWith(
-          textStyle: const WidgetStatePropertyAll(buttonText))),
-      );
-    }
+      }
+      final iconPath = Platform.environment['DVIZH_MATERIAL_ICONS'];
+      final icons = FontLoader('MaterialIcons')
+        ..addFont(
+          iconPath == null
+              ? rootBundle.load('fonts/MaterialIcons-Regular.otf')
+              : File(iconPath).readAsBytes().then(ByteData.sublistView),
+        );
+      await icons.load();
+    });
+    const buttonText = TextStyle(
+      fontFamily: 'OrbitPreview',
+      fontSize: 17,
+      fontWeight: FontWeight.w700,
+    );
+    final base = dark ? AppTheme.dark : AppTheme.light;
+    final theme = base.copyWith(
+      textTheme: base.textTheme.apply(fontFamily: 'OrbitPreview'),
+      filledButtonTheme: FilledButtonThemeData(
+        style: base.filledButtonTheme.style?.copyWith(
+          textStyle: const WidgetStatePropertyAll(buttonText),
+        ),
+      ),
+    );
     await t.pumpWidget(
       MaterialApp(
         theme: theme,
@@ -189,12 +187,81 @@ void main() {
       pending = null;
       await t.pumpAndSettle();
       expect(find.text('1400 / 2000 мл'), findsOneWidget);
-      await t.tap(find.text('Убрать 200 мл за сегодня'));
+      await t.tap(find.byTooltip('Убрать 200 мл за сегодня'));
       await t.pumpAndSettle();
       expect(find.text('1200 / 2000 мл'), findsOneWidget);
       await t.pumpWidget(const SizedBox());
     },
   );
+  for (final size in [
+    const Size(320, 568),
+    const Size(360, 640),
+    const Size(390, 844),
+  ]) {
+    for (final dark in [false, true]) {
+      testWidgets(
+        'steps and complete water card fit before scrolling: $size dark=$dark',
+        (t) async {
+          await mount(
+            t,
+            const HomeScreen(),
+            width: size.width,
+            height: size.height,
+            dark: dark,
+            systemInsets: true,
+          );
+          final navTop = t.getTopLeft(find.byType(NavigationBar)).dy;
+          final water = find.byType(WaterSummary);
+          expect(t.getBottomRight(water).dy, lessThanOrEqualTo(navTop + 1));
+          expect(
+            find.byKey(const Key('homeDailySteps')).hitTestable(),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(const Key('quickWaterAdd')).hitTestable(),
+            findsOneWidget,
+          );
+          expect(
+            find.byKey(const Key('quickWaterUndo')).hitTestable(),
+            findsOneWidget,
+          );
+          expect(t.takeException(), isNull);
+          await capture(
+            t,
+            'compact-${size.width.toInt()}x${size.height.toInt()}-${dark ? 'dark' : 'light'}',
+          );
+          await t.pumpWidget(const SizedBox());
+        },
+      );
+    }
+  }
+  testWidgets('compact cards retain large-text scrolling and navigation', (
+    t,
+  ) async {
+    await mount(
+      t,
+      const HomeScreen(),
+      width: 320,
+      height: 568,
+      scale: 2,
+      systemInsets: true,
+    );
+    await t.scrollUntilVisible(find.byKey(const Key('quickWaterAdd')), 180);
+    await Scrollable.ensureVisible(
+      t.element(find.byKey(const Key('quickWaterAdd'))),
+      alignment: 0.5,
+    );
+    await t.pumpAndSettle();
+    expect(
+      find.byKey(const Key('quickWaterAdd')).hitTestable(),
+      findsOneWidget,
+    );
+    await t.tap(find.byKey(const Key('quickWaterAdd')));
+    await t.pumpAndSettle();
+    expect(find.text('1400 / 2000 мл'), findsOneWidget);
+    expect(t.takeException(), isNull);
+    await t.pumpWidget(const SizedBox());
+  });
   testWidgets('settings accept decimal comma and reject invalid calibration', (
     t,
   ) async {

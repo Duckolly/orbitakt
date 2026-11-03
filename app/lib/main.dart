@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'services/tool_routes.dart';
+import 'services/consent_preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,13 +29,7 @@ void main() {
 
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      final bool privacyAccepted = prefs.getBool('privacyAccepted') ?? false;
-      final bool ageConfirmed = prefs.getBool('ageConfirmed') ?? false;
-      final bool offlineUnderstood =
-          prefs.getBool('offlineUnderstood') ?? false;
-
-      final bool hasConsent =
-          privacyAccepted && ageConfirmed && offlineUnderstood;
+      final bool hasConsent = ConsentPreferences.accepted(prefs);
 
       runApp(DvizhApp(showConsentFirst: !hasConsent));
     },
@@ -58,7 +53,7 @@ class DvizhApp extends StatelessWidget {
       builder: (BuildContext context, ThemeMode themeMode, Widget? child) {
         return MaterialApp(
           navigatorObservers: [toolRouteObserver],
-          title: 'Движ',
+          title: 'Орбитакт',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,

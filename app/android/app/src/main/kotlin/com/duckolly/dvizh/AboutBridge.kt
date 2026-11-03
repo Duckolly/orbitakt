@@ -25,9 +25,11 @@ class AboutBridge(private val activity: MainActivity, engine: FlutterEngine) {
                         result.error("info_unavailable", "Версия недоступна", null)
                     }
                 }
-                "openTelegram" -> {
+                "openTelegram", "openWebsite" -> {
+                    val url = if (call.method == "openWebsite")
+                        "https://duckolly.github.io/testofsilence/" else "https://t.me/dvizhoffline"
                     val opened = try {
-                        activity.startActivity(Intent(Intent.ACTION_VIEW, "https://t.me/dvizhoffline".toUri()))
+                        activity.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
                         true
                     } catch (_: RuntimeException) { false }
                     result.success(opened)

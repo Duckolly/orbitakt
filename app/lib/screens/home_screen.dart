@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ],
   );
   Widget _today() => ListView(
-    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+    padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
     children: [
       Wrap(
         alignment: WrapAlignment.spaceBetween,
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) => Scaffold(
     appBar: _selected == 0 || _selected == 2
         ? AppBar(
-            title: const Text('Движ'),
+            title: const Text('Орбитакт'),
             actions: [
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),

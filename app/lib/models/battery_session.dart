@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 const usageLabels = {
-  'foreground': 'Открытый экран Движа',
+  'foreground': 'Открытый экран Орбитакта',
   'step': 'Фоновый счётчик шагов',
   'tilt': 'Датчик наклона',
   'pressure': 'Барометр',

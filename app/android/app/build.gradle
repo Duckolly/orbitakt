@@ -28,7 +28,7 @@ android {
     defaultConfig {
         applicationId = "com.duckolly.dvizh"
         if (previewBuild) { applicationIdSuffix = ".preview" }
-        manifestPlaceholders = [appLabel: "Движ", widgetLabel: "Движ: шаги и вода"]
+        manifestPlaceholders = [appLabel: "Орбитакт", widgetLabel: "Орбитакт: шаги и вода"]
         minSdk = 24
         targetSdk = 36
         versionCode = flutter.versionCode

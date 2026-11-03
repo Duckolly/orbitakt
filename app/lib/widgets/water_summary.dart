@@ -96,8 +96,9 @@ class _WaterSummaryState extends State<WaterSummary>
 
     return Card(
       color: OrbitColors.aqua(context),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

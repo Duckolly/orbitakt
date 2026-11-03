@@ -78,7 +78,7 @@ class DailyStepService : Service(), SensorEventListener {
         val stop=PendingIntent.getService(this,1,Intent(this,DailyStepService::class.java).setAction("STOP"),PendingIntent.FLAG_IMMUTABLE)
         val builder=if(Build.VERSION.SDK_INT>=26) Notification.Builder(this,"daily_steps") else Notification.Builder(this)
         val notification=builder.setSmallIcon(com.duckolly.dvizh.R.drawable.ic_stat_activity)
-            .setContentTitle("ДВИЖ · дневной шагомер включён").setContentText("Шаги сохраняются только на телефоне")
+            .setContentTitle("ОРБИТАКТ · дневной шагомер включён").setContentText("Шаги сохраняются только на телефоне")
             .setVisibility(Notification.VISIBILITY_PRIVATE).setContentIntent(open).setOngoing(true)
             .addAction(Notification.Action.Builder(null,"Остановить",stop).build()).build()
         try {

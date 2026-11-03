@@ -118,7 +118,7 @@ class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
             content: Text(
               requested
                   ? 'Подтвердите добавление в окне рабочего стола.'
-                  : 'Зажмите свободное место рабочего стола → Виджеты → Движ.',
+                  : 'Зажмите свободное место рабочего стола → Виджеты → Орбитакт.',
             ),
           ),
         );

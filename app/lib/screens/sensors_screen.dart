@@ -112,7 +112,7 @@ class _SensorsScreenState extends State<SensorsScreen> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const Text(
-                      'Список не запускает сбор показаний. Потребление ниже — паспортная оценка датчика, а не измеренный расход ДВИЖ.',
+                      'Список не запускает сбор показаний. Потребление ниже — паспортная оценка датчика, а не измеренный расход ОРБИТАКТ.',
                     ),
                     ..._sensors.map(
                       (s) => ExpansionTile(

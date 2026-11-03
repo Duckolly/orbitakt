@@ -44,7 +44,12 @@ void main() {
   }
 
   Future<void> tap(WidgetTester t, String text) async {
-    await t.ensureVisible(find.text(text));
+    await t.scrollUntilVisible(
+      find.text(text),
+      180,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await Scrollable.ensureVisible(t.element(find.text(text)), alignment: 0.5);
     await t.pumpAndSettle();
     await t.tap(find.text(text));
     await t.pumpAndSettle();
@@ -56,6 +61,11 @@ void main() {
       await open(t);
       expect(find.text('Версия: 3.8.1 (сборка 11)'), findsOneWidget);
       expect(find.text('Автор: Сергей Швецов'), findsOneWidget);
+      await t.scrollUntilVisible(
+        find.text(AboutScreen.telegramUrl),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
       expect(find.text(AboutScreen.telegramUrl), findsOneWidget);
       expect(calls, ['info']);
       await tap(t, 'Скопировать адрес');
@@ -82,7 +92,15 @@ void main() {
     (t) async {
       await open(t);
       pending = Completer<bool>();
-      await t.ensureVisible(find.text('Открыть Telegram'));
+      await t.scrollUntilVisible(
+        find.text('Открыть Telegram'),
+        180,
+        scrollable: find.byType(Scrollable).first,
+      );
+      await Scrollable.ensureVisible(
+        t.element(find.text('Открыть Telegram')),
+        alignment: 0.5,
+      );
       await t.pumpAndSettle();
       await t.tap(find.text('Открыть Telegram'));
       await t.pump();
@@ -112,8 +130,39 @@ void main() {
       ),
     );
     await t.pumpAndSettle();
-    await t.scrollUntilVisible(find.text('Скопировать адрес'), 250);
+    await t.scrollUntilVisible(
+      find.text('Скопировать адрес'),
+      250,
+      scrollable: find.byType(Scrollable).first,
+    );
     await t.pumpAndSettle();
     expect(t.takeException(), isNull);
   });
+  testWidgets(
+    'website and 16+ are shown; browser opens only on a tap; copy preserves exact URL',
+    (t) async {
+      await open(t);
+      expect(find.byKey(const Key('aboutMinimumAge')), findsOneWidget);
+      expect(find.text(AboutScreen.websiteUrl), findsOneWidget);
+      expect(calls, ['info']);
+      await tap(t, 'Скопировать ссылку на сайт');
+      expect(copied, 'https://duckolly.github.io/testofsilence/');
+      expect(calls, ['info']);
+      await tap(t, 'Открыть сайт');
+      expect(calls, ['info', 'openWebsite']);
+    },
+  );
+
+  testWidgets(
+    'failed website launch leaves its address available for copying',
+    (t) async {
+      opens = false;
+      await open(t);
+      await tap(t, 'Открыть сайт');
+      expect(find.textContaining('Не удалось открыть ссылку'), findsOneWidget);
+      await tap(t, 'Скопировать ссылку на сайт');
+      expect(copied, AboutScreen.websiteUrl);
+      expect(calls.where((c) => c == 'openWebsite').length, 1);
+    },
+  );
 }

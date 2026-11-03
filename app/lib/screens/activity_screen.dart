@@ -95,7 +95,7 @@ class _ActivityScreenState extends State<ActivityScreen>
               _recording &&
               !_paused) {
             await NotificationService.instance.showOngoing(
-              'Движ',
+              'Орбитакт',
               'Запись: ${widget.activityType.title}',
             );
           }

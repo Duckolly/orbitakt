@@ -13,6 +13,7 @@ import 'package:dvizh/services/water_tracker.dart';
 import 'package:dvizh/theme/app_theme.dart';
 import 'package:dvizh/widgets/activity_preferences_card.dart';
 import 'package:dvizh/widgets/water_summary.dart';
+import 'package:dvizh/widgets/orbit/orbit_art.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -209,6 +210,20 @@ void main() {
             height: size.height,
             dark: dark,
             systemInsets: true,
+          );
+          expect(find.text('Орбитакт'), findsOneWidget);
+          expect(find.byType(StepTrailProgress), findsOneWidget);
+          final indicator = find.descendant(
+            of: find.byType(StepTrailProgress),
+            matching: find.byType(LinearProgressIndicator),
+          );
+          expect(
+            t.widget<LinearProgressIndicator>(indicator).value,
+            closeTo(6420 / 8000, 0.0001),
+          );
+          expect(
+            t.widget<LinearProgressIndicator>(indicator).semanticsLabel,
+            'Прогресс цели шагов',
           );
           final navTop = t.getTopLeft(find.byType(NavigationBar)).dy;
           final water = find.byType(WaterSummary);

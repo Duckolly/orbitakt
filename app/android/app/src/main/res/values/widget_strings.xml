@@ -1,5 +1,5 @@
 <resources>
-    <string name="widget_label">Движ: шаги и вода</string>
+    <string name="widget_label">Орбитакт: шаги и вода</string>
     <string name="widget_description">Компактные итоги: шаги слева, стаканы воды справа</string>
     <string name="widget_steps_label">Шаги</string>
     <string name="widget_water_label">Вода</string>

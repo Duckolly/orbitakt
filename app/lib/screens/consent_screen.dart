@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'home_screen.dart';
+import '../services/consent_preferences.dart';
 
 class ConsentScreen extends StatefulWidget {
   const ConsentScreen({super.key});
@@ -23,7 +24,8 @@ class _ConsentScreenState extends State<ConsentScreen> {
   // без сетевого запроса, офлайн-дух не нарушается). Ссылка — текст для
   // пользователя, а не запрос.
   static const String _policyShort =
-      'Движ работает офлайн и не имеет сервера. '
+      'Орбитакт предназначен для пользователей от 16 лет. '
+      'Работает офлайн и не имеет сервера. '
       'Приложение не собирает ФИО, email, телефон, адрес, геолокацию, вес и '
       'диагнозы, не использует рекламу, аналитику и crash reporting, '
       'не отправляет данные разработчику или третьим лицам. '
@@ -58,8 +60,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
               SelectableText(_policyShort),
               const SizedBox(height: 16),
               const Text(
-                'Полная версия доступна по ссылке выше и в файле PRIVACY.md '
-                'репозитория.',
+                'Полная версия включена в файл PRIVACY.md комплекта приложения.',
                 style: TextStyle(color: Colors.grey),
               ),
             ],
@@ -70,11 +71,27 @@ class _ConsentScreenState extends State<ConsentScreen> {
   }
 
   Future<void> _continue() async {
+    if (!_canContinue) return;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setBool('privacyAccepted', true);
-    await prefs.setBool('ageConfirmed', true);
-    await prefs.setBool('offlineUnderstood', true);
+    bool saved;
+    try {
+      saved = await ConsentPreferences.confirm(prefs);
+    } catch (_) {
+      saved = false;
+    }
+    if (!saved) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Не удалось сохранить подтверждения. Повторите попытку.',
+            ),
+          ),
+        );
+      }
+      return;
+    }
 
     if (!mounted) {
       return;
@@ -90,7 +107,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Движ')),
+      appBar: AppBar(title: const Text('Орбитакт')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -105,6 +122,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
               const SizedBox(height: 16),
 
               const Text(
+                'Приложение предназначено только для пользователей от 16 лет.\n\n'
                 'Это офлайн-приложение для локального учёта активности.\n\n'
                 'Оно:\n'
                 '• не требует регистрации;\n'
@@ -149,10 +167,7 @@ class _ConsentScreenState extends State<ConsentScreen> {
                     _ageConfirmed = value ?? false;
                   });
                 },
-                title: const Text(
-                  'Мне исполнилось 14 лет, либо я использую приложение '
-                  'с согласия законного представителя',
-                ),
+                title: const Text('Мне исполнилось 16 лет'),
                 controlAffinity: ListTileControlAffinity.leading,
               ),
 

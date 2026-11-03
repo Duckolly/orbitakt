@@ -5,6 +5,7 @@ import '../services/daily_tracker.dart';
 import '../services/daily_issue.dart';
 import '../services/activity_preferences.dart';
 import '../theme/app_theme.dart';
+import 'orbit/orbit_art.dart';
 
 class DailySummary extends StatefulWidget {
   const DailySummary({super.key});
@@ -122,6 +123,7 @@ class _DailySummaryState extends State<DailySummary>
     ];
     return Card(
       color: OrbitColors.peach(context),
+      margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         borderRadius: BorderRadius.circular(28),
         onTap: () async {
@@ -131,7 +133,7 @@ class _DailySummaryState extends State<DailySummary>
           if (mounted) _load();
         },
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -165,13 +167,12 @@ class _DailySummaryState extends State<DailySummary>
                     Expanded(child: totals[1]),
                   ],
                 ),
-              const SizedBox(height: 10),
-              LinearProgressIndicator(
-                value: ((steps ?? 0) / _prefs.stepGoal).clamp(0, 1),
-                minHeight: 6,
-                borderRadius: BorderRadius.circular(8),
+              const SizedBox(height: 2),
+              StepTrailProgress(
+                key: const Key('homeStepTrail'),
+                progress: (steps ?? 0) / _prefs.stepGoal,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: 4),
               Tooltip(
                 message: fullStatus,
                 child: Text(

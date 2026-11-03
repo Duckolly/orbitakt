@@ -117,7 +117,7 @@ class _BatteryScreenState extends State<BatteryScreen>
     final s = session!;
     final delta = s.chargeDelta;
     return [
-      'Движ 3.8.2 • замер всего телефона',
+      'Орбитакт • замер всего телефона',
       '${s.start.text('model')} • Android ${s.start.text('android')}',
       'Начало: ${DateTime.fromMillisecondsSinceEpoch(s.start.wall).toLocal()}',
       'Конец: ${DateTime.fromMillisecondsSinceEpoch(s.end!.wall).toLocal()}',
@@ -125,7 +125,7 @@ class _BatteryScreenState extends State<BatteryScreen>
       'Заряд телефона: ${batteryPercent(s.start.percent)} → ${batteryPercent(s.end!.percent)}',
       'Изменение: ${delta == null ? 'Недоступно' : '${delta > 0 ? '+' : ''}${delta.toStringAsFixed(1)} п.п.'}',
       'Питание подключено в начале/конце: ${batteryFlag(s.start.flag('plugged'))} / ${batteryFlag(s.end!.flag('plugged'))}',
-      'CPU процесса Движа: ${s.cpu == null ? 'Недоступно: процесс изменился или счётчик сброшен' : '${s.cpu} мс'}',
+      'CPU процесса Орбитакта: ${s.cpu == null ? 'Недоступно: процесс изменился или счётчик сброшен' : '${s.cpu} мс'}',
       for (final entry in s.usage.entries)
         '${usageLabels[entry.key]}: ${batteryDuration(entry.value)}',
       'Заряд относится ко всему телефону. Другие приложения, экран, связь и зарядка влияют на результат. Зарядка между снимками не отслеживается.',
@@ -158,7 +158,7 @@ class _BatteryScreenState extends State<BatteryScreen>
           padding: const EdgeInsets.all(16),
           children: [
             const Text(
-              'Изменение заряда показывает расход всего телефона. Android не предоставляет Движу универсальный точный счётчик собственного расхода в процентах.',
+              'Изменение заряда показывает расход всего телефона. Android не предоставляет Орбитакту универсальный точный счётчик собственного расхода в процентах.',
             ),
             if (busy) const LinearProgressIndicator(),
             if (error != null)

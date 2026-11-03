@@ -262,8 +262,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Card(
                 child: ListTile(
                   leading: const Icon(Icons.info_outline),
-                  title: const Text('О приложении и связь'),
-                  subtitle: const Text('Версия, автор и Telegram'),
+                  title: const Text('О приложении и авторе'),
+                  subtitle: const Text('16+, версия, автор, сайт и Telegram'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute<void>(

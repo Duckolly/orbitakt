@@ -75,7 +75,7 @@ class ProgressWidget : AppWidgetProvider() {
             val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
             views.setContentDescription(R.id.widget_root,
                 "Шаги за ${daily["today"]}: $steps. Вода: $glasses стаканов, ${water["millilitres"]} мл. " +
-                    "Данные на $time. Нажмите, чтобы открыть Движ.")
+                    "Данные на $time. Нажмите, чтобы открыть Орбитакт.")
             AppWidgetManager.getInstance(context).updateAppWidget(targets, views)
         }
 
@@ -83,7 +83,7 @@ class ProgressWidget : AppWidgetProvider() {
             val views = views(context)
             views.setTextViewText(R.id.widget_steps, "—")
             views.setTextViewText(R.id.widget_water, "—")
-            views.setContentDescription(R.id.widget_root, "Не удалось обновить итоги. Нажмите, чтобы открыть Движ.")
+            views.setContentDescription(R.id.widget_root, "Не удалось обновить итоги. Нажмите, чтобы открыть Орбитакт.")
             AppWidgetManager.getInstance(context).updateAppWidget(ids(context), views)
         }
     }

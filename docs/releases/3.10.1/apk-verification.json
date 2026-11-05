@@ -1,0 +1,32 @@
+{
+  "version_name": "3.10.1",
+  "version_code": 25,
+  "package": "com.duckolly.dvizh",
+  "apk_bytes": 20046686,
+  "previous_apk_bytes": 51259070,
+  "apk_sha256": "1a57fe77f32c44f307ac36dbd16fc7084ff24b58cdf627fb1176ebd8497680c5",
+  "certificate_sha256": "57044e5fd5fa4a53e3636d8a6c245136bac8fd0adae65120eee4e624a1cf61c1",
+  "rank_assets_verified": 14,
+  "zip_alignment_16kb": true,
+  "elf_load_segment_alignments": {
+    "lib/arm64-v8a/libapp.so": [
+      65536,
+      65536,
+      65536
+    ],
+    "lib/arm64-v8a/libdatastore_shared_counter.so": [
+      16384,
+      16384,
+      16384
+    ],
+    "lib/arm64-v8a/libflutter.so": [
+      65536,
+      65536,
+      65536,
+      65536
+    ]
+  },
+  "debuggable": false,
+  "internet_permission": false,
+  "physical_device_tested": false
+}

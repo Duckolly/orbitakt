@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Orbitakt Release
+Signer #1 certificate SHA-256 digest: 57044e5fd5fa4a53e3636d8a6c245136bac8fd0adae65120eee4e624a1cf61c1
+Signer #1 certificate SHA-1 digest: 126022e15b61f889e4622454a884bed0ad740a17
+Signer #1 certificate MD5 digest: 861829b3dada525b4af2e1363141738e
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: 8fa99fdc98a2c04d7b840a749a9b6d69dae45d12c08c1b09686cf7c4f1fc3d22
+Signer #1 public key SHA-1 digest: 12203fc26938c4ae707b8979e7540ee75ad0edef
+Signer #1 public key MD5 digest: ed72453eac65fa4cadd0d125d9059baf

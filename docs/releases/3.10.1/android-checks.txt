@@ -1,0 +1,343 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :gradle:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle:pluginDescriptors
+> Task :gradle:processResources
+
+> Task :gradle:compileKotlin
+e: The daemon has terminated unexpectedly on startup attempt #1 with error code: 0. The daemon process output:
+    1. Kotlin compile daemon is ready
+w: file:///workspace/scratch/ba09be13b872/toolchain/flutter/packages/flutter_tools/gradle/src/main/kotlin/DependencyVersionChecker.kt:194:39 'getter for minSdkVersion: AndroidVersion' is deprecated. Will be removed in v9.0
+w: file:///workspace/scratch/ba09be13b872/toolchain/flutter/packages/flutter_tools/gradle/src/main/kotlin/FlutterPlugin.kt:11:37 'ApkVariant' is deprecated. Deprecated in Java
+w: file:///workspace/scratch/ba09be13b872/toolchain/flutter/packages/flutter_tools/gradle/src/main/kotlin/FlutterPlugin.kt:628:69 'ApkVariant' is deprecated. Deprecated in Java
+
+> Task :gradle:compileJava NO-SOURCE
+> Task :gradle:compileGroovy NO-SOURCE
+> Task :gradle:classes
+> Task :gradle:jar
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:compileFlutterBuildRelease
+> Task :app:packJniLibsflutterBuildRelease
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :flutter_local_notifications:preBuild UP-TO-DATE
+> Task :flutter_local_notifications:preReleaseBuild UP-TO-DATE
+> Task :permission_handler_android:preBuild UP-TO-DATE
+> Task :permission_handler_android:preReleaseBuild UP-TO-DATE
+> Task :flutter_local_notifications:writeReleaseAarMetadata
+> Task :sensors_plus:preBuild UP-TO-DATE
+> Task :permission_handler_android:writeReleaseAarMetadata
+> Task :sensors_plus:preReleaseBuild UP-TO-DATE
+> Task :shared_preferences_android:preBuild UP-TO-DATE
+> Task :shared_preferences_android:preReleaseBuild UP-TO-DATE
+> Task :sensors_plus:writeReleaseAarMetadata
+> Task :sqflite_android:preBuild UP-TO-DATE
+> Task :sqflite_android:preReleaseBuild UP-TO-DATE
+> Task :shared_preferences_android:writeReleaseAarMetadata
+> Task :sqflite_android:writeReleaseAarMetadata
+> Task :app:cleanMergeReleaseAssets
+> Task :app:checkReleaseAarMetadata
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :flutter_local_notifications:mergeReleaseShaders
+> Task :flutter_local_notifications:compileReleaseShaders NO-SOURCE
+> Task :flutter_local_notifications:generateReleaseAssets UP-TO-DATE
+> Task :flutter_local_notifications:mergeReleaseAssets
+> Task :permission_handler_android:mergeReleaseShaders
+> Task :permission_handler_android:compileReleaseShaders NO-SOURCE
+> Task :permission_handler_android:generateReleaseAssets UP-TO-DATE
+> Task :permission_handler_android:mergeReleaseAssets
+> Task :sensors_plus:mergeReleaseShaders
+> Task :sensors_plus:compileReleaseShaders NO-SOURCE
+> Task :sensors_plus:generateReleaseAssets UP-TO-DATE
+> Task :sensors_plus:mergeReleaseAssets
+> Task :shared_preferences_android:mergeReleaseShaders
+> Task :shared_preferences_android:compileReleaseShaders NO-SOURCE
+> Task :shared_preferences_android:generateReleaseAssets UP-TO-DATE
+> Task :shared_preferences_android:mergeReleaseAssets
+> Task :sqflite_android:mergeReleaseShaders
+> Task :sqflite_android:compileReleaseShaders NO-SOURCE
+> Task :sqflite_android:generateReleaseAssets UP-TO-DATE
+> Task :sqflite_android:mergeReleaseAssets
+> Task :app:mergeReleaseAssets
+> Task :app:copyFlutterAssetsRelease
+> Task :app:generateReleaseResValues
+> Task :flutter_local_notifications:generateReleaseResValues
+> Task :flutter_local_notifications:generateReleaseResources
+> Task :flutter_local_notifications:packageReleaseResources
+> Task :permission_handler_android:generateReleaseResValues
+> Task :permission_handler_android:generateReleaseResources
+> Task :permission_handler_android:packageReleaseResources
+> Task :sensors_plus:generateReleaseResValues
+> Task :sensors_plus:generateReleaseResources
+> Task :sensors_plus:packageReleaseResources
+> Task :shared_preferences_android:generateReleaseResValues
+> Task :shared_preferences_android:generateReleaseResources
+> Task :shared_preferences_android:packageReleaseResources
+> Task :sqflite_android:generateReleaseResValues
+> Task :sqflite_android:generateReleaseResources
+> Task :sqflite_android:packageReleaseResources
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:packageReleaseResources
+> Task :app:parseReleaseLocalResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :flutter_local_notifications:extractDeepLinksRelease
+> Task :app:mergeReleaseResources
+> Task :permission_handler_android:extractDeepLinksRelease
+
+> Task :flutter_local_notifications:processReleaseManifest
+package="com.dexterous.flutterlocalnotifications" found in source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/flutter_local_notifications-19.5.0/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.dexterous.flutterlocalnotifications" from the source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/flutter_local_notifications-19.5.0/android/src/main/AndroidManifest.xml.
+
+> Task :permission_handler_android:processReleaseManifest
+package="com.baseflow.permissionhandler" found in source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/permission_handler_android-12.1.0/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.baseflow.permissionhandler" from the source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/permission_handler_android-12.1.0/android/src/main/AndroidManifest.xml.
+
+> Task :sensors_plus:extractDeepLinksRelease
+> Task :shared_preferences_android:extractDeepLinksRelease
+
+> Task :sensors_plus:processReleaseManifest
+package="dev.fluttercommunity.plus.sensors" found in source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/sensors_plus-6.1.2/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="dev.fluttercommunity.plus.sensors" from the source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/sensors_plus-6.1.2/android/src/main/AndroidManifest.xml.
+
+> Task :sqflite_android:extractDeepLinksRelease
+
+> Task :shared_preferences_android:processReleaseManifest
+package="io.flutter.plugins.sharedpreferences" found in source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/shared_preferences_android-2.4.23/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="io.flutter.plugins.sharedpreferences" from the source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/shared_preferences_android-2.4.23/android/src/main/AndroidManifest.xml.
+
+> Task :sqflite_android:processReleaseManifest
+package="com.tekartik.sqflite" found in source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/sqflite_android-2.4.2+2/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.tekartik.sqflite" from the source AndroidManifest.xml: /workspace/scratch/ba09be13b872/toolchain/pub-cache/hosted/pub.dev/sqflite_android-2.4.2+2/android/src/main/AndroidManifest.xml.
+
+> Task :flutter_local_notifications:parseReleaseLocalResources
+
+> Task :app:processReleaseMainManifest
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:17:5-87 Warning:
+	uses-permission#android.permission.INTERNET was tagged at AndroidManifest.xml:17 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:18:5-99 Warning:
+	uses-permission#android.permission.ACCESS_NETWORK_STATE was tagged at AndroidManifest.xml:18 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:19:5-96 Warning:
+	uses-permission#android.permission.ACCESS_WIFI_STATE was tagged at AndroidManifest.xml:19 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:20:5-99 Warning:
+	uses-permission#android.permission.ACCESS_FINE_LOCATION was tagged at AndroidManifest.xml:20 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:21:5-101 Warning:
+	uses-permission#android.permission.ACCESS_COARSE_LOCATION was tagged at AndroidManifest.xml:21 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:22:5-145 Warning:
+	uses-permission#android.permission.CAMERA was tagged at AndroidManifest.xml:22 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:23:5-91 Warning:
+	uses-permission#android.permission.RECORD_AUDIO was tagged at AndroidManifest.xml:23 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:24:5-92 Warning:
+	uses-permission#android.permission.READ_CONTACTS was tagged at AndroidManifest.xml:24 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:25:5-92 Warning:
+	uses-permission#android.permission.READ_CALENDAR was tagged at AndroidManifest.xml:25 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:26:5-93 Warning:
+	uses-permission#android.permission.WRITE_CALENDAR was tagged at AndroidManifest.xml:26 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:27:5-147 Warning:
+	uses-permission#android.permission.READ_SMS was tagged at AndroidManifest.xml:27 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:28:5-150 Warning:
+	uses-permission#android.permission.RECEIVE_SMS was tagged at AndroidManifest.xml:28 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:31:5-101 Warning:
+	uses-permission#android.permission.RECEIVE_BOOT_COMPLETED was tagged at AndroidManifest.xml:31 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:32:5-88 Warning:
+	uses-permission#android.permission.WAKE_LOCK was tagged at AndroidManifest.xml:32 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:34:5-99 Warning:
+	uses-permission#com.google.android.gms.permission.AD_ID was tagged at AndroidManifest.xml:34 to remove other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:40:5-83:19 Warning:
+	application@android:allowBackup was tagged at AndroidManifest.xml:40 to replace other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:40:5-83:19 Warning:
+	application@android:fullBackupContent was tagged at AndroidManifest.xml:40 to replace other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:40:5-83:19 Warning:
+	application@android:dataExtractionRules was tagged at AndroidManifest.xml:40 to replace other declarations but no other declaration present
+/workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/AndroidManifest.xml:40:5-83:19 Warning:
+	application@android:usesCleartextTraffic was tagged at AndroidManifest.xml:40 to replace other declarations but no other declaration present
+
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :flutter_local_notifications:generateReleaseRFile
+> Task :permission_handler_android:parseReleaseLocalResources
+> Task :sensors_plus:parseReleaseLocalResources
+> Task :permission_handler_android:generateReleaseRFile
+> Task :sensors_plus:generateReleaseRFile
+> Task :shared_preferences_android:parseReleaseLocalResources
+> Task :sqflite_android:parseReleaseLocalResources
+> Task :shared_preferences_android:generateReleaseRFile
+> Task :sqflite_android:generateReleaseRFile
+> Task :flutter_local_notifications:javaPreCompileRelease
+> Task :app:processReleaseResources
+> Task :flutter_local_notifications:compileReleaseJavaWithJavac
+> Task :permission_handler_android:javaPreCompileRelease
+> Task :flutter_local_notifications:bundleLibCompileToJarRelease
+> Task :permission_handler_android:compileReleaseJavaWithJavac
+> Task :sensors_plus:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :permission_handler_android:bundleLibCompileToJarRelease
+> Task :sensors_plus:javaPreCompileRelease
+> Task :shared_preferences_android:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :sensors_plus:compileReleaseKotlin
+> Task :sensors_plus:compileReleaseJavaWithJavac NO-SOURCE
+> Task :sensors_plus:bundleLibCompileToJarRelease
+> Task :shared_preferences_android:javaPreCompileRelease
+> Task :sqflite_android:javaPreCompileRelease
+> Task :sqflite_android:compileReleaseJavaWithJavac
+> Task :sqflite_android:bundleLibCompileToJarRelease
+> Task :app:javaPreCompileRelease
+> Task :app:preReleaseUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileReleaseUnitTest
+> Task :flutter_local_notifications:bundleLibRuntimeToJarRelease
+> Task :flutter_local_notifications:processReleaseJavaRes NO-SOURCE
+> Task :permission_handler_android:bundleLibRuntimeToJarRelease
+> Task :permission_handler_android:processReleaseJavaRes NO-SOURCE
+> Task :sensors_plus:bundleLibRuntimeToJarRelease
+> Task :sensors_plus:processReleaseJavaRes
+> Task :sqflite_android:bundleLibRuntimeToJarRelease
+> Task :sqflite_android:processReleaseJavaRes NO-SOURCE
+> Task :app:extractProguardFiles
+> Task :flutter_local_notifications:createFullJarRelease
+> Task :flutter_local_notifications:extractProguardFiles
+> Task :shared_preferences_android:compileReleaseKotlin
+> Task :flutter_local_notifications:generateReleaseLintModel
+> Task :shared_preferences_android:compileReleaseJavaWithJavac
+> Task :shared_preferences_android:bundleLibCompileToJarRelease
+> Task :shared_preferences_android:bundleLibRuntimeToJarRelease
+> Task :shared_preferences_android:processReleaseJavaRes
+> Task :flutter_local_notifications:prepareLintJarForPublish
+> Task :permission_handler_android:createFullJarRelease
+> Task :permission_handler_android:extractProguardFiles
+> Task :permission_handler_android:generateReleaseLintModel
+> Task :permission_handler_android:prepareLintJarForPublish
+> Task :sensors_plus:createFullJarRelease
+> Task :sensors_plus:extractProguardFiles
+> Task :sensors_plus:generateReleaseLintModel
+> Task :sensors_plus:prepareLintJarForPublish
+> Task :shared_preferences_android:createFullJarRelease
+> Task :shared_preferences_android:extractProguardFiles
+> Task :shared_preferences_android:generateReleaseLintModel
+> Task :shared_preferences_android:prepareLintJarForPublish
+> Task :sqflite_android:createFullJarRelease
+> Task :sqflite_android:extractProguardFiles
+> Task :sqflite_android:generateReleaseLintModel
+> Task :sqflite_android:prepareLintJarForPublish
+> Task :flutter_local_notifications:mergeReleaseJniLibFolders
+> Task :flutter_local_notifications:mergeReleaseNativeLibs NO-SOURCE
+> Task :flutter_local_notifications:stripReleaseDebugSymbols NO-SOURCE
+> Task :flutter_local_notifications:copyReleaseJniLibsProjectAndLocalJars
+> Task :flutter_local_notifications:extractDeepLinksForAarRelease
+> Task :flutter_local_notifications:extractReleaseAnnotations
+> Task :flutter_local_notifications:mergeReleaseGeneratedProguardFiles
+> Task :flutter_local_notifications:mergeReleaseConsumerProguardFiles
+> Task :flutter_local_notifications:prepareReleaseArtProfile
+> Task :flutter_local_notifications:mergeReleaseJavaResource
+> Task :flutter_local_notifications:syncReleaseLibJars
+> Task :flutter_local_notifications:bundleReleaseLocalLintAar
+> Task :permission_handler_android:mergeReleaseJniLibFolders
+> Task :permission_handler_android:mergeReleaseNativeLibs NO-SOURCE
+> Task :permission_handler_android:stripReleaseDebugSymbols NO-SOURCE
+> Task :permission_handler_android:copyReleaseJniLibsProjectAndLocalJars
+> Task :permission_handler_android:extractDeepLinksForAarRelease
+> Task :permission_handler_android:extractReleaseAnnotations
+> Task :permission_handler_android:mergeReleaseGeneratedProguardFiles
+> Task :permission_handler_android:mergeReleaseConsumerProguardFiles
+> Task :permission_handler_android:prepareReleaseArtProfile
+> Task :permission_handler_android:mergeReleaseJavaResource
+> Task :permission_handler_android:syncReleaseLibJars
+> Task :permission_handler_android:bundleReleaseLocalLintAar
+> Task :sensors_plus:mergeReleaseJniLibFolders
+> Task :sensors_plus:mergeReleaseNativeLibs NO-SOURCE
+> Task :sensors_plus:stripReleaseDebugSymbols NO-SOURCE
+> Task :sensors_plus:copyReleaseJniLibsProjectAndLocalJars
+> Task :sensors_plus:extractDeepLinksForAarRelease
+> Task :sensors_plus:extractReleaseAnnotations
+> Task :sensors_plus:mergeReleaseGeneratedProguardFiles
+> Task :sensors_plus:mergeReleaseConsumerProguardFiles
+> Task :sensors_plus:prepareReleaseArtProfile
+> Task :sensors_plus:mergeReleaseJavaResource
+> Task :sensors_plus:syncReleaseLibJars
+> Task :sensors_plus:bundleReleaseLocalLintAar
+> Task :shared_preferences_android:mergeReleaseJniLibFolders
+> Task :shared_preferences_android:mergeReleaseNativeLibs NO-SOURCE
+> Task :shared_preferences_android:stripReleaseDebugSymbols NO-SOURCE
+> Task :shared_preferences_android:copyReleaseJniLibsProjectAndLocalJars
+> Task :shared_preferences_android:extractDeepLinksForAarRelease
+> Task :shared_preferences_android:extractReleaseAnnotations
+> Task :shared_preferences_android:mergeReleaseGeneratedProguardFiles
+> Task :shared_preferences_android:mergeReleaseConsumerProguardFiles
+> Task :shared_preferences_android:prepareReleaseArtProfile
+> Task :shared_preferences_android:mergeReleaseJavaResource
+> Task :shared_preferences_android:syncReleaseLibJars
+> Task :shared_preferences_android:bundleReleaseLocalLintAar
+> Task :sqflite_android:mergeReleaseJniLibFolders
+> Task :sqflite_android:mergeReleaseNativeLibs NO-SOURCE
+> Task :sqflite_android:stripReleaseDebugSymbols NO-SOURCE
+> Task :sqflite_android:copyReleaseJniLibsProjectAndLocalJars
+> Task :sqflite_android:extractDeepLinksForAarRelease
+> Task :sqflite_android:extractReleaseAnnotations
+> Task :sqflite_android:mergeReleaseGeneratedProguardFiles
+> Task :sqflite_android:mergeReleaseConsumerProguardFiles
+> Task :sqflite_android:prepareReleaseArtProfile
+> Task :sqflite_android:mergeReleaseJavaResource
+> Task :sqflite_android:syncReleaseLibJars
+> Task :sqflite_android:bundleReleaseLocalLintAar
+> Task :flutter_local_notifications:writeReleaseLintModelMetadata
+> Task :permission_handler_android:writeReleaseLintModelMetadata
+> Task :sensors_plus:writeReleaseLintModelMetadata
+> Task :shared_preferences_android:writeReleaseLintModelMetadata
+> Task :sqflite_android:writeReleaseLintModelMetadata
+
+> Task :app:compileReleaseKotlin
+w: file:///workspace/scratch/ba09be13b872/orbitakt/app/android/app/src/main/kotlin/com/duckolly/dvizh/DailyStepService.kt:103:111 'constructor(p0: Context!): Notification.Builder' is deprecated. Deprecated in Java.
+
+> Task :app:compileReleaseJavaWithJavac
+> Task :app:bundleReleaseClassesToRuntimeJar
+> Task :app:bundleReleaseClassesToCompileJar
+The Daemon will expire after the build after running out of JVM Metaspace.
+The project memory settings are likely not configured or are configured to an insufficient value.
+The daemon will restart for the next build, which may increase subsequent build times.
+These settings can be adjusted by setting 'org.gradle.jvmargs' in 'gradle.properties'.
+The currently configured max heap space is '2 GiB' and the configured max metaspace is '512 MiB'.
+For more information on how to set these values, please refer to https://docs.gradle.org/8.11.1/userguide/build_environment.html#sec:configuring_jvm_memory in the Gradle documentation.
+To disable this warning, set 'org.gradle.daemon.performance.disable-logging=true'.
+> Task :app:compileReleaseUnitTestKotlin
+> Task :app:compileReleaseUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processReleaseJavaRes
+> Task :app:processReleaseUnitTestJavaRes
+> Task :flutter_local_notifications:lintAnalyzeRelease
+> Task :app:testReleaseUnitTest
+> Task :app:generateReleaseLintReportModel
+> Task :app:generateReleaseUnitTestLintModel
+> Task :permission_handler_android:lintAnalyzeRelease
+> Task :sensors_plus:lintAnalyzeRelease
+> Task :sqflite_android:lintAnalyzeRelease
+> Task :app:lintAnalyzeReleaseUnitTest
+> Task :flutter_local_notifications:preReleaseUnitTestBuild UP-TO-DATE
+> Task :shared_preferences_android:lintAnalyzeRelease
+> Task :flutter_local_notifications:generateReleaseUnitTestLintModel
+> Task :flutter_local_notifications:lintAnalyzeReleaseUnitTest
+> Task :permission_handler_android:preReleaseUnitTestBuild UP-TO-DATE
+> Task :permission_handler_android:generateReleaseUnitTestLintModel
+> Task :permission_handler_android:lintAnalyzeReleaseUnitTest
+> Task :sensors_plus:preReleaseUnitTestBuild UP-TO-DATE
+> Task :sensors_plus:generateReleaseUnitTestLintModel
+> Task :sensors_plus:lintAnalyzeReleaseUnitTest
+> Task :shared_preferences_android:preReleaseUnitTestBuild UP-TO-DATE
+> Task :app:lintAnalyzeRelease
+> Task :shared_preferences_android:generateReleaseUnitTestLintModel
+> Task :sqflite_android:preReleaseUnitTestBuild UP-TO-DATE
+> Task :sqflite_android:generateReleaseUnitTestLintModel
+> Task :sqflite_android:lintAnalyzeReleaseUnitTest
+> Task :shared_preferences_android:lintAnalyzeReleaseUnitTest
+> Task :app:lintReportRelease
+> Task :app:lintRelease
+w: Detected multiple Kotlin daemon sessions at 
+w: Detected multiple Kotlin daemon sessions at 
+
+BUILD SUCCESSFUL in 5m 42s
+204 actionable tasks: 204 executed

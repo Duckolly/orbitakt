@@ -2,85 +2,113 @@
   {
     "source": "1793808199.png",
     "asset": "steps_fox.webp",
-    "sha256": "b2439e9ac9357535b83acbcdbfc836b378cb38ae282daf03d6a220247f39fb4a",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "7823fa85778a625e39df17aa131095d29484303c0d5c0bab71d8eedc115f21e5",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "b2439e9ac9357535b83acbcdbfc836b378cb38ae282daf03d6a220247f39fb4a",
+    "size_bytes": 66136
   },
   {
     "source": "1793808427.png",
     "asset": "steps_wolf.webp",
-    "sha256": "ddde23f52819161a0ab6110fc2d8901e01189adecc002c9245e622222e0559bc",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "a339c9eaf2f67e56e3a5be50718422ac783ec13ec5b59f8e2bd45aca3a3b6949",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "ddde23f52819161a0ab6110fc2d8901e01189adecc002c9245e622222e0559bc",
+    "size_bytes": 126282
   },
   {
     "source": "1793808645.png",
     "asset": "steps_lion.webp",
-    "sha256": "0217906a67431ee83a3623f463d4dd60215cd748e31049a76fcf54bff5e6d51e",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "5687a35596f241f19d5e7cc6d3126f873f24e87c796020354486dc3eefce2c29",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "0217906a67431ee83a3623f463d4dd60215cd748e31049a76fcf54bff5e6d51e",
+    "size_bytes": 108912
   },
   {
     "source": "1793808853.png",
     "asset": "steps_panther.webp",
-    "sha256": "863f3fc88cbf2358c1d935e154491d3ef2b4c2bf22c3fb0e1c0448e44de9388c",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "429f1c787c0952a899b61e000805652e70d453b8847e333aa52ba0e932dc1c8a",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "863f3fc88cbf2358c1d935e154491d3ef2b4c2bf22c3fb0e1c0448e44de9388c",
+    "size_bytes": 58598
   },
   {
     "source": "1793809081.png",
     "asset": "steps_dragon.webp",
-    "sha256": "cf166449a1b87ca909803730797f338a6f31b6d253c5db847133b70444ac91b6",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "c007bbc231822a1afeb1c0fdbc55011a345d68b9fd75f00473aafaded7385cbd",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "cf166449a1b87ca909803730797f338a6f31b6d253c5db847133b70444ac91b6",
+    "size_bytes": 176652
   },
   {
     "source": "1793809299.png",
     "asset": "water_otter.webp",
-    "sha256": "1ab169800b523c56d98152d000712a3f5d1c605b54efcd9b081f14ee5169d506",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "6fc6d4f9a6fb4152fd770f862e206556e78c2e93de32eac6746fe6fd42016626",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "1ab169800b523c56d98152d000712a3f5d1c605b54efcd9b081f14ee5169d506",
+    "size_bytes": 97756
   },
   {
     "source": "1793809521.png",
     "asset": "water_dolphin.webp",
-    "sha256": "1c0aa711822244014397fdc498f74fb94ada67a669f46e84f221e6a29d03dca2",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "2b0fa38a3d5307b0d14433d2e3092df0880262e2123ad836bb00d61578ec60e1",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "1c0aa711822244014397fdc498f74fb94ada67a669f46e84f221e6a29d03dca2",
+    "size_bytes": 103190
   },
   {
     "source": "1793809754.png",
     "asset": "water_shark.webp",
-    "sha256": "f1d3f87777f863842daeddff88139c8b76f85413e9c66f3fe2cd2b97451604d3",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "25c967d6381f9efdc31878477acbf0d74376621c02946b974c68556440dadc79",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "f1d3f87777f863842daeddff88139c8b76f85413e9c66f3fe2cd2b97451604d3",
+    "size_bytes": 100322
   },
   {
     "source": "1793809976.png",
     "asset": "water_orca.webp",
-    "sha256": "4823d5c6a2505e417852134415291c2f956badbd5df2384e9f1781907451b7f4",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "d9e6ef03f6ac42614812e26d5c7e4586a95ed57784265a5fb4b93a2fd921a03a",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "4823d5c6a2505e417852134415291c2f956badbd5df2384e9f1781907451b7f4",
+    "size_bytes": 93508
   },
   {
     "source": "generated with built-in image generation, user approved 2026-11-05",
     "asset": "water_whale.webp",
-    "sha256": "0543957fcacd01b7f3d00121421de3c3a8a06647d89ab13d0d6fadde96d029cd",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "2f4d65140dc0f12d6bd1206f1f621c41b174ca7b1289ecf62d7ff6943fc90c27",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "0543957fcacd01b7f3d00121421de3c3a8a06647d89ab13d0d6fadde96d029cd",
+    "size_bytes": 160818
   },
   {
     "source": "generated with built-in image generation, user approved 2026-11-05",
     "asset": "toilet_hare.webp",
-    "sha256": "88c7c95c57fc9724c132c0a2b14a2a9f8abf79f6a0a4591e046ab907851f0c0b",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "987c5ef9689144cd92acca48cd2db82b91aaf37ed2df5ec2efcf73444347ae29",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "88c7c95c57fc9724c132c0a2b14a2a9f8abf79f6a0a4591e046ab907851f0c0b",
+    "size_bytes": 146682
   },
   {
     "source": "generated with built-in image generation, user approved 2026-11-05",
     "asset": "toilet_monkey.webp",
-    "sha256": "f379dfdd7823688f4609e9c3ac035cdc6e79a463c06eba385ab44cc85101263b",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "6af4ecf102d4f3af0a345ecfce918720cdfea666bf25b0d8e3417555c5b7a4a1",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "f379dfdd7823688f4609e9c3ac035cdc6e79a463c06eba385ab44cc85101263b",
+    "size_bytes": 151884
   },
   {
     "source": "generated with built-in image generation, user approved 2026-11-05",
     "asset": "toilet_emu.webp",
-    "sha256": "da6f580fda320dbc3d795f16ddcad491affec9b90f5281e569c531483494bc32",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "851d73e74f413ac8da42838b37f6869a3543f04c77547a8727e7b2e73750ac4c",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "da6f580fda320dbc3d795f16ddcad491affec9b90f5281e569c531483494bc32",
+    "size_bytes": 155158
   },
   {
     "source": "generated with built-in image generation, user approved 2026-11-05",
     "asset": "toilet_dinosaur.webp",
-    "sha256": "b59aa96fa3d21f69e56f545ba276e90707789e297fe0740640afa128e4bff430",
-    "encoding": "lossless WebP; original pixels and dimensions"
+    "sha256": "a5e6a2a967f05fb42532df009046155018f19346daf7e013375c7e80030e1cd3",
+    "encoding": "WebP quality 86, 1024x1024; optimized 2026-11-05",
+    "original_sha256": "b59aa96fa3d21f69e56f545ba276e90707789e297fe0740640afa128e4bff430",
+    "size_bytes": 157288
   }
 ]

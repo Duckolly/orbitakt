@@ -1,0 +1,1450 @@
+--- a/app/android/app/src/main/kotlin/com/duckolly/dvizh/MainActivity.kt
++++ b/app/android/app/src/main/kotlin/com/duckolly/dvizh/MainActivity.kt
+@@ -20,6 +20,7 @@
+     override fun onPause() { visible=false; EnergyRuntime.usage.end("foreground",this); skyCompass?.setVisible(false); toolSensors.forEach { it.setVisible(false) }; DailyRuntime.worker.post { DailyRuntime.uiVisible=false; DailyRuntime.owner?.setInteractive(DailyRuntime.interactive) }; super.onPause() }
+     override fun configureFlutterEngine(engine: FlutterEngine) {
+         super.configureFlutterEngine(engine)
++        ReportBridge.install(this, engine)
+         WaterBridge.install(this,engine) { visible }
+         DeviceBridge.install(applicationContext,engine)
+         batteryBridge?.close(); batteryBridge=BatteryBridge(this,engine)
+--- a/app/android/app/src/main/kotlin/com/duckolly/dvizh/ProgressWidget.kt
++++ b/app/android/app/src/main/kotlin/com/duckolly/dvizh/ProgressWidget.kt
+@@ -14,26 +14,30 @@
+ import java.time.LocalDateTime
+ import java.time.format.DateTimeFormatter
+ import java.util.Locale
++import org.json.JSONObject
+ 
+-/** Compact read-only home widget. No Flutter engine, bitmaps, timers or sensor subscriptions. */
++/** Compact home widget with one-glass action. No Flutter engine, bitmaps, timers or sensor subscriptions. */
+ class ProgressWidget : AppWidgetProvider() {
+     override fun onReceive(context: Context, intent: Intent) {
+         val action = intent.action ?: return
+-        if (action !in setOf(AppWidgetManager.ACTION_APPWIDGET_UPDATE,
++        if (action !in setOf(ACTION_ADD_WATER, AppWidgetManager.ACTION_APPWIDGET_UPDATE,
+                 AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED, Intent.ACTION_MY_PACKAGE_REPLACED)) {
+-            // Old water-action PendingIntents are deliberately not processed after this upgrade.
+             super.onReceive(context, intent)
+             return
+         }
+         val pending = goAsync()
+         DailyRuntime.worker.post {
+-            try { refresh(context, true) }
++            try {
++                if (action == ACTION_ADD_WATER) DailyRuntime.water(context).change(1)
++                refresh(context, true)
++            }
+             catch (_: RuntimeException) { runCatching { showError(context) } }
+             finally { pending.finish() }
+         }
+     }
+ 
+     companion object {
++        private const val ACTION_ADD_WATER = "com.duckolly.dvizh.widget.ADD_WATER_V2"
+         private var widgetContext: Application? = null // application context, worker thread only
+         private val updates = WidgetUpdateQueue(
+             now = { SystemClock.elapsedRealtime() },
+@@ -50,6 +54,10 @@
+             val open = PendingIntent.getActivity(context, 300, Intent(context, MainActivity::class.java),
+                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+             views.setOnClickPendingIntent(R.id.widget_root, open)
++            val add = PendingIntent.getBroadcast(context, 301,
++                Intent(context, ProgressWidget::class.java).setAction(ACTION_ADD_WATER),
++                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
++            views.setOnClickPendingIntent(R.id.widget_add_water, add)
+             return views
+         }
+ 
+@@ -70,7 +78,10 @@
+             val count = NumberFormat.getIntegerInstance(Locale.forLanguageTag("ru-RU"))
+             val views = views(context)
+             views.setTextViewText(R.id.widget_steps, count.format(steps))
+-            views.setTextViewText(R.id.widget_water, "${count.format(glasses)} ст.")
++            views.setTextViewText(R.id.widget_water, count.format(glasses))
++            val cm = stepLength(context)
++            views.setTextViewText(R.id.widget_distance, String.format(Locale.forLanguageTag("ru-RU"), "≈ %.2f км", steps * cm / 100000.0))
++            views.setContentDescription(R.id.widget_add_water, "Добавить один стакан воды, 200 мл. Сейчас $glasses стаканов.")
+             // Timestamp remains available to TalkBack without cluttering the visual layout.
+             val time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+             views.setContentDescription(R.id.widget_root,
+@@ -79,10 +90,18 @@
+             AppWidgetManager.getInstance(context).updateAppWidget(targets, views)
+         }
+ 
++        private fun stepLength(context: Context): Double = runCatching {
++            val raw = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
++                .getString("flutter.activityPreferencesV1", null) ?: return@runCatching 70.0
++            val value = JSONObject(raw).optDouble("stepLengthCm", 70.0)
++            if (value.isFinite() && value in 20.0..150.0) value else 70.0
++        }.getOrDefault(70.0)
++
+         private fun showError(context: Context) {
+             val views = views(context)
+             views.setTextViewText(R.id.widget_steps, "—")
+             views.setTextViewText(R.id.widget_water, "—")
++            views.setTextViewText(R.id.widget_distance, "— км")
+             views.setContentDescription(R.id.widget_root, "Не удалось обновить итоги. Нажмите, чтобы открыть Орбитакт.")
+             AppWidgetManager.getInstance(context).updateAppWidget(ids(context), views)
+         }
+--- /dev/null
++++ b/app/android/app/src/main/kotlin/com/duckolly/dvizh/ReportBridge.kt
+@@ -0,0 +1,30 @@
++package com.duckolly.dvizh
++
++import io.flutter.embedding.engine.FlutterEngine
++import io.flutter.plugin.common.MethodChannel
++
++/** Reads existing databases on their serialized worker. No new history format. */
++object ReportBridge {
++    fun install(activity: MainActivity, engine: FlutterEngine) {
++        val context = activity.applicationContext
++        MethodChannel(engine.dartExecutor.binaryMessenger, "dvizh/reports").setMethodCallHandler { call, result ->
++            if (call.method != "load") { result.notImplemented(); return@setMethodCallHandler }
++            DailyRuntime.worker.post {
++                try {
++                    val steps = DailyRuntime.store(context).readableDatabase.rawQuery(
++                        "SELECT day,steps,estimated FROM days ORDER BY day", null).use { c ->
++                        buildList { while (c.moveToNext()) add(mapOf("day" to c.getString(0),
++                            "steps" to c.getLong(1), "estimated" to (c.getInt(2) != 0))) }
++                    }
++                    val water = DailyRuntime.water(context).readableDatabase.rawQuery(
++                        "SELECT day,glasses FROM water ORDER BY day", null).use { c ->
++                        buildList { while (c.moveToNext()) add(mapOf("day" to c.getString(0), "glasses" to c.getLong(1))) }
++                    }
++                    DailyRuntime.main.post { result.success(mapOf("steps" to steps, "water" to water)) }
++                } catch (_: RuntimeException) {
++                    DailyRuntime.main.post { result.error("report_error", "Не удалось прочитать историю", null) }
++                }
++            }
++        }
++    }
++}
+--- /dev/null
++++ b/app/android/app/src/main/res/drawable/widget_glass.xml
+@@ -0,0 +1,5 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="28dp" android:viewportWidth="24" android:viewportHeight="28">
++    <path android:fillColor="#00000000" android:strokeColor="#348A83" android:strokeWidth="2" android:strokeLineJoin="round" android:pathData="M4,3 L7,25 L17,25 L20,3 Z" />
++    <path android:fillColor="#80348A83" android:pathData="M6,13 L8,24 L16,24 L18,13 Z" />
++    <path android:strokeColor="#348A83" android:strokeWidth="2" android:pathData="M9,8 L15,8 M12,5 L12,11" />
++</vector>
+--- a/app/android/app/src/main/res/layout/progress_widget.xml
++++ b/app/android/app/src/main/res/layout/progress_widget.xml
+@@ -5,25 +5,31 @@
+     android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="4dp" android:paddingBottom="4dp"
+     android:background="@drawable/widget_background" android:contentDescription="@string/widget_label">
+     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+-         android:importantForAccessibility="noHideDescendants">
+-        <TextView android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
++         android:importantForAccessibility="auto">
++        <TextView android:visibility="gone" android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+             android:text="@string/widget_steps_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
+             android:includeFontPadding="false" android:maxLines="1" />
+-        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_steps_label" android:layout_marginTop="2dp"
++        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="0dp"
+             android:gravity="center_vertical" android:text="@string/widget_steps_preview" android:textColor="@color/widget_text"
+             android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
+             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
++        <TextView android:id="@+id/widget_distance" android:layout_width="match_parent" android:layout_height="wrap_content"
++            android:layout_below="@id/widget_steps" android:text="@string/widget_distance_preview" android:textSize="11sp"
++            android:textColor="@color/widget_secondary" android:includeFontPadding="false" android:maxLines="1" />
+     </RelativeLayout>
+     <TextView android:layout_width="1dp" android:layout_height="24dp" android:layout_marginStart="6dp" android:layout_marginEnd="8dp"
+         android:background="@color/widget_divider" android:importantForAccessibility="no" />
+     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+-         android:importantForAccessibility="noHideDescendants">
+-        <TextView android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
++         android:importantForAccessibility="auto">
++        <TextView android:visibility="gone" android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+             android:text="@string/widget_water_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
+             android:includeFontPadding="false" android:maxLines="1" />
+-        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_water_label" android:layout_marginTop="2dp"
++        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_toStartOf="@id/widget_add_water" android:layout_marginTop="0dp"
+             android:gravity="center_vertical" android:text="@string/widget_water_preview" android:textColor="@color/widget_accent"
+             android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
+             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
++        <ImageButton android:id="@+id/widget_add_water" android:layout_width="36dp" android:layout_height="match_parent"
++            android:layout_alignParentEnd="true" android:padding="5dp" android:src="@drawable/widget_glass"
++            android:background="@android:color/transparent" android:contentDescription="@string/widget_add_water_label" />
+     </RelativeLayout>
+ </LinearLayout>
+--- a/app/android/app/src/main/res/layout-v26/progress_widget.xml
++++ b/app/android/app/src/main/res/layout-v26/progress_widget.xml
+@@ -5,25 +5,31 @@
+     android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="4dp" android:paddingBottom="4dp"
+     android:background="@drawable/widget_background" android:contentDescription="@string/widget_label">
+     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+-         android:importantForAccessibility="noHideDescendants">
+-        <TextView android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
++         android:importantForAccessibility="auto">
++        <TextView android:visibility="gone" android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+             android:text="@string/widget_steps_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
+             android:includeFontPadding="false" android:maxLines="1" />
+-        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_steps_label" android:layout_marginTop="2dp"
++        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="0dp"
+             android:gravity="center_vertical" android:text="@string/widget_steps_preview" android:textColor="@color/widget_text"
+             android:autoSizeTextType="uniform" android:autoSizeMinTextSize="11sp" android:autoSizeMaxTextSize="20sp" android:autoSizeStepGranularity="1sp" android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
+             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
++        <TextView android:id="@+id/widget_distance" android:layout_width="match_parent" android:layout_height="wrap_content"
++            android:layout_below="@id/widget_steps" android:text="@string/widget_distance_preview" android:textSize="11sp"
++            android:textColor="@color/widget_secondary" android:includeFontPadding="false" android:maxLines="1" />
+     </RelativeLayout>
+     <TextView android:layout_width="1dp" android:layout_height="24dp" android:layout_marginStart="6dp" android:layout_marginEnd="8dp"
+         android:background="@color/widget_divider" android:importantForAccessibility="no" />
+     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
+-         android:importantForAccessibility="noHideDescendants">
+-        <TextView android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
++         android:importantForAccessibility="auto">
++        <TextView android:visibility="gone" android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+             android:text="@string/widget_water_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
+             android:includeFontPadding="false" android:maxLines="1" />
+-        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_water_label" android:layout_marginTop="2dp"
++        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_toStartOf="@id/widget_add_water" android:layout_marginTop="0dp"
+             android:gravity="center_vertical" android:text="@string/widget_water_preview" android:textColor="@color/widget_accent"
+             android:autoSizeTextType="uniform" android:autoSizeMinTextSize="11sp" android:autoSizeMaxTextSize="20sp" android:autoSizeStepGranularity="1sp" android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
+             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
++        <ImageButton android:id="@+id/widget_add_water" android:layout_width="36dp" android:layout_height="match_parent"
++            android:layout_alignParentEnd="true" android:padding="5dp" android:src="@drawable/widget_glass"
++            android:background="@android:color/transparent" android:contentDescription="@string/widget_add_water_label" />
+     </RelativeLayout>
+ </LinearLayout>
+--- a/app/android/app/src/main/res/values/widget_strings.xml
++++ b/app/android/app/src/main/res/values/widget_strings.xml
+@@ -4,5 +4,7 @@
+     <string name="widget_steps_label">Шаги</string>
+     <string name="widget_water_label">Вода</string>
+     <string name="widget_steps_preview">0</string>
+-    <string name="widget_water_preview">0 ст.</string>
++    <string name="widget_water_preview">0</string>
++    <string name="widget_distance_preview">≈ 0,00 км</string>
++    <string name="widget_add_water_label">Добавить стакан воды, 200 мл</string>
+ </resources>
+--- /dev/null
++++ b/app/lib/models/progress_report.dart
+@@ -0,0 +1,79 @@
++import 'rank_level.dart';
++
++class ProgressReport {
++  const ProgressReport({
++    required this.start,
++    required this.end,
++    required this.days,
++    required this.steps,
++    required this.glasses,
++    required this.visits,
++    required this.stepDays,
++    required this.waterDays,
++    required this.estimated,
++    required this.stepLengthCm,
++  });
++  final DateTime start, end;
++  final int days, steps, glasses, visits, stepDays, waterDays;
++  final bool estimated;
++  final double stepLengthCm;
++  double get averageSteps => steps / days;
++  double get averageGlasses => glasses / days;
++  double get kilometres => steps * stepLengthCm / 100000;
++}
++
++class ProgressRanks {
++  static const names = [
++    'Ниндзя',
++    'Гладиатор',
++    'Геракл',
++    'Мефистофель',
++    'Титан',
++  ];
++  static RankLevel? steps(double average) => _rank(
++    average,
++    [6000, 10000, 12000, 15000, 25000],
++    ['🐇', '🐺', '🐎', '🐆'],
++    ['Заяц', 'Волк', 'Конь', 'Гепард'],
++  );
++  static RankLevel? water(double average) => _rank(
++    average,
++    [4, 6, 8, 10, 12],
++    ['🦦', '🐬', '🐋', '🐳'],
++    ['Выдра', 'Дельфин', 'Кит', 'Синий кит'],
++  );
++  static RankLevel toilet(int monthlyTotal) {
++    final rank = _rank(
++      monthlyTotal.toDouble(),
++      [0, 15, 20, 25, 35],
++      ['🐇', '🐒', '🐦', '🦖'],
++      ['Заяц', 'Обезьяна', 'Эму', 'Динозавр'],
++    )!;
++    return RankLevel(
++      level: rank.level,
++      name: rank.level == 1 ? 'Ниндзя' : 'Уровень ${rank.level}',
++      minInclusive: rank.minInclusive,
++      maxExclusive: rank.maxExclusive,
++      animal: rank.animal,
++      icon: rank.icon,
++    );
++  }
++
++  static RankLevel? _rank(
++    double value,
++    List<double> thresholds,
++    List<String> icons,
++    List<String> animals,
++  ) {
++    if (!value.isFinite || value < thresholds.first) return null;
++    var index = thresholds.lastIndexWhere((t) => value >= t);
++    return RankLevel(
++      level: index + 1,
++      name: names[index],
++      minInclusive: thresholds[index],
++      maxExclusive: index == 4 ? null : thresholds[index + 1],
++      animal: index == 0 ? null : animals[index - 1],
++      icon: index == 0 ? null : icons[index - 1],
++    );
++  }
++}
+--- a/app/lib/screens/history_screen.dart
++++ b/app/lib/screens/history_screen.dart
+@@ -1,3 +1,5 @@
++import 'reports_screen.dart';
++import 'toilet_screen.dart';
+ import 'package:flutter/material.dart';
+ import 'package:intl/intl.dart';
+ 
+@@ -134,6 +136,24 @@
+                 runSpacing: 8,
+                 children: [
+                   OutlinedButton.icon(
++                    icon: const Icon(Icons.insights),
++                    label: const Text('Месяц / Год'),
++                    onPressed: () => Navigator.of(context).push(
++                      MaterialPageRoute<void>(
++                        builder: (_) => const ReportsScreen(),
++                      ),
++                    ),
++                  ),
++                  OutlinedButton.icon(
++                    icon: const Icon(Icons.wc),
++                    label: const Text('Туалет'),
++                    onPressed: () => Navigator.of(context).push(
++                      MaterialPageRoute<void>(
++                        builder: (_) => const ToiletScreen(),
++                      ),
++                    ),
++                  ),
++                  OutlinedButton.icon(
+                     icon: const Icon(Icons.directions_walk),
+                     label: const Text('Шаги и километры'),
+                     onPressed: () => Navigator.of(context).push(
+--- a/app/lib/screens/home_screen.dart
++++ b/app/lib/screens/home_screen.dart
+@@ -1,3 +1,5 @@
++import '../widgets/toilet_summary.dart';
++import 'reports_screen.dart';
+ import 'package:flutter/material.dart';
+ import '../models/activity.dart';
+ import '../theme/app_theme.dart';
+@@ -95,6 +97,13 @@
+       const SizedBox(height: 8),
+       const DailySummary(),
+       const WaterSummary(),
++      const ToiletSummary(),
++      _entry(
++        'Отчёты',
++        'Месяц, год, уровни и зверинец',
++        Icons.insights,
++        const ReportsScreen(),
++      ),
+       const SizedBox(height: 12),
+       _entry(
+         'Подышать',
+--- /dev/null
++++ b/app/lib/screens/reports_screen.dart
+@@ -0,0 +1,295 @@
++import '../services/monthly_animals.dart';
++import '../widgets/rank_animal.dart';
++import 'package:flutter/material.dart';
++import 'package:intl/intl.dart';
++import '../models/holiday_preset.dart';
++import '../models/progress_report.dart';
++import '../models/rank_level.dart';
++import '../services/progress_reports.dart';
++import 'toilet_screen.dart';
++
++class ReportsScreen extends StatefulWidget {
++  const ReportsScreen({super.key});
++  @override
++  State<ReportsScreen> createState() => _ReportsScreenState();
++}
++
++class _ReportsScreenState extends State<ReportsScreen> {
++  ProgressData? _data;
++  List<RankLevel?> _monthly = [];
++  String? _error;
++  bool _loading = true;
++  bool _yearMode = false;
++  int _year = DateTime.now().year;
++  int _month = DateTime.now().month;
++  HolidayPreset? _preset;
++  @override
++  void initState() {
++    super.initState();
++    _load();
++  }
++
++  Future<void> _load() async {
++    setState(() {
++      _loading = true;
++      _error = null;
++    });
++    try {
++      final data = await ProgressReports.load();
++      final now = DateTime.now();
++      final previous = data.aggregate(
++        DateTime(now.year, now.month - 1),
++        DateTime(now.year, now.month, 0),
++      );
++      final monthly = <RankLevel?>[
++        await MonthlyAnimals.get(
++          'steps',
++          ProgressRanks.steps(previous.averageSteps),
++        ),
++        await MonthlyAnimals.get(
++          'water',
++          ProgressRanks.water(previous.averageGlasses),
++        ),
++        await MonthlyAnimals.get(
++          'toilet',
++          ProgressRanks.toilet(previous.visits),
++        ),
++      ];
++      if (mounted) {
++        setState(() {
++          _data = data;
++          _monthly = monthly;
++          _loading = false;
++        });
++      }
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _loading = false;
++          _error = 'Не удалось загрузить отчёт. Данные не изменены.';
++        });
++      }
++    }
++  }
++
++  Widget _metric(String title, String total, String detail, RankLevel? rank) =>
++      Card(
++        child: Padding(
++          padding: const EdgeInsets.all(16),
++          child: Column(
++            crossAxisAlignment: CrossAxisAlignment.start,
++            children: [
++              Text(title, style: Theme.of(context).textTheme.titleMedium),
++              Text(total, style: Theme.of(context).textTheme.headlineMedium),
++              Text(detail),
++              if (rank != null)
++                Text(
++                  '${rank.name} · уровень ${rank.level}',
++                  style: const TextStyle(fontWeight: FontWeight.bold),
++                ),
++            ],
++          ),
++        ),
++      );
++  @override
++  Widget build(BuildContext context) {
++    final now = DateTime.now();
++    final today = DateTime(now.year, now.month, now.day);
++    var end = _yearMode
++        ? DateTime(_year, 12, 31)
++        : DateTime(_year, _month + 1, 0);
++    final start = _yearMode ? DateTime(_year) : DateTime(_year, _month);
++    if (_preset != null) end = DateTime(_year, _preset!.month, _preset!.day);
++    final future =
++        start.isAfter(today) || (_preset != null && end.isAfter(today));
++    if (end.isAfter(today)) end = today;
++    final report = _data == null || future
++        ? null
++        : _data!.aggregate(start, end);
++    final years = <int>{now.year};
++    if (_data != null) {
++      for (final day in [
++        ..._data!.steps.map((d) => d.day),
++        ..._data!.water.map((d) => d.day),
++        ..._data!.visits.map((d) => d.date),
++      ]) {
++        final year = DateTime.tryParse(day)?.year;
++        if (year != null) years.add(year);
++      }
++    }
++    final firstYear = years.reduce((a, b) => a < b ? a : b);
++    final format = DateFormat('dd.MM.yyyy');
++    return Scaffold(
++      appBar: AppBar(
++        title: const Text('Отчёты'),
++        actions: [
++          IconButton(
++            tooltip: 'Обновить отчёт',
++            onPressed: _loading ? null : _load,
++            icon: const Icon(Icons.refresh),
++          ),
++        ],
++      ),
++      body: SafeArea(
++        child: ListView(
++          padding: const EdgeInsets.all(16),
++          children: [
++            SegmentedButton<bool>(
++              segments: const [
++                ButtonSegment(value: false, label: Text('Месяц')),
++                ButtonSegment(value: true, label: Text('Год')),
++              ],
++              selected: {_yearMode},
++              onSelectionChanged: (v) => setState(() {
++                _yearMode = v.first;
++                _preset = null;
++              }),
++            ),
++            Wrap(
++              spacing: 16,
++              crossAxisAlignment: WrapCrossAlignment.center,
++              children: [
++                DropdownButton<int>(
++                  value: _year,
++                  items: [
++                    for (var y = now.year; y >= firstYear; y--)
++                      DropdownMenuItem(value: y, child: Text('$y год')),
++                  ],
++                  onChanged: (v) => setState(() {
++                    _year = v!;
++                    _preset = null;
++                  }),
++                ),
++                if (!_yearMode)
++                  DropdownButton<int>(
++                    value: _month,
++                    items: [
++                      for (var m = 1; m <= 12; m++)
++                        DropdownMenuItem(
++                          value: m,
++                          child: Text('${m.toString().padLeft(2, '0')} месяц'),
++                        ),
++                    ],
++                    onChanged: (v) => setState(() {
++                      _month = v!;
++                      _preset = null;
++                    }),
++                  ),
++              ],
++            ),
++            if (_yearMode) ...[
++              const Text('Промежуточный отчёт с 1 января по дату:'),
++              Wrap(
++                spacing: 8,
++                children: [
++                  ChoiceChip(
++                    label: const Text('Весь год'),
++                    selected: _preset == null,
++                    onSelected: (_) => setState(() => _preset = null),
++                  ),
++                  ...HolidayPreset.presets.map(
++                    (p) => ChoiceChip(
++                      label: Text(p.name),
++                      selected: _preset == p,
++                      onSelected: (_) => setState(() => _preset = p),
++                    ),
++                  ),
++                ],
++              ),
++              Text(
++                'Итоговый годовой отчёт: 31.12.$_year. До этой даты показан промежуточный итог.',
++              ),
++            ],
++            if (_loading)
++              const Padding(
++                padding: EdgeInsets.all(24),
++                child: Center(child: CircularProgressIndicator()),
++              ),
++            if (_error != null) ...[
++              Text(_error!),
++              TextButton(
++                onPressed: _load,
++                child: const Text('Повторить загрузку'),
++              ),
++            ],
++            if (future) const Text('Этот период ещё не наступил.'),
++            if (report != null && !_loading && _error == null) ...[
++              const SizedBox(height: 12),
++              Text(
++                '${format.format(report.start)} — ${format.format(report.end)}',
++                style: Theme.of(context).textTheme.titleLarge,
++              ),
++              Text(
++                _yearMode &&
++                        _preset == null &&
++                        !DateTime(_year, 12, 31).isAfter(today)
++                    ? 'Дата итогового отчёта: 31.12.$_year'
++                    : 'Сформирован: ${format.format(today)}',
++              ),
++              _metric(
++                'Шаги',
++                '${report.steps}',
++                '≈ ${report.kilometres.toStringAsFixed(2)} км\nСреднее: ${report.averageSteps.toStringAsFixed(0)} шагов/день',
++                ProgressRanks.steps(report.averageSteps),
++              ),
++              _metric(
++                'Вода',
++                '${report.glasses} стаканов',
++                '${report.glasses * 200} мл за период\nСреднее: ${report.averageGlasses.toStringAsFixed(1)} стакана/день',
++                ProgressRanks.water(report.averageGlasses),
++              ),
++              _metric(
++                'Туалет',
++                '${report.visits} посещений',
++                _yearMode
++                    ? 'Сумма за выбранный период. Уровень определяется только по месяцу.'
++                    : 'Сумма за месяц',
++                _yearMode ? null : ProgressRanks.toilet(report.visits),
++              ),
++              Text(
++                'Средние рассчитаны за ${report.days} календарных дней. Дни без записей включены в расчёт как 0.\nЗаписей шагов: ${report.stepDays} дней; воды: ${report.waterDays} дней. Отсутствие записи не подтверждает отсутствие активности.',
++              ),
++              if (report.estimated)
++                const Text(
++                  'Часть шагов отмечена счётчиком как приблизительная.',
++                ),
++              const SizedBox(height: 20),
++              const Text('Зверинец · по последнему завершённому месяцу'),
++              ..._animals(now),
++            ],
++            const SizedBox(height: 16),
++            OutlinedButton.icon(
++              onPressed: () async {
++                await Navigator.push(
++                  context,
++                  MaterialPageRoute<void>(builder: (_) => const ToiletScreen()),
++                );
++                if (mounted) await _load();
++              },
++              icon: const Icon(Icons.wc),
++              label: const Text('Журнал посещений'),
++            ),
++          ],
++        ),
++      ),
++    );
++  }
++
++  List<Widget> _animals(DateTime now) {
++    final previous = _data!.aggregate(
++      DateTime(now.year, now.month - 1),
++      DateTime(now.year, now.month, 0),
++    );
++    final ranks = _monthly;
++    return [
++      for (var i = 0; i < 3; i++)
++        ListTile(
++          leading: RankAnimal(ranks[i], size: 32),
++          title: Text(['Шаги', 'Вода', 'Туалет'][i]),
++          subtitle: Text(
++            '${ranks[i]?.animal ?? 'Без животного'} · ${DateFormat('MM.yyyy').format(previous.start)}',
++          ),
++        ),
++    ];
++  }
++}
+--- /dev/null
++++ b/app/lib/screens/toilet_screen.dart
+@@ -0,0 +1,206 @@
++import '../services/monthly_animals.dart';
++import '../models/rank_level.dart';
++import '../widgets/rank_animal.dart';
++import 'package:flutter/material.dart';
++import 'package:intl/intl.dart';
++import '../models/toilet_visit.dart';
++import '../models/progress_report.dart';
++import '../services/storage_service.dart';
++
++class ToiletScreen extends StatefulWidget {
++  const ToiletScreen({super.key});
++  @override
++  State<ToiletScreen> createState() => _ToiletScreenState();
++}
++
++class _ToiletScreenState extends State<ToiletScreen>
++    with WidgetsBindingObserver {
++  List<ToiletVisit> _visits = [];
++  RankLevel? _animal;
++  bool _busy = true;
++  String? _error;
++  @override
++  void initState() {
++    super.initState();
++    WidgetsBinding.instance.addObserver(this);
++    _load();
++  }
++
++  @override
++  void dispose() {
++    WidgetsBinding.instance.removeObserver(this);
++    super.dispose();
++  }
++
++  @override
++  void didChangeAppLifecycleState(AppLifecycleState state) {
++    if (state == AppLifecycleState.resumed && !_busy) _load();
++  }
++
++  Future<void> _load() async {
++    try {
++      final visits = await StorageService.getAllToiletVisits();
++      final now = DateTime.now();
++      final previousKey = ToiletVisit.at(
++        DateTime(now.year, now.month - 1),
++      ).date.substring(0, 7);
++      final animal = await MonthlyAnimals.get(
++        'toilet',
++        ProgressRanks.toilet(
++          visits.where((v) => v.date.startsWith(previousKey)).length,
++        ),
++      );
++      if (mounted) {
++        setState(() {
++          _visits = visits;
++          _animal = animal;
++          _busy = false;
++          _error = null;
++        });
++      }
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _error = 'Не удалось прочитать журнал';
++          _busy = false;
++        });
++      }
++    }
++  }
++
++  Future<void> _add() async {
++    if (_busy) return;
++    setState(() => _busy = true);
++    try {
++      await StorageService.saveToiletVisit(ToiletVisit.at(DateTime.now()));
++      await _load();
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _busy = false;
++          _error = 'Посещение не сохранено';
++        });
++      }
++    }
++  }
++
++  Future<void> _delete(ToiletVisit visit) async {
++    final confirmed = await showDialog<bool>(
++      context: context,
++      builder: (context) => AlertDialog(
++        title: const Text('Удалить ошибочную запись?'),
++        content: Text(
++          DateFormat('dd.MM.yyyy HH:mm').format(visit.timestamp.toLocal()),
++        ),
++        actions: [
++          TextButton(
++            onPressed: () => Navigator.pop(context, false),
++            child: const Text('Отмена'),
++          ),
++          FilledButton(
++            onPressed: () => Navigator.pop(context, true),
++            child: const Text('Удалить'),
++          ),
++        ],
++      ),
++    );
++    if (confirmed != true || !mounted || _busy) return;
++    setState(() => _busy = true);
++    try {
++      await StorageService.deleteToiletVisit(visit.id!);
++      await _load();
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _busy = false;
++          _error = 'Не удалось удалить запись';
++        });
++      }
++    }
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    final now = DateTime.now();
++    final date = ToiletVisit.at(now).date;
++    final month = date.substring(0, 7);
++    final current = _visits.where((v) => v.date.startsWith(month)).length;
++    final previous = DateTime(now.year, now.month - 1);
++    final previousKey = ToiletVisit.at(previous).date.substring(0, 7);
++    final previousCount = _visits
++        .where((v) => v.date.startsWith(previousKey))
++        .length;
++    final rank = ProgressRanks.toilet(current);
++    final animal = _animal;
++    return Scaffold(
++      appBar: AppBar(title: const Text('Туалет')),
++      body: SafeArea(
++        child: ListView(
++          padding: const EdgeInsets.all(20),
++          children: [
++            Text('$current', style: Theme.of(context).textTheme.displayLarge),
++            Text('Посещений за ${DateFormat('MM.yyyy').format(now)}'),
++            Text(
++              'Сегодня: ${_visits.where((v) => v.date == date).length} · Всего: ${_visits.length}',
++            ),
++            const SizedBox(height: 12),
++            Text(rank.name, style: Theme.of(context).textTheme.titleLarge),
++            const Text(
++              'Ниндзя: 0–14 · Уровень 2: 15–19 · Уровень 3: 20–24\nУровень 4: 25–34 · Уровень 5: от 35',
++            ),
++            const SizedBox(height: 16),
++            FilledButton.icon(
++              onPressed: _busy ? null : _add,
++              icon: const Icon(Icons.add),
++              label: const Text('Добавить посещение'),
++            ),
++            if (_error != null) ...[
++              Text(_error!),
++              TextButton(onPressed: _load, child: const Text('Повторить')),
++            ],
++            const SizedBox(height: 20),
++            Card(
++              child: Padding(
++                padding: const EdgeInsets.all(16),
++                child: Column(
++                  children: [
++                    Text(
++                      'Зверинец · ${DateFormat('MM.yyyy').format(previous)}',
++                    ),
++                    RankAnimal(animal, size: 52),
++                    Text(animal?.animal ?? 'Без животного'),
++                    Text('$previousCount посещений · ${animal?.name}'),
++                    const Text(
++                      'Животное определяется по завершённому месяцу и обновляется раз в месяц.',
++                    ),
++                  ],
++                ),
++              ),
++            ),
++            const SizedBox(height: 20),
++            const Text('Последние посещения'),
++            if (_visits.isEmpty && !_busy)
++              const Text('Пока нет записей. Нажми «Добавить посещение».'),
++            ..._visits
++                .take(30)
++                .map(
++                  (v) => ListTile(
++                    leading: const Icon(Icons.wc),
++                    title: Text(
++                      DateFormat(
++                        'dd.MM.yyyy HH:mm',
++                      ).format(v.timestamp.toLocal()),
++                    ),
++                    trailing: IconButton(
++                      tooltip: 'Удалить ошибочную запись',
++                      onPressed: _busy ? null : () => _delete(v),
++                      icon: const Icon(Icons.delete_outline),
++                    ),
++                  ),
++                ),
++          ],
++        ),
++      ),
++    );
++  }
++}
+--- /dev/null
++++ b/app/lib/services/monthly_animals.dart
+@@ -0,0 +1,50 @@
++import 'dart:convert';
++import 'package:shared_preferences/shared_preferences.dart';
++import '../models/rank_level.dart';
++
++/// Freeze each metric on the first visit in a calendar month.
++class MonthlyAnimals {
++  static Future<RankLevel?> get(
++    String metric,
++    RankLevel? candidate, {
++    DateTime? now,
++  }) async {
++    final date = now ?? DateTime.now();
++    final key = 'monthlyAnimalsV1.${date.year}-${date.month}.$metric';
++    final prefs = await SharedPreferences.getInstance();
++    final raw = prefs.getString(key);
++    if (raw != null) {
++      try {
++        final data = jsonDecode(raw);
++        if (data == null) return null;
++        return RankLevel(
++          level: data['level'] as int,
++          name: data['name'] as String,
++          minInclusive: (data['min'] as num).toDouble(),
++          maxExclusive: (data['max'] as num?)?.toDouble(),
++          animal: data['animal'] as String?,
++          icon: data['icon'] as String?,
++        );
++      } catch (_) {
++        /* Repair only this new derived cache, never source history. */
++      }
++    }
++    final saved = await prefs.setString(
++      key,
++      jsonEncode(
++        candidate == null
++            ? null
++            : {
++                'level': candidate.level,
++                'name': candidate.name,
++                'min': candidate.minInclusive,
++                'max': candidate.maxExclusive,
++                'animal': candidate.animal,
++                'icon': candidate.icon,
++              },
++      ),
++    );
++    if (!saved) throw StateError('Не удалось сохранить зверинец');
++    return candidate;
++  }
++}
+--- /dev/null
++++ b/app/lib/services/progress_reports.dart
+@@ -0,0 +1,70 @@
++import 'package:flutter/services.dart';
++import '../models/progress_report.dart';
++import '../models/toilet_visit.dart';
++import 'activity_preferences.dart';
++import 'daily_tracker.dart';
++import 'water_tracker.dart';
++import 'storage_service.dart';
++
++/// New read-only bridge: full retained history, independent of the old 90-day UI.
++class ProgressReports {
++  static const channel = MethodChannel('dvizh/reports');
++  static Future<ProgressData> load() async {
++    final native = await channel.invokeMapMethod<String, dynamic>('load');
++    if (native == null) throw StateError('Нет данных отчёта');
++    return ProgressData(
++      steps: (native['steps'] as List).map((r) => DailyDay(r as Map)).toList(),
++      water: (native['water'] as List).map((r) => WaterDay(r as Map)).toList(),
++      visits: await StorageService.getAllToiletVisits(),
++      preferences: await ActivityPreferences.load(),
++    );
++  }
++}
++
++class ProgressData {
++  const ProgressData({
++    required this.steps,
++    required this.water,
++    required this.visits,
++    required this.preferences,
++  });
++  final List<DailyDay> steps;
++  final List<WaterDay> water;
++  final List<ToiletVisit> visits;
++  final ActivityPreferences preferences;
++
++  ProgressReport aggregate(DateTime start, DateTime end) {
++    final first = DateTime(start.year, start.month, start.day);
++    final last = DateTime(end.year, end.month, end.day);
++    if (last.isBefore(first)) {
++      throw ArgumentError('Конец периода раньше начала');
++    }
++    bool includes(String day) {
++      final d = DateTime.tryParse(day);
++      return d != null && !d.isBefore(first) && !d.isAfter(last);
++    }
++
++    final s = steps.where((d) => includes(d.day)).toList();
++    final w = water.where((d) => includes(d.day)).toList();
++    // UTC calendar difference avoids DST introducing 23/25-hour days.
++    final days =
++        DateTime.utc(
++          last.year,
++          last.month,
++          last.day,
++        ).difference(DateTime.utc(first.year, first.month, first.day)).inDays +
++        1;
++    return ProgressReport(
++      start: first,
++      end: last,
++      days: days,
++      steps: s.fold(0, (sum, d) => sum + d.steps),
++      glasses: w.fold(0, (sum, d) => sum + d.glasses),
++      visits: visits.where((v) => includes(v.date)).length,
++      stepDays: s.length,
++      waterDays: w.length,
++      estimated: s.any((d) => d.estimated),
++      stepLengthCm: preferences.stepLengthCm,
++    );
++  }
++}
+--- a/app/lib/services/storage_service.dart
++++ b/app/lib/services/storage_service.dart
+@@ -69,6 +69,11 @@
+     return db.insert('toilet_visits', row);
+   }
+ 
++  static Future<int> deleteToiletVisit(int id) async {
++    final db = await database;
++    return db.delete('toilet_visits', where: 'id = ?', whereArgs: [id]);
++  }
++
+   static Future<List<ToiletVisit>> getAllToiletVisits() async {
+     final Database db = await database;
+     final rows = await db.query(
+--- /dev/null
++++ b/app/lib/widgets/rank_animal.dart
+@@ -0,0 +1,70 @@
++import 'package:flutter/material.dart';
++import '../models/rank_level.dart';
++
++class RankAnimal extends StatelessWidget {
++  const RankAnimal(this.rank, {super.key, this.size = 48});
++  final RankLevel? rank;
++  final double size;
++  @override
++  Widget build(BuildContext context) => Semantics(
++    label: rank?.animal ?? 'Без животного',
++    child: rank?.animal == 'Эму'
++        ? CustomPaint(
++            size: Size.square(size),
++            painter: _EmuPainter(Theme.of(context).colorScheme.primary),
++          )
++        : Text(rank?.icon ?? '○', style: TextStyle(fontSize: size)),
++  );
++}
++
++class _EmuPainter extends CustomPainter {
++  const _EmuPainter(this.color);
++  final Color color;
++  @override
++  void paint(Canvas canvas, Size size) {
++    canvas.save();
++    canvas.scale(size.width / 64, size.height / 64);
++    final p = Paint()..color = color;
++    canvas.drawOval(const Rect.fromLTWH(10, 23, 35, 24), p);
++    canvas.drawPath(
++      Path()
++        ..moveTo(37, 31)
++        ..quadraticBezierTo(51, 30, 44, 10)
++        ..lineTo(49, 10)
++        ..quadraticBezierTo(58, 39, 41, 40)
++        ..close(),
++      p,
++    );
++    canvas.drawOval(const Rect.fromLTWH(42, 4, 12, 10), p);
++    canvas.drawPath(
++      Path()
++        ..moveTo(52, 8)
++        ..lineTo(61, 12)
++        ..lineTo(52, 12)
++        ..close(),
++      p,
++    );
++    p
++      ..style = PaintingStyle.stroke
++      ..strokeWidth = 3
++      ..strokeCap = StrokeCap.round;
++    canvas.drawPath(
++      Path()
++        ..moveTo(23, 44)
++        ..lineTo(20, 58)
++        ..lineTo(14, 60)
++        ..moveTo(33, 44)
++        ..lineTo(36, 58)
++        ..lineTo(43, 60),
++      p,
++    );
++    p
++      ..style = PaintingStyle.fill
++      ..color = Colors.white;
++    canvas.drawCircle(const Offset(50, 8), 1.5, p);
++    canvas.restore();
++  }
++
++  @override
++  bool shouldRepaint(_EmuPainter oldDelegate) => color != oldDelegate.color;
++}
+--- /dev/null
++++ b/app/lib/widgets/toilet_summary.dart
+@@ -0,0 +1,116 @@
++import 'package:flutter/material.dart';
++import '../models/toilet_visit.dart';
++import '../models/progress_report.dart';
++import '../services/storage_service.dart';
++import '../screens/toilet_screen.dart';
++
++class ToiletSummary extends StatefulWidget {
++  const ToiletSummary({super.key});
++  @override
++  State<ToiletSummary> createState() => _ToiletSummaryState();
++}
++
++class _ToiletSummaryState extends State<ToiletSummary>
++    with WidgetsBindingObserver {
++  List<ToiletVisit> _visits = [];
++  bool _busy = true;
++  String? _error;
++  @override
++  void initState() {
++    super.initState();
++    WidgetsBinding.instance.addObserver(this);
++    _load();
++  }
++
++  @override
++  void dispose() {
++    WidgetsBinding.instance.removeObserver(this);
++    super.dispose();
++  }
++
++  @override
++  void didChangeAppLifecycleState(AppLifecycleState state) {
++    if (state == AppLifecycleState.resumed && !_busy) _load();
++  }
++
++  Future<void> _load() async {
++    try {
++      final visits = await StorageService.getAllToiletVisits();
++      if (mounted) {
++        setState(() {
++          _visits = visits;
++          _busy = false;
++          _error = null;
++        });
++      }
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _error = 'Не удалось прочитать посещения';
++          _busy = false;
++        });
++      }
++    }
++  }
++
++  Future<void> _add() async {
++    if (_busy) return;
++    setState(() => _busy = true);
++    try {
++      await StorageService.saveToiletVisit(ToiletVisit.at(DateTime.now()));
++      await _load();
++    } catch (_) {
++      if (mounted) {
++        setState(() {
++          _busy = false;
++          _error = 'Посещение не сохранено. Повтори попытку.';
++        });
++      }
++    }
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    final now = DateTime.now();
++    final today = ToiletVisit.at(now).date;
++    final month = today.substring(0, 7);
++    final count = _visits.where((v) => v.date.startsWith(month)).length;
++    final rank = ProgressRanks.toilet(count);
++    return Card(
++      child: Padding(
++        padding: const EdgeInsets.all(16),
++        child: Column(
++          crossAxisAlignment: CrossAxisAlignment.stretch,
++          children: [
++            ListTile(
++              contentPadding: EdgeInsets.zero,
++              leading: const Icon(Icons.wc),
++              title: const Text('Туалет'),
++              subtitle: Text(
++                _error ??
++                    'Сегодня: ${_visits.where((v) => v.date == today).length} · За месяц: $count\n${rank.name}',
++              ),
++              trailing: const Icon(Icons.chevron_right),
++              onTap: () async {
++                await Navigator.of(context).push(
++                  MaterialPageRoute<void>(builder: (_) => const ToiletScreen()),
++                );
++                if (mounted) await _load();
++              },
++            ),
++            FilledButton.icon(
++              onPressed: _busy ? null : _add,
++              icon: const Icon(Icons.add),
++              label: Text(_busy ? 'Загрузка…' : 'Добавить посещение'),
++            ),
++            if (_error != null)
++              TextButton(
++                onPressed: _load,
++                child: const Text('Повторить загрузку'),
++              ),
++          ],
++        ),
++      ),
++    );
++  }
++}
+--- /dev/null
++++ b/app/test/progress_reports_test.dart
+@@ -0,0 +1,108 @@
++import 'package:flutter_test/flutter_test.dart';
++import 'package:shared_preferences/shared_preferences.dart';
++import 'package:dvizh/models/progress_report.dart';
++import 'package:dvizh/models/toilet_visit.dart';
++import 'package:dvizh/services/activity_preferences.dart';
++import 'package:dvizh/services/daily_tracker.dart';
++import 'package:dvizh/services/water_tracker.dart';
++import 'package:dvizh/services/progress_reports.dart';
++import 'package:dvizh/services/monthly_animals.dart';
++
++void main() {
++  test('all step thresholds are inclusive and below minimum has no level', () {
++    final boundaries = [6000.0, 10000.0, 12000.0, 15000.0, 25000.0];
++    for (var i = 0; i < boundaries.length; i++) {
++      expect(ProgressRanks.steps(boundaries[i])?.level, i + 1);
++      expect(ProgressRanks.steps(boundaries[i] - .1)?.level, i == 0 ? null : i);
++    }
++    expect(ProgressRanks.steps(double.nan), isNull);
++  });
++  test('water thresholds use daily average', () {
++    for (var i = 0; i < 5; i++) {
++      expect(ProgressRanks.water(4.0 + i * 2)?.level, i + 1);
++    }
++    expect(ProgressRanks.water(3.99), isNull);
++    expect(ProgressRanks.water(100)?.level, 5);
++  });
++  test('toilet monthly thresholds and animals match specification', () {
++    expect(ProgressRanks.toilet(0).animal, isNull);
++    final values = [14, 15, 19, 20, 24, 25, 34, 35];
++    final levels = [1, 2, 2, 3, 3, 4, 4, 5];
++    for (var i = 0; i < values.length; i++) {
++      expect(ProgressRanks.toilet(values[i]).level, levels[i]);
++    }
++    expect(ProgressRanks.toilet(15).animal, 'Заяц');
++    expect(ProgressRanks.toilet(20).animal, 'Обезьяна');
++    expect(ProgressRanks.toilet(25).animal, 'Эму');
++    expect(ProgressRanks.toilet(35).animal, 'Динозавр');
++  });
++  test(
++    'aggregation includes leap day, zeros, boundaries, saved calendar dates',
++    () {
++      final data = ProgressData(
++        steps: [
++          DailyDay({'day': '2024-02-01', 'steps': 10000, 'estimated': false}),
++          DailyDay({'day': '2024-02-29', 'steps': 19000, 'estimated': true}),
++          DailyDay({'day': '2024-03-01', 'steps': 99999, 'estimated': false}),
++        ],
++        water: [
++          WaterDay({'day': '2024-02-29', 'glasses': 29}),
++        ],
++        visits: [
++          ToiletVisit(timestamp: DateTime.utc(2024, 3, 1), date: '2024-02-29'),
++        ],
++        preferences: const ActivityPreferences(stepLengthCm: 80),
++      );
++      final report = data.aggregate(DateTime(2024, 2), DateTime(2024, 2, 29));
++      expect(report.days, 29);
++      expect(report.steps, 29000);
++      expect(report.averageSteps, 1000);
++      expect(report.averageGlasses, 1);
++      expect(report.kilometres, 23.2);
++      expect(report.visits, 1);
++      expect(report.estimated, true);
++      expect(report.stepDays, 2);
++      expect(data.aggregate(DateTime(2024), DateTime(2024, 12, 31)).days, 366);
++      expect(
++        () => data.aggregate(DateTime(2025), DateTime(2024)),
++        throwsArgumentError,
++      );
++    },
++  );
++  test(
++    'animal stays fixed in a month and is recalculated next month',
++    () async {
++      SharedPreferences.setMockInitialValues({});
++      final first = await MonthlyAnimals.get(
++        'toilet',
++        ProgressRanks.toilet(15),
++        now: DateTime(2026, 11, 1),
++      );
++      final frozen = await MonthlyAnimals.get(
++        'toilet',
++        ProgressRanks.toilet(35),
++        now: DateTime(2026, 11, 20),
++      );
++      final next = await MonthlyAnimals.get(
++        'toilet',
++        ProgressRanks.toilet(35),
++        now: DateTime(2026, 12, 1),
++      );
++      expect(first?.level, 2);
++      expect(frozen?.level, 2);
++      expect(next?.level, 5);
++      expect(
++        await MonthlyAnimals.get('steps', null, now: DateTime(2026, 11)),
++        isNull,
++      );
++      expect(
++        await MonthlyAnimals.get(
++          'steps',
++          ProgressRanks.steps(25000),
++          now: DateTime(2026, 11, 2),
++        ),
++        isNull,
++      );
++    },
++  );
++}
+--- /dev/null
++++ b/app/test/progress_screens_test.dart
+@@ -0,0 +1,139 @@
++import 'dart:io';
++import 'package:flutter/material.dart';
++import 'package:flutter/services.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:shared_preferences/shared_preferences.dart';
++import 'package:sqflite_common_ffi/sqflite_ffi.dart';
++import 'package:dvizh/services/storage_service.dart';
++import 'package:dvizh/services/progress_reports.dart';
++import 'package:dvizh/screens/toilet_screen.dart';
++import 'package:dvizh/screens/reports_screen.dart';
++
++Future<void> loadFrame(WidgetTester tester) async {
++  // Let the SQLite FFI worker respond outside the fake test clock.
++  await tester.runAsync(
++    () => Future<void>.delayed(const Duration(milliseconds: 120)),
++  );
++  await tester.pumpAndSettle();
++}
++
++Future<void> waitFor(WidgetTester tester, bool Function() ready) async {
++  for (var i = 0; i < 40 && !ready(); i++) {
++    await loadFrame(tester);
++  }
++  expect(ready(), isTrue);
++}
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  late Directory temporary;
++  setUpAll(() async {
++    sqfliteFfiInit();
++    databaseFactory = databaseFactoryFfi;
++    temporary = await Directory.systemTemp.createTemp('orbitakt-screen-tests-');
++    await databaseFactory.setDatabasesPath(temporary.path);
++  });
++  setUp(() async {
++    SharedPreferences.setMockInitialValues({});
++    await StorageService.database;
++    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
++        .setMockMethodCallHandler(
++          ProgressReports.channel,
++          (call) async => {'steps': <Object>[], 'water': <Object>[]},
++        );
++  });
++  tearDown(() async {
++    await StorageService.deleteAllData();
++  });
++  tearDownAll(() async {
++    await temporary.delete(recursive: true);
++  });
++
++  testWidgets(
++    'toilet add is visible, persists, and mistaken entry can be deleted',
++    (tester) async {
++      await tester.pumpWidget(const MaterialApp(home: ToiletScreen()));
++      await loadFrame(tester);
++      expect(find.text('Сегодня: 0 · Всего: 0'), findsOneWidget);
++      await waitFor(
++        tester,
++        () =>
++            tester
++                .widget<FilledButton>(
++                  find.byWidgetPredicate((w) => w is FilledButton).first,
++                )
++                .onPressed !=
++            null,
++      );
++      await tester.tap(find.text('Добавить посещение'));
++      await loadFrame(tester);
++      await waitFor(
++        tester,
++        () => find.text('Сегодня: 1 · Всего: 1').evaluate().isNotEmpty,
++      );
++      expect(find.text('Сегодня: 1 · Всего: 1'), findsOneWidget);
++      final visits = await tester.runAsync(StorageService.getAllToiletVisits);
++      expect(visits!.length, 1);
++      final delete = find.byTooltip('Удалить ошибочную запись');
++      await tester.ensureVisible(delete);
++      await tester.pumpAndSettle();
++      await tester.tap(delete);
++      await tester.pumpAndSettle();
++      await tester.tap(find.widgetWithText(FilledButton, 'Удалить'));
++      await loadFrame(tester);
++      await tester.drag(find.byType(ListView), const Offset(0, 600));
++      await tester.pumpAndSettle();
++      await waitFor(
++        tester,
++        () => find.text('Сегодня: 0 · Всего: 0').evaluate().isNotEmpty,
++      );
++      expect(find.text('Сегодня: 0 · Всего: 0'), findsOneWidget);
++      expect(tester.takeException(), isNull);
++    },
++  );
++  testWidgets(
++    'reports only offer month/year and show empty statistics on a small screen',
++    (tester) async {
++      tester.view.physicalSize = const Size(360, 740);
++      tester.view.devicePixelRatio = 1;
++      addTearDown(tester.view.resetPhysicalSize);
++      addTearDown(tester.view.resetDevicePixelRatio);
++      await tester.pumpWidget(
++        MaterialApp(
++          builder: (context, child) => MediaQuery(
++            data: MediaQuery.of(
++              context,
++            ).copyWith(textScaler: const TextScaler.linear(1.4)),
++            child: child!,
++          ),
++          home: const ReportsScreen(),
++        ),
++      );
++      await loadFrame(tester);
++      expect(find.text('Месяц'), findsOneWidget);
++      expect(find.text('Год'), findsOneWidget);
++      expect(find.text('0 стаканов'), findsOneWidget);
++      await tester.tap(find.text('Год'));
++      await tester.pumpAndSettle();
++      expect(find.text('13 февраля'), findsOneWidget);
++      expect(find.text('8 марта'), findsOneWidget);
++      expect(find.text('1 января'), findsOneWidget);
++      expect(tester.takeException(), isNull);
++    },
++  );
++  testWidgets(
++    'failed report load offers retry without showing fake zero totals',
++    (tester) async {
++      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
++          .setMockMethodCallHandler(
++            ProgressReports.channel,
++            (call) async => throw PlatformException(code: 'db_error'),
++          );
++      await tester.pumpWidget(const MaterialApp(home: ReportsScreen()));
++      await loadFrame(tester);
++      expect(find.text('Повторить загрузку'), findsOneWidget);
++      expect(find.text('0 стаканов'), findsNothing);
++      expect(tester.takeException(), isNull);
++    },
++  );
++}

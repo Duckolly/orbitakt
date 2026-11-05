@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.duckolly.dvizh.SkyCompassMathTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-04T14:01:03" hostname="f370afe7f931" time="0.002">
+  <properties/>
+  <testcase name="smoothAcrossNorthBothWays" classname="com.duckolly.dvizh.SkyCompassMathTest" time="0.001"/>
+  <testcase name="cardinalHeadingAndVerticalRejection" classname="com.duckolly.dvizh.SkyCompassMathTest" time="0.001"/>
+  <testcase name="horizontalChartAcceptsBothViewingSidesAndRejectsVertical" classname="com.duckolly.dvizh.SkyCompassMathTest" time="0.0"/>
+  <testcase name="trueNorthCorrectionWraps" classname="com.duckolly.dvizh.SkyCompassMathTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

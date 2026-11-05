@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.duckolly.dvizh.ToolSensorMathTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-04T14:01:03" hostname="f370afe7f931" time="0.001">
+  <properties/>
+  <testcase name="screenGravityAllDisplayRotations" classname="com.duckolly.dvizh.ToolSensorMathTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

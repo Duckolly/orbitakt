@@ -11,6 +11,7 @@ import 'screens/home_screen.dart';
 import 'services/notification_service.dart';
 import 'theme/app_theme.dart';
 import 'theme/theme_controller.dart';
+import 'theme/seasonal_controller.dart';
 
 void main() {
   // R-2: зональная защита от uncaught без crash-reporting (наружу не уходит).
@@ -21,6 +22,7 @@ void main() {
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
       await ThemeController.load();
+      await SeasonalController.load();
       try {
         await NotificationService.instance.init();
       } catch (_) {

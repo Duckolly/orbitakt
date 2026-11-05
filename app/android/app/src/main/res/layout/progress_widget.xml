@@ -5,25 +5,31 @@
     android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="4dp" android:paddingBottom="4dp"
     android:background="@drawable/widget_background" android:contentDescription="@string/widget_label">
     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
-         android:importantForAccessibility="noHideDescendants">
-        <TextView android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+         android:importantForAccessibility="auto">
+        <TextView android:visibility="gone" android:id="@+id/widget_steps_label" android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="@string/widget_steps_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
             android:includeFontPadding="false" android:maxLines="1" />
-        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_steps_label" android:layout_marginTop="2dp"
+        <TextView android:id="@+id/widget_steps" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="0dp"
             android:gravity="center_vertical" android:text="@string/widget_steps_preview" android:textColor="@color/widget_text"
             android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_distance" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:layout_below="@id/widget_steps" android:text="@string/widget_distance_preview" android:textSize="11sp"
+            android:textColor="@color/widget_secondary" android:includeFontPadding="false" android:maxLines="1" />
     </RelativeLayout>
     <TextView android:layout_width="1dp" android:layout_height="24dp" android:layout_marginStart="6dp" android:layout_marginEnd="8dp"
         android:background="@color/widget_divider" android:importantForAccessibility="no" />
     <RelativeLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1"
-         android:importantForAccessibility="noHideDescendants">
-        <TextView android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
+         android:importantForAccessibility="auto">
+        <TextView android:visibility="gone" android:id="@+id/widget_water_label" android:layout_width="match_parent" android:layout_height="wrap_content"
             android:text="@string/widget_water_label" android:textColor="@color/widget_secondary" android:textSize="11sp"
             android:includeFontPadding="false" android:maxLines="1" />
-        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_below="@id/widget_water_label" android:layout_marginTop="2dp"
+        <TextView android:id="@+id/widget_water" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_toStartOf="@id/widget_add_water" android:layout_marginTop="0dp"
             android:gravity="center_vertical" android:text="@string/widget_water_preview" android:textColor="@color/widget_accent"
             android:textSize="20sp" android:textStyle="bold" android:fontFamily="sans-serif-medium"
             android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+        <ImageButton android:id="@+id/widget_add_water" android:layout_width="36dp" android:layout_height="match_parent"
+            android:layout_alignParentEnd="true" android:padding="5dp" android:src="@drawable/widget_glass"
+            android:background="@android:color/transparent" android:contentDescription="@string/widget_add_water_label" />
     </RelativeLayout>
 </LinearLayout>

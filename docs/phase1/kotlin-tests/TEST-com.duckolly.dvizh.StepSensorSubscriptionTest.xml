@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.duckolly.dvizh.StepSensorSubscriptionTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T14:01:03" hostname="f370afe7f931" time="0.02">
+  <properties/>
+  <testcase name="revokedPermissionIsNotHiddenByFallback" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.005"/>
+  <testcase name="transientExceptionAlsoRestoresPreviousMode" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.0"/>
+  <testcase name="screenOffOnAndWorkoutTransitionsPreserveCumulativeSteps" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.013"/>
+  <testcase name="reproducesRejectedDuplicateButRetuneKeepsTheCounterRunning" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.001"/>
+  <testcase name="initialFailureDoesNotClaimAWorkingSubscription" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.001"/>
+  <testcase name="stopDoesNotLetLaterScreenEventsRestartTracking" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.0"/>
+  <testcase name="rejectedNewModeRestoresPreviousWorkingMode" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.0"/>
+  <testcase name="bothRegistrationsFailWithoutClaimingActiveState" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.0"/>
+  <testcase name="sameModeAndRepeatedStartDoNotTouchAnActiveListener" classname="com.duckolly.dvizh.StepSensorSubscriptionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

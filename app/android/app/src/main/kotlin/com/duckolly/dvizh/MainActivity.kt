@@ -20,6 +20,7 @@ class MainActivity : FlutterActivity() {
     override fun onPause() { visible=false; EnergyRuntime.usage.end("foreground",this); skyCompass?.setVisible(false); toolSensors.forEach { it.setVisible(false) }; DailyRuntime.worker.post { DailyRuntime.uiVisible=false; DailyRuntime.owner?.setInteractive(DailyRuntime.interactive) }; super.onPause() }
     override fun configureFlutterEngine(engine: FlutterEngine) {
         super.configureFlutterEngine(engine)
+        ReportBridge.install(this, engine)
         WaterBridge.install(this,engine) { visible }
         DeviceBridge.install(applicationContext,engine)
         batteryBridge?.close(); batteryBridge=BatteryBridge(this,engine)

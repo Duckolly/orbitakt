@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../widgets/metric_levels_card.dart';
 import 'package:flutter/material.dart';
 import '../services/water_tracker.dart';
 import '../services/activity_preferences.dart';
@@ -148,6 +149,9 @@ class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
           if (_status != null) ...[
             Card(
               color: OrbitColors.aqua(context),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -214,6 +218,12 @@ class _WaterScreenState extends State<WaterScreen> with WidgetsBindingObserver {
               child: const Text('Повторить'),
             ),
           ],
+          if (_status != null && _error == null)
+            MetricLevelsCard(
+              metric: 'water',
+              revision:
+                  '${_status!.today}:${_status!.glasses}:${_status!.history.length}',
+            ),
           const SizedBox(height: 16),
           OutlinedButton.icon(
             onPressed: _pin,

@@ -1,0 +1,16 @@
+{
+  "flutter_tests_passed": 115,
+  "app_kotlin_tests_passed": 29,
+  "flutter_analyze": "PASS",
+  "static_checks_passed": 356,
+  "protected_files_byte_identical": 37,
+  "apk_signature_v2": "PASS",
+  "apk_zipalign_16KB": "PASS",
+  "apk_package": "com.duckolly.dvizh.preview",
+  "apk_version": "3.9.6+19",
+  "apk_internet_permission": false,
+  "device_installation": "NOT_TESTED",
+  "android_lint": "PASS",
+  "android_lint_warnings": 0,
+  "extra_dependency_tests": "38 shared_preferences_android tests failed: JVM-agent attach unavailable"
+}

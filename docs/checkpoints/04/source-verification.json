@@ -1,0 +1,23 @@
+{
+  "app_unchanged_since_checkpoint03": true,
+  "checkpoint03_app_files_checked": 170,
+  "original_protected_files_checked": 43,
+  "last_full_flutter_suite": 128,
+  "last_kotlin_app_suite": 29,
+  "new_diagnostic": "Confirmed DropdownButton failure after selected year loses its last records",
+  "functional_fixes_in_audit": false,
+  "release_readiness": "NOT_READY",
+  "release_private_key_in_sources": false,
+  "modified_original_app_files": [
+    "app/android/app/src/main/kotlin/com/duckolly/dvizh/MainActivity.kt",
+    "app/android/app/src/main/kotlin/com/duckolly/dvizh/ProgressWidget.kt",
+    "app/android/app/src/main/res/layout/progress_widget.xml",
+    "app/android/app/src/main/res/layout-v26/progress_widget.xml",
+    "app/android/app/src/main/res/values/widget_strings.xml",
+    "app/lib/main.dart",
+    "app/lib/screens/history_screen.dart",
+    "app/lib/screens/home_screen.dart",
+    "app/lib/screens/settings_screen.dart",
+    "app/lib/services/storage_service.dart"
+  ]
+}

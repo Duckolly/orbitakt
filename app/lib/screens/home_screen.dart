@@ -1,3 +1,6 @@
+import '../widgets/seasonal_surface.dart';
+import '../widgets/toilet_summary.dart';
+import 'reports_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/activity.dart';
 import '../theme/app_theme.dart';
@@ -95,6 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
       const SizedBox(height: 8),
       const DailySummary(),
       const WaterSummary(),
+      const ToiletSummary(),
+      _entry(
+        'Отчёты',
+        'Месяц, год, уровни и зверинец',
+        Icons.insights,
+        const ReportsScreen(),
+      ),
       const SizedBox(height: 12),
       _entry(
         'Подышать',
@@ -174,9 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
     body: SafeArea(
       child: switch (_selected) {
         1 => const HistoryScreen(),
-        2 => _rest(),
+        2 => SeasonalSurface(child: _rest()),
         3 => const SettingsScreen(),
-        _ => _today(),
+        _ => SeasonalSurface(child: _today()),
       },
     ),
     bottomNavigationBar: NavigationBar(

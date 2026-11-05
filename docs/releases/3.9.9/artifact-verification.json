@@ -1,0 +1,60 @@
+{
+  "file": "orbitakt-3.9.9-23-release-arm64.apk",
+  "size_bytes": 18340519,
+  "sha256": "6dacdede7a2f002b6943449dbd003ca66bd28c12dfe852c7922439d91a6d5ebe",
+  "package": "com.duckolly.dvizh",
+  "version_name": "3.9.9",
+  "version_code": 23,
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "abis": [
+    "arm64-v8a"
+  ],
+  "release_certificate_sha256": "57044e5fd5fa4a53e3636d8a6c245136bac8fd0adae65120eee4e624a1cf61c1",
+  "signature_verification": "PASS",
+  "zipalign_16KB": "PASS",
+  "elf_load_16KB": "PASS",
+  "elf_libraries": [
+    {
+      "file": "lib/arm64-v8a/libapp.so",
+      "PT_LOAD_alignments": [
+        65536,
+        65536,
+        65536
+      ]
+    },
+    {
+      "file": "lib/arm64-v8a/libdatastore_shared_counter.so",
+      "PT_LOAD_alignments": [
+        16384,
+        16384,
+        16384
+      ]
+    },
+    {
+      "file": "lib/arm64-v8a/libflutter.so",
+      "PT_LOAD_alignments": [
+        65536,
+        65536,
+        65536,
+        65536
+      ]
+    }
+  ],
+  "permissions": [
+    "android.permission.ACTIVITY_RECOGNITION",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_HEALTH",
+    "android.permission.POST_NOTIFICATIONS",
+    "com.duckolly.dvizh.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "internet_permission": false,
+  "physical_device_acceptance": "NOT_TESTED",
+  "github_push": "NOT_PERFORMED",
+  "kotlin_release_tests": 29,
+  "release_lint_errors": 0,
+  "release_lint_warnings": 0,
+  "flutter_tests_same_source": 131,
+  "app_files_matched_checkpoint05": 171,
+  "private_build_parameters_removed": true
+}

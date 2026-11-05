@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.duckolly.dvizh.WidgetUpdateQueueTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-11-04T14:55:30" hostname="f370afe7f931" time="0.005">
+  <properties/>
+  <testcase name="backwardsClockDoesNotSuppressUpdatesIndefinitely" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.002"/>
+  <testcase name="launcherInteractiveDoesNotBatchEvenWithoutFlutterUi" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <testcase name="firstPublicationIsImmediateAndIdleDoesNotPoll" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <testcase name="interactiveModeCanBringPendingPublicationForward" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.001"/>
+  <testcase name="publicationFailureDoesNotConsumeIntervalOrCreateRetryLoop" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <testcase name="finalShortWalkUpdateIsNotLostOrPostponedByBurst" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <testcase name="removingWidgetsClearsPendingAndNextWidgetPublishesImmediately" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <testcase name="screenOffAndNoWorkoutRetainsEnergySavingBatch" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.001"/>
+  <testcase name="forcedWaterOrResetPublicationCancelsStaleTrailingWork" classname="com.duckolly.dvizh.WidgetUpdateQueueTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

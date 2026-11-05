@@ -26,13 +26,21 @@ class DailyStore(context: Context) : SQLiteOpenHelper(context.applicationContext
     fun enable() { writableDatabase.execSQL("UPDATE state SET enabled=1,raw=-1 WHERE id=1") }
     fun disable() { writableDatabase.execSQL("UPDATE state SET enabled=0,raw=-1 WHERE id=1") }
     fun interrupted() { writableDatabase.execSQL("UPDATE state SET gaps=gaps+1 WHERE id=1 AND enabled=1 AND raw>=0") }
-    fun sample(raw: Long, timestampMillis: Long) {
+
+    fun sample(raw: Long, timestampMillis: Long) = sample(raw, timestampMillis, false, false)
+
+    @Suppress("UNUSED_PARAMETER")
+    fun sample(raw: Long, timestampMillis: Long, fromCall: Boolean, fromVehicle: Boolean) {
         val s = state(); if (!s.enabled || raw < 0) return
         val zone = ZoneId.systemDefault()
         val day = Instant.ofEpochMilli(timestampMillis).atZone(zone).toLocalDate().toString()
         val currentBoot = boot()
         val change = CounterMath.change(s.raw,s.boot,s.day,raw,currentBoot,day)
-        val estimated = change.boundary || (s.zone.isNotEmpty() && s.zone!=zone.id)
+        // Шаги во время звонка с большим пакетом — помечаем день как приблизительный
+        val callSuspicious = StepSampleQuality.proximityUncertain(fromCall, change.delta)
+        // Шаги в транспорте (стабильное давление) — помечаем день как приблизительный
+        val vehicleSuspicious = false // Stable pressure is not evidence of transport; retained parameter for patch compatibility.
+        val estimated = change.boundary || (s.zone.isNotEmpty() && s.zone!=zone.id) || callSuspicious || vehicleSuspicious
         val db = writableDatabase
         db.transaction {
             if (change.delta > 0) {
@@ -43,6 +51,7 @@ class DailyStore(context: Context) : SQLiteOpenHelper(context.applicationContext
             db.execSQL("UPDATE state SET raw=?,boot=?,day=?,total=?,gaps=gaps+?,zone=? WHERE id=1",arrayOf<Any>(raw,currentBoot,day,Math.addExact(s.total,change.delta),gap,zone.id))
         }
     }
+
     fun clear() {
         val db = writableDatabase
         db.transaction {

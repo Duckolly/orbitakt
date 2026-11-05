@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/workout.dart';
+import '../models/toilet_visit.dart';
 
 class StorageService {
   static Database? _db;
@@ -29,7 +30,7 @@ class StorageService {
 
     return openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (Database db, int version) async {
         // R-7: AUTOINCREMENT, id назначает SQLite => нет коллизий по millis.
         await db.execute('''
@@ -41,8 +42,47 @@ class StorageService {
             steps INTEGER NOT NULL
           )
         ''');
+        await _createToiletVisits(db);
+      },
+      onUpgrade: (Database db, int oldVersion, int newVersion) async {
+        if (oldVersion < 2) {
+          await _createToiletVisits(db);
+        }
       },
     );
+  }
+
+  static Future<void> _createToiletVisits(Database db) async {
+    await db.execute('''
+      CREATE TABLE toilet_visits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp TEXT NOT NULL,
+        date TEXT NOT NULL
+      )
+    ''');
+  }
+
+  // SQLite always assigns the id; a source id cannot overwrite history.
+  static Future<int> saveToiletVisit(ToiletVisit visit) async {
+    final Database db = await database;
+    final row = visit.toMap()..remove('id');
+    return db.insert('toilet_visits', row);
+  }
+
+  static Future<int> deleteToiletVisit(int id) async {
+    final db = await database;
+    return db.delete('toilet_visits', where: 'id = ?', whereArgs: [id]);
+  }
+
+  static Future<List<ToiletVisit>> getAllToiletVisits() async {
+    final Database db = await database;
+    final rows = await db.query(
+      'toilet_visits',
+      orderBy: 'timestamp DESC, id DESC',
+    );
+    return rows
+        .map((row) => ToiletVisit.fromMap(row.cast<String, dynamic>()))
+        .toList();
   }
 
   // R-7: вставляем БЕЗ id — ключ генерит SQLite.

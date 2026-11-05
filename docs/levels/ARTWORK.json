@@ -1,0 +1,86 @@
+[
+  {
+    "source": "1793808199.png",
+    "asset": "steps_fox.webp",
+    "sha256": "b2439e9ac9357535b83acbcdbfc836b378cb38ae282daf03d6a220247f39fb4a",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793808427.png",
+    "asset": "steps_wolf.webp",
+    "sha256": "ddde23f52819161a0ab6110fc2d8901e01189adecc002c9245e622222e0559bc",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793808645.png",
+    "asset": "steps_lion.webp",
+    "sha256": "0217906a67431ee83a3623f463d4dd60215cd748e31049a76fcf54bff5e6d51e",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793808853.png",
+    "asset": "steps_panther.webp",
+    "sha256": "863f3fc88cbf2358c1d935e154491d3ef2b4c2bf22c3fb0e1c0448e44de9388c",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793809081.png",
+    "asset": "steps_dragon.webp",
+    "sha256": "cf166449a1b87ca909803730797f338a6f31b6d253c5db847133b70444ac91b6",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793809299.png",
+    "asset": "water_otter.webp",
+    "sha256": "1ab169800b523c56d98152d000712a3f5d1c605b54efcd9b081f14ee5169d506",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793809521.png",
+    "asset": "water_dolphin.webp",
+    "sha256": "1c0aa711822244014397fdc498f74fb94ada67a669f46e84f221e6a29d03dca2",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793809754.png",
+    "asset": "water_shark.webp",
+    "sha256": "f1d3f87777f863842daeddff88139c8b76f85413e9c66f3fe2cd2b97451604d3",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "1793809976.png",
+    "asset": "water_orca.webp",
+    "sha256": "4823d5c6a2505e417852134415291c2f956badbd5df2384e9f1781907451b7f4",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "generated with built-in image generation, user approved 2026-11-05",
+    "asset": "water_whale.webp",
+    "sha256": "0543957fcacd01b7f3d00121421de3c3a8a06647d89ab13d0d6fadde96d029cd",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "generated with built-in image generation, user approved 2026-11-05",
+    "asset": "toilet_hare.webp",
+    "sha256": "88c7c95c57fc9724c132c0a2b14a2a9f8abf79f6a0a4591e046ab907851f0c0b",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "generated with built-in image generation, user approved 2026-11-05",
+    "asset": "toilet_monkey.webp",
+    "sha256": "f379dfdd7823688f4609e9c3ac035cdc6e79a463c06eba385ab44cc85101263b",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "generated with built-in image generation, user approved 2026-11-05",
+    "asset": "toilet_emu.webp",
+    "sha256": "da6f580fda320dbc3d795f16ddcad491affec9b90f5281e569c531483494bc32",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  },
+  {
+    "source": "generated with built-in image generation, user approved 2026-11-05",
+    "asset": "toilet_dinosaur.webp",
+    "sha256": "b59aa96fa3d21f69e56f545ba276e90707789e297fe0740640afa128e4bff430",
+    "encoding": "lossless WebP; original pixels and dimensions"
+  }
+]

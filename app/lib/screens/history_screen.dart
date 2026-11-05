@@ -1,3 +1,5 @@
+import 'reports_screen.dart';
+import 'toilet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -133,6 +135,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 spacing: 12,
                 runSpacing: 8,
                 children: [
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.insights),
+                    label: const Text('Месяц / Год'),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const ReportsScreen(),
+                      ),
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    icon: const Icon(Icons.wc),
+                    label: const Text('Туалет'),
+                    onPressed: () => Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => const ToiletScreen(),
+                      ),
+                    ),
+                  ),
                   OutlinedButton.icon(
                     icon: const Icon(Icons.directions_walk),
                     label: const Text('Шаги и километры'),

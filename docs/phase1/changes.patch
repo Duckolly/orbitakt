@@ -1,0 +1,286 @@
+--- /dev/null
++++ b/app/lib/models/toilet_visit.dart
+@@ -0,0 +1,35 @@
++class ToiletVisit {
++  final int? id;
++  final DateTime timestamp;
++
++  // Local calendar date at the time of the visit, in YYYY-MM-DD format.
++  // Stored separately so later time zone changes do not regroup history.
++  final String date;
++
++  const ToiletVisit({this.id, required this.timestamp, required this.date});
++
++  factory ToiletVisit.at(DateTime timestamp) {
++    final local = timestamp.toLocal();
++    final year = local.year.toString().padLeft(4, '0');
++    final month = local.month.toString().padLeft(2, '0');
++    final day = local.day.toString().padLeft(2, '0');
++
++    return ToiletVisit(timestamp: timestamp, date: '$year-$month-$day');
++  }
++
++  Map<String, Object?> toMap() {
++    return <String, Object?>{
++      if (id != null) 'id': id,
++      'timestamp': timestamp.toUtc().toIso8601String(),
++      'date': date,
++    };
++  }
++
++  factory ToiletVisit.fromMap(Map<String, dynamic> map) {
++    return ToiletVisit(
++      id: map['id'] as int?,
++      timestamp: DateTime.parse(map['timestamp'] as String),
++      date: map['date'] as String,
++    );
++  }
++}
+--- /dev/null
++++ b/app/lib/models/rank_level.dart
+@@ -0,0 +1,21 @@
++/// Thresholds use [minInclusive] <= value < [maxExclusive].
++/// A null upper bound represents the highest level.
++class RankLevel {
++  final int level;
++  final String name;
++  final double minInclusive;
++  final double? maxExclusive;
++  final String? animal;
++  final String? icon;
++
++  const RankLevel({
++    required this.level,
++    required this.name,
++    required this.minInclusive,
++    this.maxExclusive,
++    this.animal,
++    this.icon,
++  }) : assert(level >= 1 && level <= 5),
++       assert(minInclusive >= 0),
++       assert(maxExclusive == null || maxExclusive > minInclusive);
++}
+--- /dev/null
++++ b/app/lib/models/holiday_preset.dart
+@@ -0,0 +1,21 @@
++/// A recurring calendar date; the report year is chosen separately.
++class HolidayPreset {
++  final String id;
++  final String name;
++  final int month;
++  final int day;
++
++  const HolidayPreset({
++    required this.id,
++    required this.name,
++    required this.month,
++    required this.day,
++  }) : assert(month >= 1 && month <= 12),
++       assert(day >= 1 && day <= 31);
++
++  static const List<HolidayPreset> presets = <HolidayPreset>[
++    HolidayPreset(id: 'february13', name: '13 февраля', month: 2, day: 13),
++    HolidayPreset(id: 'march8', name: '8 марта', month: 3, day: 8),
++    HolidayPreset(id: 'january1', name: '1 января', month: 1, day: 1),
++  ];
++}
+--- a/app/lib/services/storage_service.dart
++++ b/app/lib/services/storage_service.dart
+@@ -2,6 +2,7 @@
+ import 'package:sqflite/sqflite.dart';
+ 
+ import '../models/workout.dart';
++import '../models/toilet_visit.dart';
+ 
+ class StorageService {
+   static Database? _db;
+@@ -29,7 +30,7 @@
+ 
+     return openDatabase(
+       path,
+-      version: 1,
++      version: 2,
+       onCreate: (Database db, int version) async {
+         // R-7: AUTOINCREMENT, id назначает SQLite => нет коллизий по millis.
+         await db.execute('''
+@@ -41,8 +42,42 @@
+             steps INTEGER NOT NULL
+           )
+         ''');
++        await _createToiletVisits(db);
++      },
++      onUpgrade: (Database db, int oldVersion, int newVersion) async {
++        if (oldVersion < 2) {
++          await _createToiletVisits(db);
++        }
+       },
+     );
++  }
++
++  static Future<void> _createToiletVisits(Database db) async {
++    await db.execute('''
++      CREATE TABLE toilet_visits (
++        id INTEGER PRIMARY KEY AUTOINCREMENT,
++        timestamp TEXT NOT NULL,
++        date TEXT NOT NULL
++      )
++    ''');
++  }
++
++  // SQLite always assigns the id; a source id cannot overwrite history.
++  static Future<int> saveToiletVisit(ToiletVisit visit) async {
++    final Database db = await database;
++    final row = visit.toMap()..remove('id');
++    return db.insert('toilet_visits', row);
++  }
++
++  static Future<List<ToiletVisit>> getAllToiletVisits() async {
++    final Database db = await database;
++    final rows = await db.query(
++      'toilet_visits',
++      orderBy: 'timestamp DESC, id DESC',
++    );
++    return rows
++        .map((row) => ToiletVisit.fromMap(row.cast<String, dynamic>()))
++        .toList();
+   }
+ 
+   // R-7: вставляем БЕЗ id — ключ генерит SQLite.
+--- /dev/null
++++ b/app/test/phase1_storage_test.dart
+@@ -0,0 +1,96 @@
++import 'dart:io';
++
++import 'package:flutter_test/flutter_test.dart';
++import 'package:sqflite_common_ffi/sqflite_ffi.dart';
++import 'package:dvizh/models/holiday_preset.dart';
++import 'package:dvizh/models/toilet_visit.dart';
++import 'package:dvizh/services/storage_service.dart';
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  late Directory temporary;
++
++  setUpAll(() async {
++    sqfliteFfiInit();
++    databaseFactory = databaseFactoryFfi;
++    temporary = await Directory.systemTemp.createTemp('orbitakt-phase1-');
++    await databaseFactory.setDatabasesPath(temporary.path);
++  });
++
++  tearDown(() async {
++    await StorageService.deleteAllData();
++  });
++
++  tearDownAll(() async {
++    await temporary.delete(recursive: true);
++  });
++
++  test('migration preserves version 1 workout rows', () async {
++    final path = '${temporary.path}/dvizh.db';
++    final legacy = await openDatabase(
++      path,
++      version: 1,
++      onCreate: (db, version) async {
++        await db.execute('''
++          CREATE TABLE workouts (
++            id INTEGER PRIMARY KEY AUTOINCREMENT,
++            type TEXT NOT NULL,
++            startedAt TEXT NOT NULL,
++            durationSeconds INTEGER NOT NULL,
++            steps INTEGER NOT NULL
++          )
++        ''');
++      },
++    );
++    final original = <String, Object?>{
++      'id': 7,
++      'type': 'running',
++      'startedAt': '2026-11-01T12:00:00.000',
++      'durationSeconds': 100,
++      'steps': 80,
++    };
++    await legacy.insert('workouts', original);
++    await legacy.close();
++
++    final db = await StorageService.database;
++    expect(await db.getVersion(), 2);
++    expect(await db.query('workouts'), [original]);
++    expect(await StorageService.getAllToiletVisits(), isEmpty);
++    await StorageService.saveToiletVisit(ToiletVisit.at(DateTime(2026, 11, 4)));
++    expect((await StorageService.getAllToiletVisits()).length, 1);
++  });
++
++  test(
++    'new database assigns unique visit ids and retains local dates',
++    () async {
++      final visit = ToiletVisit(
++        id: 99,
++        timestamp: DateTime.utc(2026, 11, 3, 23, 30),
++        date: '2026-11-04',
++      );
++      final first = await StorageService.saveToiletVisit(visit);
++      final second = await StorageService.saveToiletVisit(visit);
++      expect(first, isNot(second));
++      final rows = await StorageService.getAllToiletVisits();
++      expect(rows.map((v) => v.id), [second, first]);
++      expect(rows.every((v) => v.date == '2026-11-04'), isTrue);
++      expect(rows.first.timestamp.isAtSameMomentAs(visit.timestamp), isTrue);
++      // Existing workout-only clear semantics are preserved.
++      await StorageService.clearAll();
++      expect((await StorageService.getAllToiletVisits()).length, 2);
++      await StorageService.deleteAllData();
++      expect(await StorageService.getAllToiletVisits(), isEmpty);
++    },
++  );
++
++  test('visit captures local calendar day and presets match specification', () {
++    final visit = ToiletVisit.at(DateTime(2026, 1, 1, 0, 5));
++    expect(visit.date, '2026-01-01');
++    expect(visit.toMap().containsKey('id'), isFalse);
++    expect(HolidayPreset.presets.map((p) => '${p.month}-${p.day}'), [
++      '2-13',
++      '3-8',
++      '1-1',
++    ]);
++  });
++}
+--- a/TASKS.md
++++ b/TASKS.md
+@@ -125,3 +125,36 @@
+ 
+ APK3.8.2: 17973327 байт, SHA-256 `24e5e48ba11fb069353661b29f59fa23d3f75f571dc64da7d85dab865945c4d9`.
+ Точность: docs/STEP_ACCURACY.md; измеренного процента пока нет.
++
++## Фаза 1 — модели и хранение посещений (2026-11-04)
++
++Текущий согласованный объём: без роста, веса и UserProfile. Разрешена
++миграция БД 1 → 2 с сохранением workouts. Работа комплексом; переупаковка
++проекта в ZIP разрешена. Фазы 2–7 не начаты.
++
++- [x] ToiletVisit: SQLite id, момент времени UTC, сохранённая местная дата.
++- [x] RankLevel: модель уровня 1–5, границы, необязательные животное и иконка.
++- [x] HolidayPreset: модель и пресеты 13 февраля, 8 марта, 1 января.
++- [x] БД версии 2: создание toilet_visits при новой установке и миграции.
++- [x] Сохранение и чтение посещений; SQLite назначает уникальные id.
++- [x] Сохранены таблица workouts, старые ключи, сигнатуры и очистка тренировок.
++- [x] Добавлены 3 Flutter-теста, включая миграцию с сохранением тренировки.
++- [x] Все 115 Flutter-тестов PASS, включая существующие тесты.
++- [x] flutter analyze: No issues found.
++- [x] Статическая проверка проекта: 356 проверок, ошибок нет.
++- [x] Все 29 Kotlin-тестов приложения PASS (по JUnit XML).
++- [x] Android Lint приложения (:app:lintRelease): PASS.
++- [x] Тестовый ARM64 preview APK 3.9.6+19 собран; package и подпись v2 проверены.
++- [x] В APK нет INTERNET; zipalign с выравниванием 16 КБ PASS.
++- [x] Новый debug-ключ сохранён для будущих обновлений этой тестовой сборки.
++- [ ] Установка на реальном телефоне и совместимость с прежней подписью: не проверены.
++- [x] ZIP проекта, diff, журналы и итоговый отчёт подготовлены.
++
++Пороговые наборы и алгоритмы уровней относятся к Фазе 2; экран добавления
++посещений в этой фазе не создаётся. На экранах приложения изменений нет.
++Версия pubspec.yaml сохранена по запрету его редактирования; номер и имя
++тестовой сборки задаются параметрами Flutter --build-name/--build-number.
++
++Дополнительный прогон тестов сторонних пакетов остановился на 38 тестах
++shared_preferences_android из-за Mockito/Byte Buddy JVM-agent в окружении.
++Все 29 тестов приложения прошли. Подробности: docs/phase1/README.md.

@@ -1,3 +1,5 @@
+import '../theme/seasonal_controller.dart';
+import '../widgets/seasonal_settings_card.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -153,6 +155,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
 
     await ThemeController.load();
+    await SeasonalController.load();
 
     if (!mounted) {
       return;
@@ -225,6 +228,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const SizedBox(height: 24),
 
               const ActivityPreferencesCard(),
+              const SizedBox(height: 24),
+              const SeasonalSettingsCard(),
               const SizedBox(height: 24),
               const Text(
                 'Тема',

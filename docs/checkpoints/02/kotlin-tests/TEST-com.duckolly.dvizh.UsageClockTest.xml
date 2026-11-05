@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.duckolly.dvizh.UsageClockTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-04T14:39:51" hostname="f370afe7f931" time="0.006">
+  <properties/>
+  <testcase name="replacementRejectsOldOwnerAndAllowsOverlappingModules" classname="com.duckolly.dvizh.UsageClockTest" time="0.005"/>
+  <testcase name="repeatedLeaseAndSnapshotsDoNotResetClock" classname="com.duckolly.dvizh.UsageClockTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

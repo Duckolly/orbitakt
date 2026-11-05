@@ -1,0 +1,159 @@
+00:00 +0: loading /workspace/scratch/34a54c8d84c2/git-publish/app/test/workout_test.dart
+00:00 +0: /workspace/scratch/34a54c8d84c2/git-publish/app/test/workout_test.dart: workout keeps fields through SQLite map conversion
+00:00 +1: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: sensor registration failures are not labelled as database errors
+00:00 +2: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:01 +3: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:01 +4: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:01 +5: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:01 +6: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:02 +7: /workspace/scratch/34a54c8d84c2/git-publish/app/test/daily_issue_test.dart: native reason is shown and cleared after a successful restart
+00:02 +8: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:02 +9: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:02 +10: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:02 +11: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:02 +12: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +13: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +14: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +15: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +16: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +17: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +18: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +19: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: selected year survives deletion of its final records and report reload
+00:03 +20: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sky_compass_test.dart: manual mode and absent sensors never subscribe
+00:03 +21: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sky_compass_test.dart: manual mode and absent sensors never subscribe
+00:04 +22: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: journal loading and read failure show no fabricated zero or null; retry recovers
+00:04 +23: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: journal loading and read failure show no fabricated zero or null; retry recovers
+00:04 +24: /workspace/scratch/34a54c8d84c2/git-publish/app/test/audit_fixes_test.dart: journal loading and read failure show no fabricated zero or null; retry recovers
+00:04 +25: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sky_compass_test.dart: opt-in passes selected coordinates; unreliable data never becomes north
+00:04 +26: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sky_compass_test.dart: opt-in passes selected coordinates; unreliable data never becomes north
+00:04 +27: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:04 +28: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:04 +29: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:04 +30: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:04 +31: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:05 +32: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:05 +33: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+
+Warning: A call to tap() with finder "Found 1 widget with text "Все уровни": [
+  Text("Все уровни", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery, _ScrollableScope]),
+]" derived an Offset (Offset(140.0, 1152.0)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+Indeed, Offset(140.0, 1152.0) is outside the bounds of the root of the render tree, Size(320.0, 780.0).
+The finder corresponds to this RenderBox: RenderParagraph#e5509 relayoutBoundary=up25
+The hit test result at that offset is: HitTestResult(HitTestEntry<HitTestTarget>#6be77(_ReusableRenderView#801f0), HitTestEntry<HitTestTarget>#298e0(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2077:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1861:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1041:7)
+#3      main.<anonymous closure> (file:///workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart:91:22)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+00:05 +34: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:06 +35: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_artwork_test.dart: long ranks wrap on narrow screens with enlarged type in both themes
+00:07 +36: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +37: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +38: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +39: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +40: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +41: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +42: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +43: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +44: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:07 +45: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:08 +46: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:08 +47: /workspace/scratch/34a54c8d84c2/git-publish/app/test/orbit_ui_test.dart: Orbit light and dark render real sensor distance and navigation
+00:08 +48: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:08 +49: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:08 +50: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +51: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +52: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +53: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +54: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +55: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +56: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:09 +57: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +58: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +59: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +60: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +61: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +62: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +63: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +64: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +65: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +66: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +67: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:10 +68: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:11 +69: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:11 +70: /workspace/scratch/34a54c8d84c2/git-publish/app/test/sleep_breathing_test.dart: three completed sessions require explicit increase and persist new rhythm
+00:11 +71: /workspace/scratch/34a54c8d84c2/git-publish/app/test/navigation_test.dart: home opens workout screen without plugin access
+00:11 +72: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +73: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +74: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +75: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +76: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +77: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +78: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:12 +79: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:13 +80: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:13 +81: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:13 +82: /workspace/scratch/34a54c8d84c2/git-publish/app/test/tilt_screen_test.dart: tilt is opt-in, listens only during game, cancels on pause and route cover
+00:13 +83: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:14 +84: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:14 +85: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:14 +86: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:14 +87: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:14 +88: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +89: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +90: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +91: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +92: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +93: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:15 +94: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +95: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +96: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +97: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +98: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +99: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:16 +100: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:17 +101: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:17 +102: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:17 +103: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +104: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +105: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +106: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +107: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +108: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +109: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +110: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:18 +111: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +112: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +113: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +114: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +115: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +116: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:19 +117: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:20 +118: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:20 +119: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:20 +120: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:20 +121: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:21 +122: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:21 +123: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:22 +124: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:22 +125: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:22 +126: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:22 +127: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:22 +128: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:24 +129: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:24 +130: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:24 +131: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:24 +132: /workspace/scratch/34a54c8d84c2/git-publish/app/test/levels_screens_test.dart: all three full screens render with larger type; water actions remain usable
+00:25 +133: /workspace/scratch/34a54c8d84c2/git-publish/app/test/about_test.dart: website and 16+ are shown; browser opens only on a tap; copy preserves exact URL
+00:25 +134: /workspace/scratch/34a54c8d84c2/git-publish/app/test/about_test.dart: failed website launch leaves its address available for copying
+00:25 +135: All tests passed!

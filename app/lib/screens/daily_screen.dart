@@ -1,4 +1,5 @@
 import 'dart:async';
+import '../widgets/metric_levels_card.dart';
 import 'package:flutter/material.dart';
 import '../services/daily_tracker.dart';
 import '../services/daily_issue.dart';
@@ -135,28 +136,42 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
         child: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '${s?.todaySteps ?? 0}',
-                key: const Key('dailySteps'),
-                style: const TextStyle(
-                  fontSize: 56,
-                  fontWeight: FontWeight.bold,
+            Card(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${s?.todaySteps ?? 0}',
+                        key: const Key('dailySteps'),
+                        style: const TextStyle(
+                          fontSize: 56,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const Text('шагов сегодня'),
+                    Text(
+                      _prefs.distanceLabel(s?.todaySteps ?? 0),
+                      key: const Key('dailyDistance'),
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const Text(
+                      'Приблизительное расстояние без GPS. Длину шага можно изменить в настройках.',
+                    ),
+                    const SizedBox(height: 16),
+                  ],
                 ),
               ),
             ),
-            const Text('шагов сегодня'),
-            Text(
-              _prefs.distanceLabel(s?.todaySteps ?? 0),
-              key: const Key('dailyDistance'),
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const Text(
-              'Приблизительное расстояние без GPS. Длину шага можно изменить в настройках.',
-            ),
-            const SizedBox(height: 16),
             if (s == null)
               const LinearProgressIndicator()
             else if (!s.supported)
@@ -194,6 +209,12 @@ class _DailyScreenState extends State<DailyScreen> with WidgetsBindingObserver {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: Text(_error!, key: const Key('dailyError')),
+              ),
+            if (s != null && _error == null)
+              MetricLevelsCard(
+                metric: 'steps',
+                revision:
+                    '${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}:${s.todaySteps}:${s.history.length}:${s.totalRecorded}',
               ),
             const SizedBox(height: 16),
             const Text(

@@ -1,0 +1,15 @@
+{
+  "phase": 7,
+  "flutter_full_suite": 128,
+  "seasonal_regression_after_final_change": 5,
+  "flutter_analyze": "PASS",
+  "kotlin_app_tests": 29,
+  "debug_build": "3.9.8+21 PASS",
+  "android_lint_errors": 0,
+  "android_lint_warnings": 0,
+  "static_checks": 453,
+  "previous_tests": "UNCHANGED",
+  "protected_modules_and_build_config": "UNCHANGED",
+  "physical_device": "NOT_TESTED",
+  "release_apk": "NOT_BUILT_OR_INCLUDED"
+}

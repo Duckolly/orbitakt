@@ -1,0 +1,23 @@
+{
+  "closed": [
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "flutter_full_suite": 131,
+  "new_regression_tests": 3,
+  "flutter_analyze": "PASS",
+  "kotlin_app_tests": 29,
+  "internal_debug_build": "3.9.9+22 PASS",
+  "lint_errors": 0,
+  "lint_warnings": 0,
+  "static_checks": 453,
+  "old_tests": "UNCHANGED",
+  "release_apk": "NOT_ISSUED",
+  "pending": [
+    "A4 daily journal scope decision",
+    "A5 physical-device acceptance",
+    "A6 final APK"
+  ],
+  "next_version_code_min": 23
+}

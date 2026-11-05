@@ -4,5 +4,7 @@
     <string name="widget_steps_label">Шаги</string>
     <string name="widget_water_label">Вода</string>
     <string name="widget_steps_preview">0</string>
-    <string name="widget_water_preview">0 ст.</string>
+    <string name="widget_water_preview">0</string>
+    <string name="widget_distance_preview">≈ 0,00 км</string>
+    <string name="widget_add_water_label">Добавить стакан воды, 200 мл</string>
 </resources>

@@ -1,0 +1,446 @@
+--- a/app/lib/screens/reports_screen.dart
++++ b/app/lib/screens/reports_screen.dart
+@@ -106,7 +106,8 @@
+     final report = _data == null || future
+         ? null
+         : _data!.aggregate(start, end);
+-    final years = <int>{now.year};
++    // Preserve a selected historical year even if its last records were removed.
++    final years = <int>{now.year, _year};
+     if (_data != null) {
+       for (final day in [
+         ..._data!.steps.map((d) => d.day),
+--- a/app/lib/screens/toilet_screen.dart
++++ b/app/lib/screens/toilet_screen.dart
+@@ -18,6 +18,8 @@
+   List<ToiletVisit> _visits = [];
+   RankLevel? _animal;
+   bool _busy = true;
++  bool _loading = true;
++  bool _reading = false;
+   String? _error;
+   @override
+   void initState() {
+@@ -38,6 +40,13 @@
+   }
+ 
+   Future<void> _load() async {
++    if (_reading) return;
++    _reading = true;
++    setState(() {
++      _busy = true;
++      _loading = true;
++      _error = null;
++    });
+     try {
+       final visits = await StorageService.getAllToiletVisits();
+       final now = DateTime.now();
+@@ -53,6 +62,7 @@
+       if (mounted) {
+         setState(() {
+           _visits = visits;
++          _loading = false;
+           _animal = animal;
+           _busy = false;
+           _error = null;
+@@ -62,9 +72,12 @@
+       if (mounted) {
+         setState(() {
+           _error = 'Не удалось прочитать журнал';
+-          _busy = false;
+-        });
+-      }
++          _loading = false;
++          _busy = false;
++        });
++      }
++    } finally {
++      _reading = false;
+     }
+   }
+ 
+@@ -138,66 +151,76 @@
+         child: ListView(
+           padding: const EdgeInsets.all(20),
+           children: [
+-            Text('$current', style: Theme.of(context).textTheme.displayLarge),
+-            Text('Посещений за ${DateFormat('MM.yyyy').format(now)}'),
+-            Text(
+-              'Сегодня: ${_visits.where((v) => v.date == date).length} · Всего: ${_visits.length}',
+-            ),
+-            const SizedBox(height: 12),
+-            Text(rank.name, style: Theme.of(context).textTheme.titleLarge),
+-            const Text(
+-              'Ниндзя: 0–14 · Уровень 2: 15–19 · Уровень 3: 20–24\nУровень 4: 25–34 · Уровень 5: от 35',
+-            ),
+-            const SizedBox(height: 16),
++            if (_loading) const Text('Загрузка журнала…'),
++            if (!_loading && _error == null) ...[
++              Text('$current', style: Theme.of(context).textTheme.displayLarge),
++              Text('Посещений за ${DateFormat('MM.yyyy').format(now)}'),
++              Text(
++                'Сегодня: ${_visits.where((v) => v.date == date).length} · Всего: ${_visits.length}',
++              ),
++              const SizedBox(height: 12),
++              Text(rank.name, style: Theme.of(context).textTheme.titleLarge),
++              const Text(
++                'Ниндзя: 0–14 · Уровень 2: 15–19 · Уровень 3: 20–24\nУровень 4: 25–34 · Уровень 5: от 35',
++              ),
++              const SizedBox(height: 16),
++            ],
+             FilledButton.icon(
+-              onPressed: _busy ? null : _add,
++              onPressed: _busy || _loading || _error != null ? null : _add,
+               icon: const Icon(Icons.add),
+               label: const Text('Добавить посещение'),
+             ),
+             if (_error != null) ...[
+               Text(_error!),
+-              TextButton(onPressed: _load, child: const Text('Повторить')),
++              TextButton(
++                onPressed: _busy ? null : _load,
++                child: const Text('Повторить'),
++              ),
+             ],
+-            const SizedBox(height: 20),
+-            Card(
+-              child: Padding(
+-                padding: const EdgeInsets.all(16),
+-                child: Column(
+-                  children: [
+-                    Text(
+-                      'Зверинец · ${DateFormat('MM.yyyy').format(previous)}',
+-                    ),
+-                    RankAnimal(animal, size: 52),
+-                    Text(animal?.animal ?? 'Без животного'),
+-                    Text('$previousCount посещений · ${animal?.name}'),
+-                    const Text(
+-                      'Животное определяется по завершённому месяцу и обновляется раз в месяц.',
+-                    ),
+-                  ],
++            if (!_loading && _error == null) ...[
++              const SizedBox(height: 20),
++              Card(
++                child: Padding(
++                  padding: const EdgeInsets.all(16),
++                  child: Column(
++                    children: [
++                      Text(
++                        'Зверинец · ${DateFormat('MM.yyyy').format(previous)}',
++                      ),
++                      RankAnimal(animal, size: 52),
++                      Text(animal?.animal ?? 'Без животного'),
++                      Text(
++                        '$previousCount посещений · ${animal?.name ?? 'Без уровня'}',
++                      ),
++                      const Text(
++                        'Животное определяется по завершённому месяцу и обновляется раз в месяц.',
++                      ),
++                    ],
++                  ),
+                 ),
+               ),
+-            ),
+-            const SizedBox(height: 20),
+-            const Text('Последние посещения'),
+-            if (_visits.isEmpty && !_busy)
+-              const Text('Пока нет записей. Нажми «Добавить посещение».'),
+-            ..._visits
+-                .take(30)
+-                .map(
+-                  (v) => ListTile(
+-                    leading: const Icon(Icons.wc),
+-                    title: Text(
+-                      DateFormat(
+-                        'dd.MM.yyyy HH:mm',
+-                      ).format(v.timestamp.toLocal()),
+-                    ),
+-                    trailing: IconButton(
+-                      tooltip: 'Удалить ошибочную запись',
+-                      onPressed: _busy ? null : () => _delete(v),
+-                      icon: const Icon(Icons.delete_outline),
++              const SizedBox(height: 20),
++              const Text('Последние посещения'),
++              if (_visits.isEmpty && !_busy)
++                const Text('Пока нет записей. Нажми «Добавить посещение».'),
++              ..._visits
++                  .take(30)
++                  .map(
++                    (v) => ListTile(
++                      leading: const Icon(Icons.wc),
++                      title: Text(
++                        DateFormat(
++                          'dd.MM.yyyy HH:mm',
++                        ).format(v.timestamp.toLocal()),
++                      ),
++                      trailing: IconButton(
++                        tooltip: 'Удалить ошибочную запись',
++                        onPressed: _busy ? null : () => _delete(v),
++                        icon: const Icon(Icons.delete_outline),
++                      ),
+                     ),
+                   ),
+-                ),
++            ],
+           ],
+         ),
+       ),
+--- a/app/lib/widgets/toilet_summary.dart
++++ b/app/lib/widgets/toilet_summary.dart
+@@ -14,6 +14,7 @@
+     with WidgetsBindingObserver {
+   List<ToiletVisit> _visits = [];
+   bool _busy = true;
++  bool _reading = false;
+   String? _error;
+   @override
+   void initState() {
+@@ -34,6 +35,9 @@
+   }
+ 
+   Future<void> _load() async {
++    if (_reading) return;
++    _reading = true;
++    setState(() => _busy = true);
+     try {
+       final visits = await StorageService.getAllToiletVisits();
+       if (mounted) {
+@@ -50,6 +54,8 @@
+           _busy = false;
+         });
+       }
++    } finally {
++      _reading = false;
+     }
+   }
+ 
+@@ -88,7 +94,9 @@
+               title: const Text('Туалет'),
+               subtitle: Text(
+                 _error ??
+-                    'Сегодня: ${_visits.where((v) => v.date == today).length} · За месяц: $count\n${rank.name}',
++                    (_busy
++                        ? 'Загрузка…'
++                        : 'Сегодня: ${_visits.where((v) => v.date == today).length} · За месяц: $count\n${rank.name}'),
+               ),
+               trailing: const Icon(Icons.chevron_right),
+               onTap: () async {
+@@ -99,13 +107,13 @@
+               },
+             ),
+             FilledButton.icon(
+-              onPressed: _busy ? null : _add,
++              onPressed: _busy || _error != null ? null : _add,
+               icon: const Icon(Icons.add),
+               label: Text(_busy ? 'Загрузка…' : 'Добавить посещение'),
+             ),
+             if (_error != null)
+               TextButton(
+-                onPressed: _load,
++                onPressed: _busy ? null : _load,
+                 child: const Text('Повторить загрузку'),
+               ),
+           ],
+--- /dev/null
++++ b/app/test/audit_fixes_test.dart
+@@ -0,0 +1,159 @@
++import 'dart:io';
++import 'package:flutter/material.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:shared_preferences/shared_preferences.dart';
++import 'package:sqflite_common_ffi/sqflite_ffi.dart';
++import 'package:dvizh/screens/reports_screen.dart';
++import 'package:dvizh/screens/toilet_screen.dart';
++import 'package:dvizh/widgets/toilet_summary.dart';
++import 'package:dvizh/services/progress_reports.dart';
++import 'package:dvizh/services/storage_service.dart';
++
++Future<void> advance(WidgetTester tester) async {
++  await tester.runAsync(
++    () => Future<void>.delayed(const Duration(milliseconds: 120)),
++  );
++  await tester.pumpAndSettle();
++}
++
++Future<void> until(WidgetTester tester, bool Function() ready) async {
++  for (var i = 0; i < 30 && !ready(); i++) {
++    await advance(tester);
++  }
++  expect(ready(), isTrue);
++}
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  late Directory dir;
++  setUpAll(() async {
++    sqfliteFfiInit();
++    databaseFactory = databaseFactoryFfi;
++    dir = await Directory.systemTemp.createTemp('orbitakt-audit-fixes-');
++    await databaseFactory.setDatabasesPath(dir.path);
++  });
++  setUp(() async {
++    SharedPreferences.setMockInitialValues({});
++    await StorageService.database;
++  });
++  tearDown(() async {
++    await StorageService.deleteAllData();
++  });
++  tearDownAll(() async {
++    await dir.delete(recursive: true);
++  });
++
++  testWidgets(
++    'selected year survives deletion of its final records and report reload',
++    (tester) async {
++      final old = DateTime.now().year - 1;
++      var rows = <Object>[
++        {'day': '$old-12-31', 'steps': 10000, 'estimated': false},
++      ];
++      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
++          .setMockMethodCallHandler(
++            ProgressReports.channel,
++            (call) async => {'steps': rows, 'water': <Object>[]},
++          );
++      await tester.pumpWidget(const MaterialApp(home: ReportsScreen()));
++      await until(tester, () => find.text('0 стаканов').evaluate().isNotEmpty);
++      await tester.tap(find.text('${DateTime.now().year} год'));
++      await tester.pumpAndSettle();
++      await tester.tap(find.text('$old год').last);
++      await tester.pumpAndSettle();
++      rows = <Object>[];
++      await tester.tap(find.byTooltip('Обновить отчёт'));
++      await advance(tester);
++      await until(tester, () => find.text('0 стаканов').evaluate().isNotEmpty);
++      expect(find.text('$old год'), findsOneWidget);
++      expect(tester.takeException(), isNull);
++    },
++  );
++  testWidgets(
++    'journal loading and read failure show no fabricated zero or null; retry recovers',
++    (tester) async {
++      await tester.runAsync(() async {
++        final db = await StorageService.database;
++        await db.execute(
++          'ALTER TABLE toilet_visits RENAME TO visits_unavailable',
++        );
++      });
++      await tester.pumpWidget(const MaterialApp(home: ToiletScreen()));
++      expect(find.text('Загрузка журнала…'), findsOneWidget);
++      expect(find.text('Сегодня: 0 · Всего: 0'), findsNothing);
++      await until(
++        tester,
++        () => find.text('Не удалось прочитать журнал').evaluate().isNotEmpty,
++      );
++      expect(find.text('Сегодня: 0 · Всего: 0'), findsNothing);
++      expect(
++        find.text('Пока нет записей. Нажми «Добавить посещение».'),
++        findsNothing,
++      );
++      expect(find.textContaining('null'), findsNothing);
++      expect(
++        tester
++            .widget<FilledButton>(
++              find.byWidgetPredicate((w) => w is FilledButton).first,
++            )
++            .onPressed,
++        isNull,
++      );
++      await tester.runAsync(() async {
++        final db = await StorageService.database;
++        await db.execute(
++          'ALTER TABLE visits_unavailable RENAME TO toilet_visits',
++        );
++      });
++      await tester.tap(find.text('Повторить'));
++      await advance(tester);
++      await until(
++        tester,
++        () => find.text('Сегодня: 0 · Всего: 0').evaluate().isNotEmpty,
++      );
++      expect(find.textContaining('null'), findsNothing);
++      expect(tester.takeException(), isNull);
++    },
++  );
++  testWidgets(
++    'home toilet card reports loading and read error without zero totals',
++    (tester) async {
++      await tester.runAsync(() async {
++        final db = await StorageService.database;
++        await db.execute(
++          'ALTER TABLE toilet_visits RENAME TO visits_unavailable',
++        );
++      });
++      await tester.pumpWidget(
++        const MaterialApp(home: Scaffold(body: ToiletSummary())),
++      );
++      expect(find.textContaining('Сегодня:'), findsNothing);
++      await until(
++        tester,
++        () => find.text('Не удалось прочитать посещения').evaluate().isNotEmpty,
++      );
++      expect(find.textContaining('За месяц: 0'), findsNothing);
++      expect(
++        tester
++            .widget<FilledButton>(
++              find.byWidgetPredicate((w) => w is FilledButton).first,
++            )
++            .onPressed,
++        isNull,
++      );
++      await tester.runAsync(() async {
++        final db = await StorageService.database;
++        await db.execute(
++          'ALTER TABLE visits_unavailable RENAME TO toilet_visits',
++        );
++      });
++      await tester.tap(find.text('Повторить загрузку'));
++      await advance(tester);
++      await until(
++        tester,
++        () => find.textContaining('За месяц: 0').evaluate().isNotEmpty,
++      );
++      expect(tester.takeException(), isNull);
++    },
++  );
++}
+--- a/PRIVACY.md
++++ b/PRIVACY.md
+@@ -2,9 +2,9 @@
+ 
+ Настройки дыхания, ступень и счётчик добровольных отметок комфорта хранятся только локально в sleepBreathingV1. Данные не отправляются автору или в аналитику. Режим не измеряет кислород, CO₂ или дыхательный объём и не записывает звук. Дата рождения повторно не запрашивается; ограничение 16+ сохраняется. Источники методики представлены адресами для копирования; браузер сам по себе не открывается.
+ 
+-# Политика конфиденциальности — ОРБИТАКТ 3.9.4
++# Политика конфиденциальности — ОРБИТАКТ
+ 
+-Дата: 03.11.2026. Текст описывает текущие исходники. Публикующая сторона, контакт поддержки и действующий публичный URL должны быть заполнены владельцем перед магазинным выпуском. Декларации магазина не отправлены.
++Дата: 04.11.2026. Текст описывает текущие исходники. Публикующая сторона, контакт поддержки и действующий публичный URL должны быть заполнены владельцем перед магазинным выпуском. Декларации магазина не отправлены.
+ 
+ ## Возраст и внешние ссылки
+ 
+@@ -28,15 +28,23 @@
+ 
+ ## Вода, игра и виджет
+ 
+-Вода отмечается вручную в приложении; это работает при выключенном шагомере. Новый день определяется местной датой телефона без удаления истории. Уменьшение применяется к сегодняшнему итогу до нуля. Экран показывает последние 90 записанных дат; старые записи автоматически не удаляются.
++Вода отмечается вручную в приложении или кнопкой стакана на виджете; это работает при выключенном шагомере. Новый день определяется местной датой телефона без удаления истории. Уменьшение применяется к сегодняшнему итогу до нуля. Экран показывает последние 90 записанных дат; старые записи автоматически не удаляются.
+ 
+ «Бегалка» работает без сети, хранит только рекорд. При сворачивании ставится на паузу; продолжение требует нажатия. Незавершённая партия после закрытия экрана или процесса не восстанавливается.
+ 
+-Добавленный пользователем компактный виджет передаёт локальные итоги системному рабочему столу для отображения: шаги слева, стаканы воды справа. Показатели видны людям, которым виден экран. Нажатие открывает приложение. Виджет не включает шагомер и не меняет воду. Системные обновления запрашиваются раз в 30 минут и могут задерживаться; при новых шагах обновления ограничены по частоте. Время снимка доступно в описании TalkBack, визуально не отображается.
++Добавленный пользователем компактный виджет передаёт локальные итоги системному рабочему столу для отображения: шаги слева, стаканы воды справа. Показатели видны людям, которым виден экран. Нажатие на основную область открывает приложение. Отдельная кнопка стакана добавляет один стакан (200 мл) в сегодняшнюю локальную запись воды без открытия приложения. Виджет не включает шагомер. Под шагами отображается приблизительное расстояние по сохранённой длине шага; рост и вес не используются. Системные обновления запрашиваются раз в 30 минут и могут задерживаться; при новых шагах обновления ограничены по частоте. Время снимка доступно в описании TalkBack, визуально не отображается.
++
++## Журнал посещений, отчёты и оформление
++
++Посещения туалета добавляются пользователем вручную. В существующей локальной базе dvizh.db для каждой записи сохраняются SQLite-идентификатор, момент времени в UTC и календарная местная дата посещения. Эти данные не передаются автору, другим пользователям или на сервер. На главной и в журнале показываются количества; ошибочную запись можно удалить после подтверждения.
++
++Месячные и годовые отчёты вычисляются локально по сохранённым дневным итогам шагов/воды и посещениям. Средние включают календарные дни периода без записей как нули; отсутствие записи не доказывает отсутствие активности. Уровни — производные показатели приложения. Животные рассчитываются по завершённому месяцу и сохраняются как отдельная локальная настройка monthlyAnimalsV1.*. Для нового месяца создаётся новая фиксация; предыдущие сохранённые фиксации остаются на устройстве до команды удаления всех данных. Прежние дневные журналы остаются отдельными экранами; ограничение 90 записей на этих экранах не удаляет более ранние данные из базы и не ограничивает годовой отчёт.
++
++Выбор обычного/новогоднего скина и анимации хранится локально в seasonalAppearanceV1. Анимация учитывает системное снижение движения и останавливается в фоне; новых сенсоров, сетевых запросов или разрешений для оформления нет. Рост, вес и профиль с этими полями не добавлялись.
+ 
+ ## Хранение и удаление
+ 
+-Три приватные SQLite-БД и настройки находятся в данных приложения. Резервное копирование отключено конфигурацией Android. Истории воды, тренировок и шагов очищаются соответствующими командами; очистка дневных шагов также останавливает службу. «Удалить все данные» очищает журналы, рекорд игры, настройки и отметки ознакомления. Удаление приложения удаляет локальные записи штатными средствами Android. Экспорт/перенос пользовательских записей пока не реализован.
++Три приватные SQLite-БД и настройки находятся в данных приложения. Резервное копирование отключено конфигурацией Android. Истории воды, тренировок и шагов очищаются соответствующими командами; очистка дневных шагов также останавливает службу. «Удалить все данные» очищает журналы шагов, воды, тренировок и посещений туалета, рекорд игры, настройки, сохранённый зверинец, сезонное оформление и отметки ознакомления. Очистка только тренировок не удаляет посещения туалета; у ошибочной записи посещения есть отдельное удаление. Удаление приложения удаляет локальные записи штатными средствами Android. Экспорт/перенос пользовательских записей пока не реализован.
+ 
+ Вариант «Орбитакт» (com.duckolly.dvizh.preview) и основное приложение (com.duckolly.dvizh) имеют разные хранилища. Автоматического обмена и переноса между ними нет.
+ 

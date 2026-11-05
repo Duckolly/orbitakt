@@ -1,0 +1,154 @@
+ CHECKSUMS_SHA256.txt                               |    2 [32m+[m[31m-[m
+ CONTINUE_HERE.md                                   |  266 [32m++++[m
+ GITHUB_RELEASE.md                                  |   53 [32m+[m[31m-[m
+ PRIVACY.md                                         |   20 [32m+[m[31m-[m
+ README.md                                          |   18 [32m+[m
+ RELEASE_NOTES_3.10.0.md                            |   21 [32m+[m
+ RELEASE_NOTES_3.9.9.md                             |   52 [32m+[m
+ START_HERE.md                                      |   12 [32m+[m
+ TASKS.md                                           |  223 [32m+++[m
+ .../kotlin/com/duckolly/dvizh/DailyStepService.kt  |   91 [32m+[m[31m-[m
+ .../main/kotlin/com/duckolly/dvizh/DailyStore.kt   |   13 [32m+[m[31m-[m
+ .../main/kotlin/com/duckolly/dvizh/MainActivity.kt |    1 [32m+[m
+ .../kotlin/com/duckolly/dvizh/ProgressWidget.kt    |   29 [32m+[m[31m-[m
+ .../main/kotlin/com/duckolly/dvizh/ReportBridge.kt |   30 [32m+[m
+ .../kotlin/com/duckolly/dvizh/StepSampleQuality.kt |   10 [32m+[m
+ .../app/src/main/res/drawable/widget_glass.xml     |    5 [32m+[m
+ .../src/main/res/layout-v26/progress_widget.xml    |   18 [32m+[m[31m-[m
+ .../app/src/main/res/layout/progress_widget.xml    |   18 [32m+[m[31m-[m
+ .../app/src/main/res/values/widget_strings.xml     |    4 [32m+[m[31m-[m
+ .../com/duckolly/dvizh/StepSampleQualityTest.kt    |   21 [32m+[m
+ app/assets/ranks/steps_dragon.webp                 |  Bin [31m0[m -> [32m4260490[m bytes
+ app/assets/ranks/steps_fox.webp                    |  Bin [31m0[m -> [32m2019708[m bytes
+ app/assets/ranks/steps_lion.webp                   |  Bin [31m0[m -> [32m2929186[m bytes
+ app/assets/ranks/steps_panther.webp                |  Bin [31m0[m -> [32m2415084[m bytes
+ app/assets/ranks/steps_wolf.webp                   |  Bin [31m0[m -> [32m3087796[m bytes
+ app/assets/ranks/toilet_dinosaur.webp              |  Bin [31m0[m -> [32m1543066[m bytes
+ app/assets/ranks/toilet_emu.webp                   |  Bin [31m0[m -> [32m1565494[m bytes
+ app/assets/ranks/toilet_hare.webp                  |  Bin [31m0[m -> [32m1510692[m bytes
+ app/assets/ranks/toilet_monkey.webp                |  Bin [31m0[m -> [32m1478054[m bytes
+ app/assets/ranks/water_dolphin.webp                |  Bin [31m0[m -> [32m2324868[m bytes
+ app/assets/ranks/water_orca.webp                   |  Bin [31m0[m -> [32m2929948[m bytes
+ app/assets/ranks/water_otter.webp                  |  Bin [31m0[m -> [32m2657140[m bytes
+ app/assets/ranks/water_shark.webp                  |  Bin [31m0[m -> [32m2696328[m bytes
+ app/assets/ranks/water_whale.webp                  |  Bin [31m0[m -> [32m1497780[m bytes
+ app/lib/main.dart                                  |    2 [32m+[m
+ app/lib/models/holiday_preset.dart                 |   21 [32m+[m
+ app/lib/models/progress_report.dart                |  101 [32m++[m
+ app/lib/models/rank_level.dart                     |   21 [32m+[m
+ app/lib/models/toilet_visit.dart                   |   35 [32m+[m
+ app/lib/screens/daily_screen.dart                  |   59 [32m+[m[31m-[m
+ app/lib/screens/history_screen.dart                |   20 [32m+[m
+ app/lib/screens/home_screen.dart                   |   14 [32m+[m[31m-[m
+ app/lib/screens/reports_screen.dart                |  296 [32m++++[m
+ app/lib/screens/settings_screen.dart               |    5 [32m+[m
+ app/lib/screens/toilet_screen.dart                 |  238 [32m++++[m
+ app/lib/screens/water_screen.dart                  |   10 [32m+[m
+ app/lib/services/monthly_animals.dart              |   54 [32m+[m
+ app/lib/services/progress_reports.dart             |   70 [32m+[m
+ app/lib/services/storage_service.dart              |   42 [32m+[m[31m-[m
+ app/lib/theme/seasonal_controller.dart             |   45 [32m+[m
+ app/lib/widgets/metric_levels_card.dart            |  261 [32m++++[m
+ app/lib/widgets/rank_animal.dart                   |   50 [32m+[m
+ app/lib/widgets/seasonal_settings_card.dart        |   98 [32m++[m
+ app/lib/widgets/seasonal_surface.dart              |  163 [32m+++[m
+ app/lib/widgets/toilet_summary.dart                |  124 [32m++[m
+ app/pubspec.yaml                                   |    3 [32m+[m[31m-[m
+ app/test/audit_fixes_test.dart                     |  159 [32m+++[m
+ app/test/levels_artwork_test.dart                  |   99 [32m++[m
+ app/test/levels_screens_test.dart                  |  183 [32m+++[m
+ app/test/phase1_storage_test.dart                  |   96 [32m++[m
+ app/test/progress_reports_test.dart                |  108 [32m++[m
+ app/test/progress_screens_test.dart                |  139 [32m++[m
+ app/test/seasonal_theme_test.dart                  |  166 [32m+++[m
+ docs/checkpoints/02/changes-from-phase1.patch      | 1450 [32m++++++++++++++++++++[m
+ .../TEST-com.duckolly.dvizh.SkyCompassMathTest.xml |   10 [32m+[m
+ ...m.duckolly.dvizh.StepSensorSubscriptionTest.xml |   15 [32m+[m
+ .../TEST-com.duckolly.dvizh.ToolSensorMathTest.xml |    7 [32m+[m
+ .../TEST-com.duckolly.dvizh.UsageClockTest.xml     |    8 [32m+[m
+ .../TEST-com.duckolly.dvizh.WaterMathTest.xml      |   10 [32m+[m
+ ...ST-com.duckolly.dvizh.WidgetUpdateQueueTest.xml |   15 [32m+[m
+ docs/checkpoints/02/lint-results-debug.html        |  204 [32m+++[m
+ docs/checkpoints/02/lint-results-debug.txt         |    1 [32m+[m
+ docs/checkpoints/02/lint-results-debug.xml         |    4 [32m+[m
+ docs/checkpoints/02/static-check.json              |    6 [32m+[m
+ docs/checkpoints/02/verification.json              |   12 [32m+[m
+ .../checkpoints/03/changes-from-checkpoint02.patch |  546 [32m++++++++[m
+ .../TEST-com.duckolly.dvizh.SkyCompassMathTest.xml |   10 [32m+[m
+ ...m.duckolly.dvizh.StepSensorSubscriptionTest.xml |   15 [32m+[m
+ .../TEST-com.duckolly.dvizh.ToolSensorMathTest.xml |    7 [32m+[m
+ .../TEST-com.duckolly.dvizh.UsageClockTest.xml     |    8 [32m+[m
+ .../TEST-com.duckolly.dvizh.WaterMathTest.xml      |   10 [32m+[m
+ ...ST-com.duckolly.dvizh.WidgetUpdateQueueTest.xml |   15 [32m+[m
+ docs/checkpoints/03/lint-results-debug.html        |  204 [32m+++[m
+ docs/checkpoints/03/lint-results-debug.txt         |    1 [32m+[m
+ docs/checkpoints/03/lint-results-debug.xml         |    4 [32m+[m
+ docs/checkpoints/03/static-check.json              |    6 [32m+[m
+ docs/checkpoints/03/verification.json              |   15 [32m+[m
+ docs/checkpoints/04/REQUIREMENTS_AUDIT.md          |  138 [32m++[m
+ docs/checkpoints/04/repro_report_year.dart         |   43 [32m+[m
+ docs/checkpoints/04/source-verification.json       |   23 [32m+[m
+ docs/checkpoints/05/FIXES.md                       |   33 [32m+[m
+ .../checkpoints/05/changes-from-checkpoint04.patch |  446 [32m++++++[m
+ .../TEST-com.duckolly.dvizh.SkyCompassMathTest.xml |   10 [32m+[m
+ ...m.duckolly.dvizh.StepSensorSubscriptionTest.xml |   15 [32m+[m
+ .../TEST-com.duckolly.dvizh.ToolSensorMathTest.xml |    7 [32m+[m
+ .../TEST-com.duckolly.dvizh.UsageClockTest.xml     |    8 [32m+[m
+ .../TEST-com.duckolly.dvizh.WaterMathTest.xml      |   10 [32m+[m
+ ...ST-com.duckolly.dvizh.WidgetUpdateQueueTest.xml |   15 [32m+[m
+ docs/checkpoints/05/lint-results-debug.html        |  204 [32m+++[m
+ docs/checkpoints/05/lint-results-debug.txt         |    1 [32m+[m
+ docs/checkpoints/05/lint-results-debug.xml         |    4 [32m+[m
+ docs/checkpoints/05/static-check.json              |    6 [32m+[m
+ docs/checkpoints/05/verification.json              |   23 [32m+[m
+ docs/levels/ARTWORK.json                           |   86 [32m++[m
+ docs/levels/DESIGN.md                              |   20 [32m+[m
+ docs/levels/KOTLIN_REVIEW.md                       |   25 [32m+[m
+ docs/levels/RELEASE_REPORT.md                      |   45 [32m+[m
+ docs/levels/SESSION_HANDOFF.md                     |   29 [32m+[m
+ docs/levels/TASKS.md                               |   35 [32m+[m
+ docs/levels/checks/android-release-2026-11-05.txt  |  317 [32m+++++[m
+ docs/levels/checks/flutter-analyze.txt             |    2 [32m+[m
+ docs/levels/checks/flutter-test.txt                |  159 [32m+++[m
+ docs/levels/checks/screens-preview.txt             |    5 [32m+[m
+ docs/levels/checks/static-check.json               |    6 [32m+[m
+ docs/levels/previews/steps-dark.png                |  Bin [31m0[m -> [32m69722[m bytes
+ docs/levels/previews/steps-light.png               |  Bin [31m0[m -> [32m70408[m bytes
+ docs/levels/previews/toilet-dark.png               |  Bin [31m0[m -> [32m56622[m bytes
+ docs/levels/previews/toilet-light.png              |  Bin [31m0[m -> [32m56463[m bytes
+ docs/levels/previews/water-dark.png                |  Bin [31m0[m -> [32m75350[m bytes
+ docs/levels/previews/water-light.png               |  Bin [31m0[m -> [32m75769[m bytes
+ .../supplied/Qwen_kotlin_20261105_fcvokr5em.kt     |  269 [32m++++[m
+ .../supplied/Qwen_kotlin_20261105_kjnsej0yw.kt     |   68 [32m+[m
+ docs/phase1/README.md                              |  117 [32m++[m
+ docs/phase1/apk-badging.txt                        |  119 [32m++[m
+ docs/phase1/apk-permissions.txt                    |    7 [32m+[m
+ docs/phase1/apk-signature.txt                      |   17 [32m+[m
+ docs/phase1/changes.patch                          |  286 [32m++++[m
+ .../TEST-com.duckolly.dvizh.SkyCompassMathTest.xml |   10 [32m+[m
+ ...m.duckolly.dvizh.StepSensorSubscriptionTest.xml |   15 [32m+[m
+ .../TEST-com.duckolly.dvizh.ToolSensorMathTest.xml |    7 [32m+[m
+ .../TEST-com.duckolly.dvizh.UsageClockTest.xml     |    8 [32m+[m
+ .../TEST-com.duckolly.dvizh.WaterMathTest.xml      |   10 [32m+[m
+ ...ST-com.duckolly.dvizh.WidgetUpdateQueueTest.xml |   15 [32m+[m
+ docs/phase1/lint-results-release.html              |  204 [32m+++[m
+ docs/phase1/lint-results-release.txt               |    1 [32m+[m
+ docs/phase1/lint-results-release.xml               |    4 [32m+[m
+ docs/phase1/static-check.json                      |    6 [32m+[m
+ docs/phase1/verification.json                      |   16 [32m+[m
+ docs/releases/3.9.9/apk-badging.txt                |  119 [32m++[m
+ docs/releases/3.9.9/apk-manifest-tree.txt          |  111 [32m++[m
+ docs/releases/3.9.9/apk-permissions.txt            |    7 [32m+[m
+ docs/releases/3.9.9/apk-signature.txt              |   17 [32m+[m
+ docs/releases/3.9.9/artifact-verification.json     |   60 [32m+[m
+ .../TEST-com.duckolly.dvizh.SkyCompassMathTest.xml |   10 [32m+[m
+ ...m.duckolly.dvizh.StepSensorSubscriptionTest.xml |   15 [32m+[m
+ .../TEST-com.duckolly.dvizh.ToolSensorMathTest.xml |    7 [32m+[m
+ .../TEST-com.duckolly.dvizh.UsageClockTest.xml     |    8 [32m+[m
+ .../TEST-com.duckolly.dvizh.WaterMathTest.xml      |   10 [32m+[m
+ ...ST-com.duckolly.dvizh.WidgetUpdateQueueTest.xml |   15 [32m+[m
+ docs/releases/3.9.9/lint-results-release.html      |  204 [32m+++[m
+ docs/releases/3.9.9/lint-results-release.txt       |    1 [32m+[m
+ docs/releases/3.9.9/lint-results-release.xml       |    4 [32m+[m
+ docs/releases/3.9.9/static-check.json              |    6 [32m+[m
+ 153 files changed, 9572 insertions(+), 88 deletions(-)
